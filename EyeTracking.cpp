@@ -3,9 +3,9 @@
  * Eye detection and tracking with OpenCV
  *
  * This program tries to detect and tracking the user's eye with webcam.
- * At startup, the program performs face detection followed by eye detection 
+ * At startup, the program performs face detection followed by eye detection
  * using OpenCV's built-in Haar cascade classifier. If the user's eye detected
- * successfully, an eye template is extracted. This template will be used in 
+ * successfully, an eye template is extracted. This template will be used in
  * the subsequent template matching for tracking the eye.
  */
 
@@ -56,7 +56,7 @@ void trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect)
 {
 	cv::Size size(rect.width * 2, rect.height * 2);
 	cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
-	
+
 	window &= cv::Rect(0, 0, im.cols, im.rows);
 
 	cv::Mat dst(window.width - tpl.rows + 1, window.height - tpl.cols + 1, CV_32FC1);
@@ -78,13 +78,14 @@ void trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect)
 int main(int argc, char** argv)
 {
 	// Load the cascade classifiers
-	// Make sure you point the XML files to the right path, or 
+	// Make sure you point the XML files to the right path, or
 	// just copy the files from [OPENCV_DIR]/data/haarcascades directory
-	face_cascade.load("haarcascade_frontalface_alt2.xml");
-	eye_cascade.load("haarcascade_eye.xml");
+	face_cascade.load("../resource/haarcascade_frontalface_alt2.xml");
+	eye_cascade.load("../resource/haarcascade_eye.xml");
 
 	// Open webcam
-	cv::VideoCapture cap(0);
+	// open the second web cam
+	cv::VideoCapture cap(1);
 
 	// Check if everything is ok
 	if (face_cascade.empty() || eye_cascade.empty() || !cap.isOpened())
@@ -106,7 +107,7 @@ int main(int argc, char** argv)
 		// Flip the frame horizontally, Windows users might need this
 		cv::flip(frame, frame, 1);
 
-		// Convert to grayscale and 
+		// Convert to grayscale and
 		// adjust the image contrast using histogram equalization
 		cv::Mat gray;
 		cv::cvtColor(frame, gray, CV_BGR2GRAY);
