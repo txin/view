@@ -80,8 +80,8 @@ int main(int argc, char** argv)
 	// Load the cascade classifiers
 	// Make sure you point the XML files to the right path, or
 	// just copy the files from [OPENCV_DIR]/data/haarcascades directory
-	face_cascade.load("../resource/haarcascade_frontalface_alt2.xml");
-	eye_cascade.load("../resource/haarcascade_eye.xml");
+	face_cascade.load("haarcascade_frontalface_alt2.xml");
+	eye_cascade.load("haarcascade_eye.xml");
 
 	// Open webcam
 	// open the second web cam
