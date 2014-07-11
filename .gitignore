@@ -4,6 +4,9 @@
 *.o
 *.obj
 
+# resource files
+*.jpg
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
