@@ -2,9 +2,9 @@
 <opencv_storage>
   <Settings>
     <BoardSize_Width>4</BoardSize_Width>
-    <BoardSize_Height>5</BoardSize_Height>
+    <BoardSize_Height>4</BoardSize_Height>
     <Square_Size>20</Square_Size>
-    <Input>cam0_input.xml</Input>
+    <Input>"0"</Input>
     <Input_FlipAroundHorizontalAxis>0</Input_FlipAroundHorizontalAxis>
     <Input_Delay>100</Input_Delay>
     <Calibrate_NrOfFrameToUse>10</Calibrate_NrOfFrameToUse>
