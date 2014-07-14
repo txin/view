@@ -322,6 +322,7 @@ bool runCalibrationAndSave(Settings& s, Size imageSize, Mat&  cameraMatrix,
     if(ok)
         saveCameraParams( s, imageSize, cameraMatrix, distCoeffs, rvecs ,
                           tvecs, reprojErrs, imagePoints, totalAvgErr);
+    printf("camera parameters saved\n");
     return ok;
 }
 
