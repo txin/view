@@ -246,13 +246,12 @@ static void saveCameraParams( Settings& s, Size& imageSize,
     fs << "Camera_Matrix" << cameraMatrix;
     fs << "Distortion_Coefficients" << distCoeffs;
     fs << "Avg_Reprojection_Error" << totalAvgErr;
-    if( !reprojErrs.empty() )
+    if (!reprojErrs.empty())
         fs << "Per_View_Reprojection_Errors" << Mat(reprojErrs);
-    if( !rvecs.empty() && !tvecs.empty() )    {
+    if (!rvecs.empty() && !tvecs.empty() )    {
         CV_Assert(rvecs[0].type() == tvecs[0].type());
         Mat bigmat((int)rvecs.size(), 6, rvecs[0].type());
-        for( int i = 0; i < (int)rvecs.size(); i++ )
-        {
+        for (int i = 0; i < (int)rvecs.size(); i++) {
             Mat r = bigmat(Range(i, i+1), Range(0,3));
             Mat t = bigmat(Range(i, i+1), Range(3,6));
 
@@ -262,7 +261,7 @@ static void saveCameraParams( Settings& s, Size& imageSize,
             r = rvecs[i].t();
             t = tvecs[i].t();
         }
-        cvWriteComment( *fs, "a set of 6-tuples (rotation vector + translation vector) for each view", 0 );
+        cvWriteComment(*fs, "a set of 6-tuples (rotation vector + translation vector) for each view", 0 );
         fs << "Extrinsic_Parameters" << bigmat;
     }
 
@@ -297,6 +296,7 @@ bool runCalibrationAndSave(Settings& s, Size imageSize, Mat&  cameraMatrix,
 
 int main(int argc, char** argv) {
     Settings s;
+    // default configuration file, directs to the saved 10 images
     const string inputSettingsFile = "default.xml";
     FileStorage fs(inputSettingsFile, FileStorage::READ);
     if (!fs.isOpened()) {
@@ -305,7 +305,6 @@ int main(int argc, char** argv) {
     }
     fs["Settings"] >> s;
     fs.release();
-
     if (!s.goodInput) {
         cout << "Invalid input detected. Application stopping." << endl;
         return -1;
@@ -317,26 +316,24 @@ int main(int argc, char** argv) {
     int mode = 0; // IMAGE_LIST
     const char ESC_KEY = 27;
 
-    for (int i = 0; ; ++i) {
+    for (int i = 0; i < 10; i++) {
         Mat view;
-        
         view = s.nextImage();
-// If no more images then run calibration, save and stop loop.
-        if (view.empty()) {
-            if(imagePoints.size() > 0) {
+         if (view.empty()) {
+            if (imagePoints.size() > 0) {
                 runCalibrationAndSave(s, imageSize,
-                                      cameraMatrix, distCoeffs, imagePoints);
+                                    cameraMatrix, distCoeffs, imagePoints);
             }
             break;
-        }
-        imageSize = view.size();
-        if (s.flipVertical) {
-            flip(view, view, 0);
-        }    
-        vector<Point2f> pointBuf;
-        bool found;
-        found = findChessboardCorners(view, s.boardSize, pointBuf,
-                                      CV_CALIB_CB_ADAPTIVE_THRESH 
+             }
+             imageSize = view.size();
+             if (s.flipVertical) {
+             flip(view, view, 0);
+            }    
+             vector<Point2f> pointBuf;
+            bool found;
+         found = findChessboardCorners(view, s.boardSize, pointBuf,
+                                    CV_CALIB_CB_ADAPTIVE_THRESH 
                                       | CV_CALIB_CB_FAST_CHECK 
                                       | CV_CALIB_CB_NORMALIZE_IMAGE);
         // pattern: chessboard
@@ -344,20 +341,28 @@ int main(int argc, char** argv) {
             Mat viewGray;
             cvtColor(view, viewGray, COLOR_BGR2GRAY);
             cornerSubPix(viewGray, pointBuf, Size(11,11),
-                         Size(-1,-1), 
-                         TermCriteria( CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1));
+                      Size(-1,-1), 
+                      TermCriteria( CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1));
             drawChessboardCorners(view, s.boardSize, Mat(pointBuf), found);
+
+            // TODO: test image list, push_back the found pointBuf
+            imagePoints.push_back(pointBuf);
         }
+   
         imshow("Image View", view);
+        waitKey(10);
         char key = (char)waitKey(s.delay);
+        
         if (key == ESC_KEY) {
             break;
         }
     }
 
-    // -----------------------Show the undistorted image for the image list ------
+    // Show the undistorted image for the image list
     // default image list
-    if (s.showUndistorsed) {
+   
+
+    /*if (s.showUndistorsed) {
         Mat view, rview, map1, map2;
         initUndistortRectifyMap(cameraMatrix, distCoeffs, Mat(),
                                 getOptimalNewCameraMatrix(cameraMatrix, 
@@ -371,9 +376,9 @@ int main(int argc, char** argv) {
             remap(view, rview, map1, map2, INTER_LINEAR);
             imshow("Image View", rview);
             char c = (char)waitKey();
-            if( c  == ESC_KEY || c == 'q' || c == 'Q' )
-                break;
+            if (c  == ESC_KEY || c == 'q' || c == 'Q') break;
         }
-    }
+        }*/
+
     return 0;
 }

@@ -7,29 +7,6 @@
  */
 #include "StereoView.h"
 
-// setup calibration for cameras
-// 1. read configuration file
-// 2.
-int StereoView::cameraCalibrationSetup() {
-    cv::Settings s;
-    // use default configuration file
-    const string inputSettingsFile = "default.xml";
-    std::FileStorage fs(intputSettingsFile, FileStorage::READ);
-
-    if (!fs.isOpened()) {
-        std::cout << "Could not open the configuration file" 
-                  << inputSettingsFile << std::endl;
-        return -1;
-    }
-    fs["Settings"] >> s;
-    fs.release();
-
-    if (!s.goodInput) {
-        std::cout << "Invalid input detected in the configuration file" << std::endl;
-        return -1;
-    }
-    return 0;
-}
 
 int StereoView::cameraSetup() {
     for (int i = 0; i < CAMERA_NUM; i++) {

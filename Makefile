@@ -3,6 +3,3 @@ LIBS = `pkg-config --libs opencv`
 
 % : %.cpp
 	g++ $(CFLAGS) -o $@.out $< $(LIBS)
-
-StereoView : StereoView.cpp
-	g++ $(CFLAGS) -o $@.out $< $(LIBS) 
