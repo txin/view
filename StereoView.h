@@ -14,10 +14,11 @@ private:
 
   int cameraCalibrationSetup();
   int cameraSetup();
-
+  
 public:
   inline StereoView() {
     cameraSetup();
   };
   void showCameraData();
+  int showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight);
 };
