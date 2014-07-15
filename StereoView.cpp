@@ -14,6 +14,18 @@ const int alpha_slider_max = 100;
 int alpha_slider;
 double alpha, beta;
 
+
+// load calibration configuration file for the camera
+// currently for camera 0
+int StereoView::loadConfiguration() {
+    cv::FileStorage fs("cam0_config.xml", cv::FileStorage::READ);
+
+    fs["Camera_Matrix"] >> cameraMat[0];
+    fs["Distortion_Coefficients"] >> distCoeffMat[0];
+    fs.release();
+}
+
+
 // open cameras, currently 2 cameras
 int StereoView::cameraSetup() {
     for (int i = 0; i < CAMERA_NUM; i++) {
@@ -26,6 +38,9 @@ int StereoView::cameraSetup() {
             cameras[i].set(CV_CAP_PROP_FRAME_HEIGHT, CAMERA_HEIGHT);
         }
     }
+    
+    // load configuration files
+    loadConfiguration();
     return 0;
 }
 
@@ -43,13 +58,17 @@ void on_trackbar(int, void* ) {
 // show disparity map, in order to calculate depth
 int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     
-    imgLeft = cv::imread("l.jpg", CV_LOAD_IMAGE_COLOR);
-    imgRight = cv::imread("r.jpg", CV_LOAD_IMAGE_COLOR);
+    imgLeft = cv::imread("c0_1.jpg", CV_LOAD_IMAGE_COLOR);
+    imgRight = cv::imread("c0_2.jpg", CV_LOAD_IMAGE_COLOR);
     cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
     cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
-    //   imgLeft = cv::imread("left01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+    //imgLeft = cv::imread("left01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
     //imgRight = cv::imread("right01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+    // apply the calibration parameters to the first matrix captured by cam 0
+    cv::Mat temp0 = imgLeft.clone();
+    cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
     cv::imshow("Camera 0", imgLeft);
+    cv::imshow("Undistorted_cam0", temp0);
     cv::imshow("Camera 1", imgRight);
     if ((char)cv::waitKey(5) == 'q') return 0;
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
@@ -115,7 +134,9 @@ void StereoView::showCameraData() {
         cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE);
         cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
     }
-  
+    cv::namedWindow("Undistorted_cam0", CV_WINDOW_AUTOSIZE);
+    cv::moveWindow("Undistorted_cam0", 0, CAMERA_HEIGHT);
+    
     const char *windowName = "Disparity";
     cv::namedWindow(windowName, CV_WINDOW_NORMAL);   
         // create trackbars

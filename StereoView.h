@@ -12,8 +12,14 @@ class StereoView {
 private:
   cv::VideoCapture cameras[CAMERA_NUM];
   cv::StereoBM sbm;
+
+  // calibration parameters for cameras;
+  cv::Mat cameraMat[CAMERA_NUM];
+  cv::Mat distCoeffMat[CAMERA_NUM];
+
   int cameraCalibrationSetup();
   int cameraSetup();
+  int loadConfiguration();
 
 public:
   inline StereoView() {
