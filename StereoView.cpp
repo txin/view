@@ -10,6 +10,10 @@
  */
 #include "StereoView.h"
 
+const int alpha_slider_max = 100;
+int alpha_slider;
+double alpha, beta;
+
 // open cameras, currently 2 cameras
 int StereoView::cameraSetup() {
     for (int i = 0; i < CAMERA_NUM; i++) {
@@ -25,15 +29,29 @@ int StereoView::cameraSetup() {
     return 0;
 }
 
+cv::StereoBM sbm_here;
+int display;
+void on_trackbar(int, void* ) {
+    alpha = (double) alpha_slider/alpha_slider_max ;
+    beta = ( 1.0 - alpha ) * 10;
+    int level = (int)beta + 1;
+    display = 16 * level;
+    sbm_here.state->numberOfDisparities = 16 * level ; // 112
+}
+
 // capture images from 2 cameras, and convert to grayscale images and 
 // show disparity map, in order to calculate depth
 int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     
+    imgLeft = cv::imread("l.jpg", CV_LOAD_IMAGE_COLOR);
+    imgRight = cv::imread("r.jpg", CV_LOAD_IMAGE_COLOR);
     cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
     cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
+    //   imgLeft = cv::imread("left01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+    //imgRight = cv::imread("right01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
     cv::imshow("Camera 0", imgLeft);
     cv::imshow("Camera 1", imgRight);
-    cv::waitKey(5);
+    if ((char)cv::waitKey(5) == 'q') return 0;
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
     cv::Mat imgDisparity8U = cv::Mat(imgLeft.rows, imgLeft.cols, CV_8UC1);
     
@@ -45,32 +63,52 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     int ndisparities = 16 * 5;
     int SADWindowSize = 21;
     
-    cv::StereoBM sbm(cv::StereoBM::BASIC_PRESET, ndisparities, SADWindowSize);
+    // cv::StereoBM sbm(cv::StereoBM::BASIC_PRESET, ndisparities, SADWindowSize);    
+    // sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
     
-    sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
+    // setup paremeters
+    sbm.state->SADWindowSize = 87;
+    sbm.state->numberOfDisparities = 80; // 112
+    //sbm.state->blockSize=15;
+   
+    //sbm.state->preFilterSize = 9; // 5
+    
+    sbm.state->preFilterCap = 40; //6, 61
+    sbm.state->minDisparity = 0; // -39
+    sbm.state->textureThreshold = 0; // 507
+    sbm.state->uniquenessRatio = 0;
+    sbm.state->speckleWindowSize = 30;
+    sbm.state->speckleRange = 29; // 8
+    sbm.state->disp12MaxDiff = 0; // 1
+    
     
     double minVal;
     double maxVal;
     
-    cv::minMaxLoc(imgDisparity16S, &minVal, &maxVal);
+//    cv::minMaxLoc(imgDisparity16S, &minVal, &maxVal);
     
-    imgDisparity16S.convertTo(imgDisparity8U, CV_8UC1, 255 / (maxVal - minVal));
-    
+    //  imgDisparity16S.convertTo(imgDisparity8U, CV_8UC1, 255 / (maxVal - minVal));
+    cv::Mat disp;
+    cv::Mat disp8;
     const char *windowName = "Disparity";
-    cv::namedWindow(windowName, CV_WINDOW_NORMAL);
-    cv::imshow(windowName, imgDisparity8U);
-
+    sbm(imgLeft, imgRight, disp);
+    cv::normalize(disp, disp8, 0, 255, CV_MINMAX, CV_8U);
+    cv::imshow(windowName, disp8);
+    // cv::imshow(windowName, imgDisparity8U);
     // cv::imwrite("SBM_sample.png", imgDisparity16S);
-    cv::waitKey(5);
+    if ((char)cv::waitKey(5) == 'q') return 0;
     
     return 0;
 }
+
+
+
 
 // show cameradata, RGB format captured and convert to grayscale
 void StereoView::showCameraData() {
     cv::Mat frames[CAMERA_NUM];
     cv::Mat grayFrames[CAMERA_NUM];
-
+    sbm_here = sbm;
     for (int i = 0; i < CAMERA_NUM; i++) {
         std::string windowName("Camera ");
         windowName += std::to_string(i);
@@ -78,6 +116,12 @@ void StereoView::showCameraData() {
         cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
     }
   
+    const char *windowName = "Disparity";
+    cv::namedWindow(windowName, CV_WINDOW_NORMAL);   
+        // create trackbars
+    cv::createTrackbar("num of disparities", "Disparity", &alpha_slider, 
+                       alpha_slider_max, on_trackbar);
+    on_trackbar(display, 0);
     // TODO: 2 threads to show camera data?
     while (cv::waitKey(15) != 'q') {
         cameras[0] >> frames[0];

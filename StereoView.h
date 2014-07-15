@@ -11,10 +11,10 @@
 class StereoView {
 private:
   cv::VideoCapture cameras[CAMERA_NUM];
-
+  cv::StereoBM sbm;
   int cameraCalibrationSetup();
   int cameraSetup();
-  
+
 public:
   inline StereoView() {
     cameraSetup();
