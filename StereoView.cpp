@@ -18,7 +18,7 @@ double alpha, beta;
 // load calibration configuration file for the camera
 // currently for camera 0
 int StereoView::loadConfiguration() {
-    cv::FileStorage fs("cam0_config.xml", cv::FileStorage::READ);
+    cv::FileStorage fs("Camera0config.xml", cv::FileStorage::READ);
 
     fs["Camera_Matrix"] >> cameraMat[0];
     fs["Distortion_Coefficients"] >> distCoeffMat[0];
@@ -58,8 +58,6 @@ void on_trackbar(int, void* ) {
 // show disparity map, in order to calculate depth
 int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     
-    imgLeft = cv::imread("c0_1.jpg", CV_LOAD_IMAGE_COLOR);
-    imgRight = cv::imread("c0_2.jpg", CV_LOAD_IMAGE_COLOR);
     cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
     cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
     //imgLeft = cv::imread("left01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
