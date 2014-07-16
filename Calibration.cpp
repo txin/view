@@ -446,7 +446,7 @@ int Calibration::setup(int cameraNo) {
         cv::imshow(windowName, view);
         char key = (char)waitKey(s.inputCapture.isOpened() ? 50 : s.delay);
         
-        if (key == ESC_KEY) {
+        if (key == ESC_KEY || key == 'q' || key == 'Q') {
             break;
         }
         if (key == 'u' && mode == CALIBRATED) {
