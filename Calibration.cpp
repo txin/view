@@ -6,19 +6,9 @@
  * 1. live feed
  * 2. image html didnt't work out
  */
-#include <iostream>
-#include <sstream>
-#include <time.h>
-#include <stdio.h>
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/calib3d/calib3d.hpp>
-#include <opencv2/highgui/highgui.hpp>
-
-#ifndef _CRT_SECURE_NO_WARNINGS
-# define _CRT_SECURE_NO_WARNINGS
-#endif
+#include "Calibration.h"
+#include "StereoView.h"
 
 using namespace cv;
 using namespace std;
@@ -86,9 +76,11 @@ public:
         if (input.empty()) {      // Check for valid input
             inputType = INVALID;
         } else {
+            
+            // for input configuration
             if (input[0] >= '0' && input[0] <= '9') {
                 stringstream ss(input);
-                ss >> cameraID;
+                ss >> cameraID[0];
                 inputType = CAMERA;
             } else {
                 if (readStringList(input, imageList)) {
@@ -99,7 +91,7 @@ public:
                 }
             }
             if (inputType == CAMERA)
-                inputCapture.open(cameraID);
+                inputCapture.open(cameraID[0]);
             if (inputType == VIDEO_FILE)
                 inputCapture.open(input);
             if (inputType != IMAGE_LIST && !inputCapture.isOpened())
@@ -158,7 +150,7 @@ public:
     string outputFileName;      // The name of the file where to write
     bool showUndistorsed;       // Show undistorted images after calibration
     string input;              
-    int cameraID;
+    int cameraID[CAMERA_NUM];
     vector<string> imageList;
     int atImageList;
     VideoCapture inputCapture;
@@ -326,9 +318,11 @@ bool runCalibrationAndSave(Settings& s, Size imageSize, Mat&  cameraMatrix,
     return ok;
 }
 
+
+// calibrate for camera 0 and 1
 int main(int argc, char** argv) {
     Settings s;
-    // default configuration file, directs to the saved 10 images
+    // default configuration file for camera use
     const string inputSettingsFile = "default.xml";
     FileStorage fs(inputSettingsFile, FileStorage::READ);
     if (!fs.isOpened()) {

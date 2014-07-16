@@ -4,12 +4,18 @@
     <BoardSize_Width>4</BoardSize_Width>
     <BoardSize_Height>4</BoardSize_Height>
     <Square_Size>20</Square_Size>
+    
+    <!-- numbers represent the camera number-->
+    
     <Input>"0"</Input>
     <Input_FlipAroundHorizontalAxis>0</Input_FlipAroundHorizontalAxis>
     <Input_Delay>100</Input_Delay>
     <Calibrate_NrOfFrameToUse>5</Calibrate_NrOfFrameToUse>
     <Calibrate_FixAspectRatio>1</Calibrate_FixAspectRatio>
-    <Calibrate_AssumeZeroTangentialDistortion>1</Calibrate_AssumeZeroTangentialDistortion>
+
+    <Calibrate_AssumeZeroTangentialDistortion>1
+    </Calibrate_AssumeZeroTangentialDistortion>
+
     <Calibrate_FixPrincipalPointAtTheCenter>1</Calibrate_FixPrincipalPointAtTheCenter>
     <Write_outputFileName>"out_camera0_data.xml"</Write_outputFileName>
     <Write_DetectedFeaturePoints>1</Write_DetectedFeaturePoints>
