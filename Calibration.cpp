@@ -320,7 +320,7 @@ bool runCalibrationAndSave(Settings& s, Size imageSize, Mat&  cameraMatrix,
 
 
 // calibrate for camera 0 and 1
-int main(int argc, char** argv) {
+int Calibration::setup() {
     Settings s;
     // default configuration file for camera use
     const string inputSettingsFile = "default.xml";
@@ -461,5 +461,11 @@ int main(int argc, char** argv) {
             if (c  == ESC_KEY || c == 'q' || c == 'Q') break;
         }
     }
+    return 0;
+}
+
+int main() {
+    Calibration test;
+    test.setup();
     return 0;
 }
