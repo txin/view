@@ -53,10 +53,10 @@ public:
         node["Show_UndistortedImage"] >> showUndistorsed;
         node["Input"] >> input;
         node["Input_Delay"] >> delay;
-        interprate();
+        interpret();
     }
 
-    void interprate() {
+    void interpret() {
         goodInput = true;
         if (boardSize.width <= 0 || boardSize.height <= 0) {
             cerr << "Invalid Board size: " << boardSize.width << " " 
@@ -78,9 +78,10 @@ public:
         } else {
             
             // for input configuration
-            if (input[0] >= '0' && input[0] <= '9') {
+            // use camera id passed in
+            /*if (input[0] >= '0' && input[0] <= '9') {
                 stringstream ss(input);
-                ss >> cameraID[0];
+                //ss >> cameraID;
                 inputType = CAMERA;
             } else {
                 if (readStringList(input, imageList)) {
@@ -89,16 +90,22 @@ public:
                 } else {
                     inputType = VIDEO_FILE;
                 }
+                }*/
+            // default input Type camera
+            inputType = CAMERA;
+
+
+            if (inputType == CAMERA) {
+                inputCapture.open(cameraID);
             }
-            if (inputType == CAMERA)
-                inputCapture.open(cameraID[0]);
-            if (inputType == VIDEO_FILE)
-                inputCapture.open(input);
-            if (inputType != IMAGE_LIST && !inputCapture.isOpened())
-                inputType = INVALID;
+            
+            //if (inputType == VIDEO_FILE)
+            //              inputCapture.open(input);
+            //if (inputType != IMAGE_LIST && !inputCapture.isOpened())
+            //     inputType = INVALID;
         }
         if (inputType == INVALID) {
-            cerr << "Input is invalid" << input;
+            cerr << "Input is invalid here" << input;
             goodInput = false;
         }
         flag = 0;
@@ -150,7 +157,7 @@ public:
     string outputFileName;      // The name of the file where to write
     bool showUndistorsed;       // Show undistorted images after calibration
     string input;              
-    int cameraID[CAMERA_NUM];
+    int cameraID;
     vector<string> imageList;
     int atImageList;
     VideoCapture inputCapture;
@@ -320,10 +327,15 @@ bool runCalibrationAndSave(Settings& s, Size imageSize, Mat&  cameraMatrix,
 
 
 // calibrate for camera 0 and 1
-int Calibration::setup() {
+int Calibration::setup(int cameraNo) {
     Settings s;
     // default configuration file for camera use
     const string inputSettingsFile = "default.xml";
+
+    string windowName = "Camera";
+    string indexStr = std::to_string(cameraNo);
+    windowName += indexStr;
+
     FileStorage fs(inputSettingsFile, FileStorage::READ);
     if (!fs.isOpened()) {
         cout << "Could not open the configuration file: \"" 
@@ -332,6 +344,14 @@ int Calibration::setup() {
     }
     fs["Settings"] >> s;
     fs.release();
+
+    // set up camera id
+    s.cameraID = cameraNo;
+    // set up output file name
+    s.outputFileName = windowName + "config.xml";
+
+    s.interpret();
+
     if (!s.goodInput) {
         cout << "Invalid input detected. Application stopping." << endl;
         return -1;
@@ -423,8 +443,7 @@ int Calibration::setup() {
             Mat temp = view.clone();
             undistort(temp, view, cameraMatrix, distCoeffs);
         }
-
-        imshow("Image View", view);
+        cv::imshow(windowName, view);
         char key = (char)waitKey(s.inputCapture.isOpened() ? 50 : s.delay);
         
         if (key == ESC_KEY) {
@@ -456,7 +475,7 @@ int Calibration::setup() {
             if(view.empty())
                 continue;
             remap(view, rview, map1, map2, INTER_LINEAR);
-            imshow("Image View", rview);
+            imshow(windowName, rview);
             char c = (char)waitKey();
             if (c  == ESC_KEY || c == 'q' || c == 'Q') break;
         }
@@ -464,8 +483,48 @@ int Calibration::setup() {
     return 0;
 }
 
-int main() {
+// thread id same to camera id
+void *calibrate(void *t) {
     Calibration test;
-    test.setup();
+    long tid = (long)t;
+    int cameraNo = (int)tid;
+    int returnVal = test.setup(cameraNo);
+    pthread_exit(NULL);
+}
+
+
+int main() {
+    // creat 2 threads
+    pthread_t threads[CAMERA_NUM];
+
+    pthread_attr_t attr;
+    void *status;
+
+    for (int i = 0; i < CAMERA_NUM; i++) {
+        std::string windowName("Camera");
+        windowName += std::to_string(i);
+        cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE);
+        cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
+    }
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+        
+    int rc;
+    for (int i = 0; i < CAMERA_NUM; i++) {
+        std::cout << "main() : creating thread, " << i << endl;
+        long index = (long)i;
+        rc = pthread_create(&threads[i], NULL, calibrate, (void *)index);
+    }
+
+    pthread_attr_destroy(&attr);
+    for (int i = 0; i < CAMERA_NUM; i++) {
+        rc = pthread_join(threads[i], &status);
+        if (rc) {
+            std::cout << "Error: unable to join, " << rc << std::endl;
+        }
+        cout << "Main: completed thread id :" << i;
+        cout << " exiting with status : " << status << std::endl;
+    }
+    std::cout << "Main: program exiting." << std::endl;
     return 0;
 }

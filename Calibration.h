@@ -1,7 +1,9 @@
 #include <iostream>
 #include <sstream>
+#include <string>
 #include <time.h>
 #include <stdio.h>
+#include <pthread.h>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -16,6 +18,6 @@
 class Calibration {
 public:
     Calibration(){};
-    int setup();
+    int setup(int cameraNo);
 
 };
