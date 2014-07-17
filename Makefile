@@ -1,4 +1,4 @@
-LAGS = `pkg-config --cflags opencv` -std=c++11
+CFLAGS = `pkg-config --cflags opencv` -std=c++11
 LIBS = `pkg-config --libs opencv` -lpthread
 
 % : %.cpp
