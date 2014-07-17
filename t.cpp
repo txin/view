@@ -8,17 +8,39 @@ GLFWwindow* window;
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/rotate_vector.hpp>
+
 using namespace glm;
 
 #include "shader.hpp"
 
-glm::vec3 eyeLocation(4, -3, 3);
- 
+glm::vec3 position(0, 0, 5);
+float horizontalAngle = 3.14f;
+float verticalAngle = 0.0f;
+float initialFoV = 45.0f;
+
+float speed = 0.1f;  
+glm::vec3 right;
+float deltaTime;
+glm::vec3 direction;
 
 static void key_callback(GLFWwindow* window, int key, int scancode,
                          int action, int modes) {
-    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
-        printf("left\n");
+    // Move forward
+    if (key == GLFW_KEY_UP && action == GLFW_PRESS){
+        position += direction * deltaTime * speed;
+    }
+// Move backward
+    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS){
+        position -= direction * deltaTime * speed;
+    }
+// Strafe right
+    if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS){
+        position += right * deltaTime * speed;
+    }
+// Strafe left
+    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS){
+        position -= right * deltaTime * speed;
     }
 }
 
@@ -75,18 +97,7 @@ int main(void) {
     // Get a handle for our "MVP" uniform
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
-    // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-    glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-    // Camera matrix
-    glm::mat4 View       = glm::lookAt(
-        glm::vec3(4,3,-3), // Camera is at (4,3,-3), in World Space
-        glm::vec3(0,0,0), // and looks at the origin
-        glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-        );
-    // Model matrix : an identity matrix (model will be at the origin)
-    glm::mat4 Model      = glm::mat4(1.0f);
-    // Our ModelViewProjection : multiplication of our 3 matrices
-    glm::mat4 MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
+    
 
     // Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
     // A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
@@ -183,9 +194,42 @@ int main(void) {
 
 
 
-
+    double lastTime = glfwGetTime();
     // display main loop
     do{
+
+        double currentTime = glfwGetTime();
+        deltaTime = float(currentTime - lastTime);
+
+        direction = glm::vec3(cos(verticalAngle) * sin(horizontalAngle),
+                               sin(verticalAngle),
+                               cos(verticalAngle) * cos(horizontalAngle));
+        
+        // Right vector
+        right = glm::vec3(
+            sin(horizontalAngle - 3.14f/2.0f),
+            0,
+            cos(horizontalAngle - 3.14f/2.0f)
+            );
+        glm::vec3 up = glm::cross( right, direction );
+
+
+// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+        glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+        // Camera matrix
+        glm::mat4 View       = glm::lookAt(
+            //glm::vec3(4,3,-3), // Camera is at (4,3,-3), in World Space
+            position,
+            position + direction, // and looks at the origin
+            up  // Head is up (set to 0,-1,0 to look upside-down)
+            );
+        // Model matrix : an identity matrix (model will be at the origin)
+        glm::mat4 Model      = glm::mat4(1.0f);
+        // Our ModelViewProjection : multiplication of our 3 matrices
+        glm::mat4 MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
+
+
+
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // Use our shader
@@ -216,6 +260,10 @@ int main(void) {
             0,                                // stride
             (void*)0                          // array buffer offset
             );
+
+
+
+
 
         // Draw the triangle !
         glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
