@@ -12,6 +12,17 @@ using namespace glm;
 
 #include "shader.hpp"
 
+glm::vec3 eyeLocation(4, -3, 3);
+ 
+
+static void key_callback(GLFWwindow* window, int key, int scancode,
+                         int action, int modes) {
+    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+        printf("left\n");
+    }
+}
+
+
 int main(void) {
  
    // Initialise GLFW
@@ -33,6 +44,7 @@ int main(void) {
         return -1;
     }
     glfwMakeContextCurrent(window);
+    glfwSetKeyCallback(window, key_callback);
 
     // Initialize GLEW
     glewExperimental = true; // Needed for core profile
@@ -167,17 +179,20 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
+
+
+
+
+
+    // display main loop
     do{
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         // Use our shader
         glUseProgram(programID);
-
         // Send our transformation to the currently bound shader, 
         // in the "MVP" uniform
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
         // 1rst attribute buffer : vertices
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
