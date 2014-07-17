@@ -1,28 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <GL/glew.h>
-
-#include <GLFW/glfw3.h>
-GLFWwindow* window;
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/rotate_vector.hpp>
+#include "Cube.h"
+#include "shader.hpp"
 
 using namespace glm;
 
-#include "shader.hpp"
-
-glm::vec3 position(0, 0, 5);
-float horizontalAngle = 3.14f;
-float verticalAngle = 0.0f;
-float initialFoV = 45.0f;
 
 float speed = 0.1f;  
 glm::vec3 right;
 float deltaTime;
 glm::vec3 direction;
+glm::vec3 position(0, 0, 5);
 
 static void key_callback(GLFWwindow* window, int key, int scancode,
                          int action, int modes) {
@@ -45,9 +31,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
 }
 
 
-int main(void) {
+int Cube::display() {
  
-   // Initialise GLFW
+    // Initialise GLFW
     if(!glfwInit()) {
         fprintf( stderr, "Failed to initialize GLFW\n" );
         return -1;
@@ -92,7 +78,7 @@ int main(void) {
 
     // Create and compile our GLSL program from the shaders
     GLuint programID = LoadShaders("TransformVertexShader.vert", 
-                                    "ColorFragmentShader.frag");
+                                   "ColorFragmentShader.frag");
 
     // Get a handle for our "MVP" uniform
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
@@ -202,8 +188,8 @@ int main(void) {
         deltaTime = float(currentTime - lastTime);
 
         direction = glm::vec3(cos(verticalAngle) * sin(horizontalAngle),
-                               sin(verticalAngle),
-                               cos(verticalAngle) * cos(horizontalAngle));
+                              sin(verticalAngle),
+                              cos(verticalAngle) * cos(horizontalAngle));
         
         // Right vector
         right = glm::vec3(
@@ -287,6 +273,11 @@ int main(void) {
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
+    return 0;
+}
 
+int main(void) {
+    Cube cube;
+    cube.display();
     return 0;
 }
