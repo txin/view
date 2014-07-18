@@ -10,6 +10,9 @@ float deltaTime;
 glm::vec3 direction;
 glm::vec3 position(0, 0, 5);
 
+
+
+// TODO: change the up and down key functions
 static void key_callback(GLFWwindow* window, int key, int scancode,
                          int action, int modes) {
     // Move forward
@@ -30,6 +33,13 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
     }
 }
 
+
+// TODO: initialise the eye position in the centre of 640 * 480 screen
+// TODO: based on which window?
+int Cube::setViewMatrix(int xpos, int ypos) {
+    horizontalAngle += eyeMoveSpeed * deltaTime * float(640 / 2 - xpos);
+    verticalAngle += eyeMoveSpeed * deltaTime * float(480 / 2 - ypos);
+}
 
 int Cube::run() {
  

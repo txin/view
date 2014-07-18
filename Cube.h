@@ -25,8 +25,13 @@ private:
     float verticalAngle = 0.0f;
     float initialFoV = 45.0f;
 
+    // eyeMoveSpeed relative to the movement of the cube
+    // TODO: eyemovement speed testing
+    float eyeMoveSpeed = 0.05f;
+
 public:
     Cube(){};
     int run();
-    int setViewMatrix();
+    // set view matrix from the x, y positions of eyeTracking class
+    int setViewMatrix(int xpos, int ypos);
 };

@@ -1,19 +1,23 @@
-CFLAGS = `pkg-config --cflags opencv` -std=c++11
-LIBS = `pkg-config --libs opencv` -lpthread
+CV_FLAGS = `pkg-config --cflags opencv` 
+C_FLAG = -std=c++11
+CV_LIBS = `pkg-config --libs opencv` -lpthread
+GL_LIBS = -lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lGLEW
 
 % : %.cpp
-	g++ $(CFLAGS) -c $< 
-	g++ $(CFLAGS) -o $@.out $@.o $(LIBS)	
+	g++ $(CV_FLAGS) $(C_FLAG) -c $< 
+	g++ $(CV_FLAGS) $(C_FLAG) -o $@.out $@.o $(CV_LIBS)	
 
 eyeTracking.o : eyeTracking.cpp 
-	g++ -std=c++11 -c eyeTracking.cpp	
+	g++ $(C_FLAG) -c eyeTracking.cpp	
 
 cube.o : cube.cpp shader.cpp shader.hpp
-	g++ -std=c++11 -c cube.cpp shader.cpp shader.hpp
-#g++ cube.o shader.o -o cube.out -lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lGLEW
+	g++ $(C_FLAG) -c cube.cpp shader.cpp shader.hpp
 
-main : cube.o eyeTracking.o shader.o
-	g++ -std=c++11 -c main.cpp
-	g++ cube.o eyeTracking.o shader.o main.o -o main.out -lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lGLEW $(LIBS)
+global.o : global.cpp
+	g++ $(CV-FLAGS) $(C_FLAG) -c global.cpp
+
+main : cube.o eyeTracking.o shader.o global.o
+	g++ $(C_FLAG) -c main.cpp
+	g++ cube.o eyeTracking.o shader.o global.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
 clean :
 	rm *.o *.out
