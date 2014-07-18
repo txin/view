@@ -190,7 +190,6 @@ int Cube::run() {
 
     // display main loop
     do{
-        
         // TODO: test out the global accessing to the same memory address
         Global global = Global::getInstance();
         std::cout << global.getPosition() << std::endl;

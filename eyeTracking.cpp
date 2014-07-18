@@ -98,7 +98,7 @@ int EyeTracking::run() {
     Global global = Global::getInstance();
     
     cv::Point iniPos(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-    std::cout << iniPos << std::endl;
+//    std::cout << iniPos << std::endl;
     global.setPosition(iniPos);
 
 
@@ -124,7 +124,7 @@ int EyeTracking::run() {
             // Tracking stage with template matching
             trackEye(gray, eye_tpl, eye_bb);
             
-            
+            global.setPosition(eye_bb.x, eye_bb.y);
             // Draw bounding rectangle for the eye
             cv::rectangle(frame, eye_bb, CV_RGB(0,255,0));
         }
