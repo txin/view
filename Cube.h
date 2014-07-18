@@ -5,6 +5,7 @@
  *
  */
 #pragma once
+#define GLM_FORCE_RADIANS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,10 +15,7 @@
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-
-
 
 class Cube {
 private:

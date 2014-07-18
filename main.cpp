@@ -44,8 +44,10 @@ void *doTask(void *t) {
 }
 
 
+// 2 threads for eyeTracking and 3D view of a cube separately
+
 int main() {
-    // 2 threads for eyeTracking and 3D view of a cube separately
+
     pthread_t threads[THREAD_NUM];
     pthread_attr_t attr;
     void *status;

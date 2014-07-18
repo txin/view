@@ -87,13 +87,14 @@ int EyeTracking::run() {
     if (face_cascade.empty() || eye_cascade.empty() || !cap.isOpened())
         return 1;
 
-    // Set video to 320x240
+    // Set video to 640 * 480
     cap.set(CV_CAP_PROP_FRAME_WIDTH, CAMERA_WIDTH);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT, CAMERA_HEIGHT);
 
     cv::Mat frame, eye_tpl;
     cv::Rect eye_bb;
 
+    // TODO: change the template to eyes with glasses
     while (cv::waitKey(15) != 'q') {
         cap >> frame;
         if (frame.empty())
