@@ -21,6 +21,7 @@
 #include "EyeTracking.h"
 #include "StereoView.h"
 #include "Cube.h"
+#include "Global.h"
 
 int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
@@ -93,6 +94,13 @@ int EyeTracking::run() {
 
     cv::Mat frame, eye_tpl;
     cv::Rect eye_bb;
+    
+    Global global = Global::getInstance();
+    
+    cv::Point iniPos(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+
+    global.setPosition(iniPos);
+
 
     // TODO: change the template to eyes with glasses
     while (cv::waitKey(15) != 'q') {

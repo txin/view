@@ -57,7 +57,7 @@ int main() {
     
     // create threads
     int rc;
-    for (int i = 0; i < CAMERA_NUM; i++) {
+    for (int i = 0; i < THREAD_NUM; i++) {
         cout << "main(): creating thread, " << i << endl;
         long index = (long)i;
         rc = pthread_create(&threads[i], NULL, doTask, (void *)index);

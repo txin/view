@@ -1,15 +1,14 @@
 #include "Cube.h"
 #include "shader.hpp"
+#include "Global.h"
 
 using namespace glm;
-
 
 float speed = 0.1f;  
 glm::vec3 right;
 float deltaTime;
 glm::vec3 direction;
 glm::vec3 position(0, 0, 5);
-
 
 
 // TODO: change the up and down key functions
@@ -188,9 +187,13 @@ int Cube::run() {
 
 
     double lastTime = glfwGetTime();
+
     // display main loop
     do{
-
+        
+        // TODO: test out the global accessing to the same memory address
+        Global global = Global::getInstance();
+        std::cout << global.getPosition() << std::endl;
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
 
@@ -210,6 +213,7 @@ int Cube::run() {
 // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
         glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
         // Camera matrix
+
         glm::mat4 View       = glm::lookAt(
             //glm::vec3(4,3,-3), // Camera is at (4,3,-3), in World Space
             position,
