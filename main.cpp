@@ -25,13 +25,13 @@ void *doTask(void *t) {
     switch (taskid) {
 
     case EYETRACKING: {
-//        EyeTracking eyeTracking;
-//        eyeTracking.run();
+        EyeTracking eyeTracking;
+        eyeTracking.run();
     }
         break;
     case CUBE: {
-//        Cube cube;
-//        cube.run();
+        Cube cube;
+        cube.run();
     }
         break;
     default: {
@@ -44,7 +44,7 @@ void *doTask(void *t) {
 }
 
 
-int main(void) {
+int main() {
     // 2 threads for eyeTracking and 3D view of a cube separately
     pthread_t threads[THREAD_NUM];
     pthread_attr_t attr;

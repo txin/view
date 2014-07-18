@@ -81,7 +81,7 @@ int EyeTracking::run() {
 
     const char *windowName = "EyeTracking";
     cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE);
-    cv::moveWindow(windowName, 0, 0);
+    cv::moveWindow(windowName, CAMERA_WIDTH, 0);
 
     // Check if everything is ok
     if (face_cascade.empty() || eye_cascade.empty() || !cap.isOpened())
