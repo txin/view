@@ -8,6 +8,7 @@
 
 #include "EyeTracking.h"
 #include "Cube.h"
+#include "Global.h"
 
 #define THREAD_NUM 2
 
@@ -55,6 +56,10 @@ int main() {
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
     
+    // test with setting global's position
+    Global global = Global::getInstance();
+    global.setPosition(2, 2);
+
     // create threads
     int rc;
     for (int i = 0; i < THREAD_NUM; i++) {

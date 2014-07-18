@@ -98,7 +98,7 @@ int EyeTracking::run() {
     Global global = Global::getInstance();
     
     cv::Point iniPos(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-
+    std::cout << iniPos << std::endl;
     global.setPosition(iniPos);
 
 

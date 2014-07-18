@@ -73,7 +73,7 @@ int Cube::run() {
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-    // Dark blue background
+   // Dark blue background
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
     // Enable depth test
