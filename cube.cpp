@@ -31,7 +31,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
 }
 
 
-int Cube::display() {
+int Cube::run() {
  
     // Initialise GLFW
     if(!glfwInit()) {
@@ -248,9 +248,6 @@ int Cube::display() {
             );
 
 
-
-
-
         // Draw the triangle !
         glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
 
@@ -276,8 +273,11 @@ int Cube::display() {
     return 0;
 }
 
+// for unit testing
+/*
 int main(void) {
     Cube cube;
-    cube.display();
+    cube.run();
     return 0;
-}
+} 
+*/

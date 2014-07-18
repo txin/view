@@ -26,7 +26,7 @@ public:
            << "Square_Size"         << squareSize
            << "Calibrate_NrOfFrameToUse" << nrFrames
            << "Calibrate_FixAspectRatio" << aspectRatio
-           << "Calibrate_AssumeZeroTangentialDistortion" << calibZeroTangentDist
+n           << "Calibrate_AssumeZeroTangentialDistortion" << calibZeroTangentDist
            << "Calibrate_FixPrincipalPointAtTheCenter" << calibFixPrincipalPoint
            << "Write_DetectedFeaturePoints" << bwritePoints
            << "Write_extrinsicParameters"   << bwriteExtrinsics
@@ -492,6 +492,7 @@ void *calibrate(void *t) {
     pthread_exit(NULL);
 }
 
+// for unit testing
 
 int main() {
     // creat 2 threads
@@ -528,3 +529,4 @@ int main() {
     std::cout << "Main: program exiting." << std::endl;
     return 0;
 }
+

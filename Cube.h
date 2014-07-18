@@ -4,6 +4,8 @@
  *
  *
  */
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -27,6 +29,6 @@ private:
 
 public:
     Cube(){};
-    int display();
+    int run();
     int setViewMatrix();
 };

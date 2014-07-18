@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 
@@ -25,6 +27,6 @@ public:
   inline StereoView() {
     cameraSetup();
   };
-  void showCameraData();
+  void run();
   int showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight);
 };

@@ -122,7 +122,7 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
 
 
 // show cameradata, RGB format captured and convert to grayscale
-void StereoView::showCameraData() {
+void StereoView::run() {
     cv::Mat frames[CAMERA_NUM];
     cv::Mat grayFrames[CAMERA_NUM];
     sbm_here = sbm;
@@ -153,6 +153,6 @@ void StereoView::showCameraData() {
 
 int main(int argc, char** argv) {
     StereoView view;
-    view.showCameraData();
+    view.run();
     return 0;
 }
