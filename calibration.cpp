@@ -26,7 +26,7 @@ public:
            << "Square_Size"         << squareSize
            << "Calibrate_NrOfFrameToUse" << nrFrames
            << "Calibrate_FixAspectRatio" << aspectRatio
-n           << "Calibrate_AssumeZeroTangentialDistortion" << calibZeroTangentDist
+           << "Calibrate_AssumeZeroTangentialDistortion" << calibZeroTangentDist
            << "Calibrate_FixPrincipalPointAtTheCenter" << calibFixPrincipalPoint
            << "Write_DetectedFeaturePoints" << bwritePoints
            << "Write_extrinsicParameters"   << bwriteExtrinsics
