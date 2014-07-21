@@ -96,11 +96,6 @@ int EyeTracking::run() {
     cv::Rect eye_bb;
     
     Global global = Global::getInstance();
-    
-    cv::Point iniPos(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-//    std::cout << iniPos << std::endl;
-    global.setPosition(iniPos);
-
 
     // TODO: change the template to eyes with glasses
     while (cv::waitKey(15) != 'q') {

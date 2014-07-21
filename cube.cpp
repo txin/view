@@ -1,15 +1,17 @@
 #include "Cube.h"
 #include "shader.hpp"
 #include "Global.h"
+#include "StereoView.h"
 
 using namespace glm;
 
 float speed = 0.1f;  
 glm::vec3 right;
 float deltaTime;
+// movement of x y coordinates of the eye, int pixels
+int deltaXpos, deltaYpos;
 glm::vec3 direction;
 glm::vec3 position(0, 0, 5);
-
 
 // TODO: change the up and down key functions
 static void key_callback(GLFWwindow* window, int key, int scancode,
@@ -33,11 +35,12 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
 }
 
 
-// TODO: initialise the eye position in the centre of 640 * 480 screen
 // TODO: based on which window?
 int Cube::setViewMatrix(int xpos, int ypos) {
-    horizontalAngle += eyeMoveSpeed * deltaTime * float(640 / 2 - xpos);
-    verticalAngle += eyeMoveSpeed * deltaTime * float(480 / 2 - ypos);
+    horizontalAngle += eyeMoveSpeed * deltaTime * float(xpos);
+//horizontalAngle += eyeMoveSpeed * float(CAMERA_WIDTH/ 2 - xpos);
+//horizontalAngle += eyeMoveSpeed * deltaTime * float(CAMERA_WIDTH/ 2 - xpos);
+    //verticalAngle += eyeMoveSpeed * deltaTime * float(CAMERA_HEIGHT / 2 - ypos);
 }
 
 int Cube::run() {
@@ -188,11 +191,29 @@ int Cube::run() {
 
     double lastTime = glfwGetTime();
 
+    Global global = Global::getInstance();
+   
+
+    // std::cout << global.getPosition() << std::endl;
+    // TODO: test 
+    // position of eye
+    int xpos = CAMERA_WIDTH / 2;
+    int ypos = CAMERA_HEIGHT / 2;
+    int tempX, tempY;
     // display main loop
-    do{
-        // TODO: test out the global accessing to the same memory address
-        Global global = Global::getInstance();
-        std::cout << global.getPosition() << std::endl;
+    do {
+        tempX = global.getPosition().x;
+        tempY = global.getPosition().y;
+        
+        // TODO: don't need??
+        deltaXpos = tempX - xpos;
+        deltaYpos = tempY - ypos;
+                
+        xpos = tempX;
+        ypos = tempY;
+        
+        setViewMatrix(deltaXpos, deltaYpos);
+
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
 

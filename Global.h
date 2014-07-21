@@ -2,6 +2,7 @@
 // share the location
 #include <opencv2/imgproc/imgproc.hpp>
 #include <pthread.h>
+#include "StereoView.h"
 
 class Global {
 
@@ -12,9 +13,9 @@ private:
     pthread_mutex_t start;
     // eye position from EyeTracking class
     // share with Cube class to compute the dynamic view matrix
-    Global(){
+    Global() {
         pthread_mutex_init(&start, NULL);
-        position = new cv::Point();
+        position = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
     };
 
 public:
