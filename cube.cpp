@@ -34,13 +34,12 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
     }
 }
 
-
-// TODO: based on which window?
-int Cube::setViewMatrix(int xpos, int ypos) {
-    horizontalAngle += eyeMoveSpeed * deltaTime * float(xpos);
-//horizontalAngle += eyeMoveSpeed * float(CAMERA_WIDTH/ 2 - xpos);
-//horizontalAngle += eyeMoveSpeed * deltaTime * float(CAMERA_WIDTH/ 2 - xpos);
-    //verticalAngle += eyeMoveSpeed * deltaTime * float(CAMERA_HEIGHT / 2 - ypos);
+// TODO
+int Cube::setEyePosition(int deltaXpos, int deltaYpos) {
+    position += right * deltaTime * eyeMoveSpeed * float(deltaXpos);
+    // horizontalAngle += eyeMoveSpeed * deltaTime * float(deltaXpos);
+   
+    //verticalAngle += eyeMoveSpeed * deltaTime * float(deltaYpos);
 }
 
 int Cube::run() {
@@ -212,7 +211,7 @@ int Cube::run() {
         xpos = tempX;
         ypos = tempY;
         
-        setViewMatrix(deltaXpos, deltaYpos);
+        setEyePosition(deltaXpos, deltaYpos);
 
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
@@ -225,9 +224,8 @@ int Cube::run() {
         right = glm::vec3(
             sin(horizontalAngle - 3.14f/2.0f),
             0,
-            cos(horizontalAngle - 3.14f/2.0f)
-            );
-        glm::vec3 up = glm::cross( right, direction );
+            cos(horizontalAngle - 3.14f/2.0f));
+        glm::vec3 up = glm::cross(right, direction);
 
 
 // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units

@@ -28,11 +28,11 @@ private:
 
     // eyeMoveSpeed relative to the movement of the cube
     // TODO: eyemovement speed testing
-    float eyeMoveSpeed = 0.001f;
+    float eyeMoveSpeed = 0.003f;
 
 public:
     Cube() {};
     int run();
     // set view matrix from the x, y positions of eyeTracking class
-    int setViewMatrix(int xpos, int ypos);
+    int setEyePosition(int xpos, int ypos);
 };
