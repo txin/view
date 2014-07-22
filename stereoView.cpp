@@ -14,17 +14,17 @@ const int alpha_slider_max = 100;
 int alpha_slider;
 double alpha, beta;
 
-
-// load calibration configuration file for the camera
-// currently for camera 0
+// load calibration configuration files for the cameras
 int StereoView::loadConfiguration() {
-    cv::FileStorage fs("Camera0config.xml", cv::FileStorage::READ);
-
-    fs["Camera_Matrix"] >> cameraMat[0];
-    fs["Distortion_Coefficients"] >> distCoeffMat[0];
-    fs.release();
+    for (int i = 0; i < CAMERA_NUM; i++) {
+        std::string indexStr = std::to_string(i);
+        std::string fileName = "Camera" + indexStr + "config.xml";
+        cv::FileStorage fs("Camera0config.xml", cv::FileStorage::READ);
+        fs["Camera_Matrix"] >> cameraMat[i];
+        fs["Distortion_Coefficients"] >> distCoeffMat[i];
+        fs.release();
+    }
 }
-
 
 // open cameras, currently 2 cameras
 int StereoView::cameraSetup() {
@@ -64,9 +64,9 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     //imgRight = cv::imread("right01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
     // apply the calibration parameters to the first matrix captured by cam 0
     cv::Mat temp0 = imgLeft.clone();
-    cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
+//    cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
     cv::imshow("Camera 0", imgLeft);
-    cv::imshow("Undistorted_cam0", temp0);
+//    cv::imshow("Undistorted_cam0", temp0);
     cv::imshow("Camera 1", imgRight);
     if ((char)cv::waitKey(5) == 'q') return 0;
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
@@ -132,12 +132,15 @@ void StereoView::run() {
         cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE);
         cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
     }
-    cv::namedWindow("Undistorted_cam0", CV_WINDOW_AUTOSIZE);
-    cv::moveWindow("Undistorted_cam0", 0, CAMERA_HEIGHT);
-    
+    /*
+      cv::namedWindow("Undistorted_cam0", CV_WINDOW_AUTOSIZE);
+      cv::moveWindow("Undistorted_cam0", 0, CAMERA_HEIGHT);
+    */
     const char *windowName = "Disparity";
-    cv::namedWindow(windowName, CV_WINDOW_NORMAL);   
-        // create trackbars
+    cv::namedWindow(windowName, CV_WINDOW_NORMAL);
+    cv::moveWindow(windowName, 0, CAMERA_HEIGHT + 50);
+    
+// create trackbars
     cv::createTrackbar("num of disparities", "Disparity", &alpha_slider, 
                        alpha_slider_max, on_trackbar);
     on_trackbar(display, 0);
