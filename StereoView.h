@@ -18,7 +18,7 @@ private:
     // calibration parameters for cameras;
     cv::Mat cameraMat[CAMERA_NUM];
     cv::Mat distCoeffMat[CAMERA_NUM];
-    void distortionRemoval();
+    void distortionRemoval(std::string, cv::Mat&);
 
     int cameraCalibrationSetup();
     int cameraSetup();

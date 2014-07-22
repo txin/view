@@ -52,8 +52,8 @@ void on_trackbar(int, void*) {
     sbm_here.state->numberOfDisparities = 16 * level ; // the multiples of 16
 }
 
-void StereoView:: distortionRemoval() {
-    cv::Mat view, rview, map1, map2;
+void StereoView:: distortionRemoval(std::string windowName, cv::Mat& view){
+    cv::Mat rview, map1, map2;
     cv::Size imageSize(640, 480); // testing
     cv::initUndistortRectifyMap(cameraMat[0], distCoeffMat[0], cv::Mat(),
                                 getOptimalNewCameraMatrix(cameraMat[0], 
@@ -63,13 +63,11 @@ void StereoView:: distortionRemoval() {
                                 imageSize, CV_16SC2, map1, map2);
 
     // view  imread ?? images
-    while (1) {
-        cv::remap(view, rview, map1, map2, CV_INTER_LINEAR);
-        cv::imshow("Image View", rview);
-        char c = cv::waitKey();
-        if( c  == 27 || c == 'q' || c == 'Q' )
-            break;
-    }
+    // while (1) {
+    cv::remap(view, rview, map1, map2, CV_INTER_LINEAR);
+    cv::imshow(windowName, rview);
+    char c = cv::waitKey(5);
+//    }
 
 }
 
@@ -88,7 +86,7 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     cv::Mat temp1 = imgRight.clone();
     
     // TODO: change undistort method
-    cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
+    // cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
     
     if (debug_readimg) {
         cv::undistort(temp1, imgRight, cameraMat[0], distCoeffMat[0]);
@@ -96,7 +94,9 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
         cv::undistort(temp1, imgRight, cameraMat[1], distCoeffMat[1]);
     }
     
-    cv::imshow("Camera 0", temp0);
+    //cv::imshow("Camera 0", temp0);
+    distortionRemoval("Camera 0", imgLeft);
+
     cv::imshow("Camera 1", temp1);
     if ((char)cv::waitKey(5) == 'q') return 0;
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
