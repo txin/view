@@ -52,20 +52,50 @@ void on_trackbar(int, void*) {
     sbm_here.state->numberOfDisparities = 16 * level ; // the multiples of 16
 }
 
+void StereoView:: distortionRemoval() {
+    cv::Mat view, rview, map1, map2;
+    cv::Size imageSize(640, 480); // testing
+    cv::initUndistortRectifyMap(cameraMat[0], distCoeffMat[0], cv::Mat(),
+                                getOptimalNewCameraMatrix(cameraMat[0], 
+                                                          distCoeffMat[0], 
+                                                          imageSize,
+                                                          1, imageSize, 0),
+                                imageSize, CV_16SC2, map1, map2);
+
+    // view  imread ?? images
+    while (1) {
+        cv::remap(view, rview, map1, map2, CV_INTER_LINEAR);
+        cv::imshow("Image View", rview);
+        char c = cv::waitKey();
+        if( c  == 27 || c == 'q' || c == 'Q' )
+            break;
+    }
+
+}
+
 // capture images from 2 cameras, and convert to grayscale images and 
 // show disparity map, in order to calculate depth
-int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
-    cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
-    cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
-    //imgLeft = cv::imread("left01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
-    //imgRight = cv::imread("right01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+bool debug_readimg = true;
 
+int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
+   
+    if (!debug_readimg) {
+        cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
+        cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
+    }
     // apply the calibration parameters to the first matrix captured by cam 0
     cv::Mat temp0 = imgLeft.clone();
     cv::Mat temp1 = imgRight.clone();
+    
+    // TODO: change undistort method
     cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
-    cv::undistort(temp1, imgRight, cameraMat[1], distCoeffMat[1]);
-
+    
+    if (debug_readimg) {
+        cv::undistort(temp1, imgRight, cameraMat[0], distCoeffMat[0]);
+    } else {
+        cv::undistort(temp1, imgRight, cameraMat[1], distCoeffMat[1]);
+    }
+    
     cv::imshow("Camera 0", temp0);
     cv::imshow("Camera 1", temp1);
     if ((char)cv::waitKey(5) == 'q') return 0;
@@ -83,12 +113,12 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     // cv::StereoBM sbm(cv::StereoBM::BASIC_PRESET, ndisparities, SADWindowSize);    
     // sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
     
-    // setup paremeters
+    //setup paremeters
     //sbm.state->SADWindowSize = 11;
     //sbm.state->numberOfDisparities = 32; // 112
     //sbm.state->blockSize=15;
-    //  sbm.state->preFilterSize = 31; // 5
-    // sbm.state->preFilterCap = 31; //6, 61
+    //sbm.state->preFilterSize = 31; // 5
+    //sbm.state->preFilterCap = 31; //6, 61
     //sbm.state->minDisparity = 3; // -39
     //sbm.state->textureThreshold = 0; // 507
     //sbm.state->uniquenessRatio = 0;
@@ -106,7 +136,8 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     cv::Mat disp;
     cv::Mat disp8;
     const char *windowName = "Disparity";
-    sbm(imgLeft, imgRight, disp);
+    sbm(temp0, temp1, disp);
+//sbm(imgLeft, imgRight, disp);
     cv::normalize(disp, disp8, 0, 255, CV_MINMAX, CV_8U);
     cv::imshow(windowName, disp8);
     // cv::imshow(windowName, imgDisparity8U);
@@ -130,18 +161,27 @@ void StereoView::run() {
         cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
     }
 
+    cv::Mat imgLeft, imgRight;
+    imgLeft = cv::imread("cam0_l.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+    imgRight = cv::imread("cam0_r.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+
     // TODO: 2 threads to show camera data?
+
     while (cv::waitKey(15) != 'q') {
-        cameras[0] >> frames[0];
-        cameras[1] >> frames[1];
-        if (frames[0].empty()) break;
-        if (frames[1].empty()) break;
-        showDepthData(frames[0], frames[1]);
+        if (debug_readimg) {
+            showDepthData(imgLeft, imgRight);
+        } else {
+            cameras[0] >> frames[0];
+            cameras[1] >> frames[1];
+            if (frames[0].empty()) break;
+            if (frames[1].empty()) break;
+            showDepthData(frames[0], frames[1]);
+        }
     }
 }
 
 /*int main(int argc, char** argv) {
-    StereoView view;
-    view.run();
-    return 0;
-    }*/
+  StereoView view;
+  view.run();
+  return 0;
+  }*/
