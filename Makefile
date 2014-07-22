@@ -7,10 +7,6 @@ GL_LIBS = -lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lGLEW
 	g++ $(CV_FLAGS) $(C_FLAG) -c $< 
 	g++ $(CV_FLAGS) $(C_FLAG) -o $@.out $@.o $(CV_LIBS)	
 
-#tuner : stereoView.o
-#	g++ $(C_FLAG) -c stereoView.cpp tuner.cpp
-#	g++ $(CV_FLAGS) $(C_FLAG) stereoView.o tuner.o -o tuner.out $(CV_LIBS)	
-
 sbmTuner :
 	g++ $(C_FLAG) -c stereoView.cpp tuner.cpp
 	g++ $(CV_FLAGS) $(C_FLAG) stereoView.o tuner.o -o sbmTuner.out $(CV_LIBS) 

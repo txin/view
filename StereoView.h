@@ -12,21 +12,27 @@
 
 class StereoView {
 private:
-  cv::VideoCapture cameras[CAMERA_NUM];
-  cv::StereoBM sbm;
+    cv::VideoCapture cameras[CAMERA_NUM];
+    cv::StereoBM sbm;
 
-  // calibration parameters for cameras;
-  cv::Mat cameraMat[CAMERA_NUM];
-  cv::Mat distCoeffMat[CAMERA_NUM];
+    // calibration parameters for cameras;
+    cv::Mat cameraMat[CAMERA_NUM];
+    cv::Mat distCoeffMat[CAMERA_NUM];
 
-  int cameraCalibrationSetup();
-  int cameraSetup();
-  int loadConfiguration();
+    int cameraCalibrationSetup();
+    int cameraSetup();
+    int loadConfiguration();
 
 public:
-  inline StereoView() {
-    cameraSetup();
-  };
-  void run();
-  int showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight);
+    inline StereoView() {          
+        cameraSetup();
+        const char *windowName = "Disparity";
+        cv::namedWindow(windowName, CV_WINDOW_NORMAL);
+        cv::moveWindow(windowName, 0, CAMERA_HEIGHT + 50);
+    };
+    inline cv::StereoBM getSbm() {
+        return sbm;
+    }
+    void run();
+    int showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight);
 };

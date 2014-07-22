@@ -23,7 +23,12 @@ int setSBM(cv::StereoBM sbm) {
 }
 
 void on_trackbar_filter_size(int, void*) {
-    sbmTuner.state->preFilterSize = compute(FILTER_SIZE);
+    int filter_size = compute(FILTER_SIZE);
+    filter_size += 4;
+    if (filter_size % 2 == 0) {
+        filter_size += 1;
+    }
+    sbmTuner.state->preFilterSize = filter_size;
 }
 
 void on_trackbar_filter_cap(int, void*) {
@@ -39,14 +44,14 @@ void on_trackbar_min_disparity(int, void*) {
 }
 
 void on_trackbar_num_disparity(int, void*) {
-    sbmTuner.state->numberOfDisparities = compute(NUM_DISPARITY);
+    sbmTuner.state->numberOfDisparities = 16 * compute(NUM_DISPARITY);
 }
 
 void on_trackbar_texture(int, void*) {
     sbmTuner.state->textureThreshold = compute(TEXTURE) ;
 }
 
-void on_trackbar_unqiue_ratio(int, void*) {
+void on_trackbar_unique_ratio(int, void*) {
     sbmTuner.state->uniquenessRatio = compute(UNIQUE_RATIO);
 }
 
@@ -58,9 +63,42 @@ void on_trackbar_speckle_range(int, void*) {
     sbmTuner.state->speckleRange = compute(SPECKLE_RANGE);
 }
 
+void createSliders() {
+    
+    const char *windowName = "Disparity";
+    cv::createTrackbar("filter_size", windowName, &slider[0], 
+                       slider_max, on_trackbar_filter_size);
+
+    cv::createTrackbar("filter_cap", windowName, &slider[1], 
+                       slider_max, on_trackbar_filter_cap);
+
+    cv::createTrackbar("filter_SAD_size", windowName, &slider[2], 
+                       slider_max, on_trackbar_filter_size);
+
+    cv::createTrackbar("min_disparity", windowName, &slider[3], 
+                       slider_max, on_trackbar_min_disparity);
+
+    cv::createTrackbar("num_disparity", windowName, &slider[4], 
+                       slider_max, on_trackbar_num_disparity);
+
+    cv::createTrackbar("texture", windowName, &slider[5], 
+                       slider_max, on_trackbar_texture);
+
+    cv::createTrackbar("unique_ratio", windowName, &slider[6], 
+                       slider_max, on_trackbar_unique_ratio);
+
+    cv::createTrackbar("speckle_size", windowName, &slider[7], 
+                       slider_max, on_trackbar_speckle_size);
+
+    cv::createTrackbar("speckle_range", windowName, &slider[8], 
+                       slider_max, on_trackbar_speckle_range);
+}
+
 // testing, create window
 int main() {
     StereoView view;
+    setSBM(view.getSbm());
+    createSliders();
     view.run();
     return 0;
 }

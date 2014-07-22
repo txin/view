@@ -84,17 +84,17 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     // sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
     
     // setup paremeters
-    sbm.state->SADWindowSize = 11;
+    //sbm.state->SADWindowSize = 11;
     //sbm.state->numberOfDisparities = 32; // 112
     //sbm.state->blockSize=15;
-    sbm.state->preFilterSize = 31; // 5
-    sbm.state->preFilterCap = 31; //6, 61
-    sbm.state->minDisparity = 3; // -39
-    sbm.state->textureThreshold = 0; // 507
-    sbm.state->uniquenessRatio = 0;
-    sbm.state->speckleWindowSize = 10;
-    sbm.state->speckleRange = 10; // 8
-    sbm.state->disp12MaxDiff = 0; // 1
+    //  sbm.state->preFilterSize = 31; // 5
+    // sbm.state->preFilterCap = 31; //6, 61
+    //sbm.state->minDisparity = 3; // -39
+    //sbm.state->textureThreshold = 0; // 507
+    //sbm.state->uniquenessRatio = 0;
+    //sbm.state->speckleWindowSize = 10;
+    //sbm.state->speckleRange = 10; // 8
+    //sbm.state->disp12MaxDiff = 0; // 1
     
     
     double minVal;
@@ -118,6 +118,8 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
 
 // show cameradata, RGB format captured and convert to grayscale
 void StereoView::run() {
+
+
     cv::Mat frames[CAMERA_NUM];
     cv::Mat grayFrames[CAMERA_NUM];
     sbm_here = sbm;
@@ -127,17 +129,7 @@ void StereoView::run() {
         cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE);
         cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
     }
-    /*
-      cv::namedWindow("Undistorted_cam0", CV_WINDOW_AUTOSIZE);
-      cv::moveWindow("Undistorted_cam0", 0, CAMERA_HEIGHT);
-    */
-    const char *windowName = "Disparity";
-    cv::namedWindow(windowName, CV_WINDOW_NORMAL);
-    cv::moveWindow(windowName, 0, CAMERA_HEIGHT + 50);
-    
-// create trackbars
-    cv::createTrackbar("num of disparities", "Disparity", &alpha_slider, 
-                       alpha_slider_max, on_trackbar);
+
     // TODO: 2 threads to show camera data?
     while (cv::waitKey(15) != 'q') {
         cameras[0] >> frames[0];
