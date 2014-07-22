@@ -6,11 +6,10 @@
  * reference: docs.opencv.org
  * disparity opencv-2.4.9/samples/cpp/tutorial_code/calib3d/stereoBM
  *                       /SBM_Sample.cpp
- *
  */
 #include "StereoView.h"
 
-const int alpha_slider_max = 100;
+const int alpha_slider_max = 20;
 int alpha_slider;
 double alpha, beta;
 
@@ -45,29 +44,30 @@ int StereoView::cameraSetup() {
 }
 
 cv::StereoBM sbm_here;
-int display;
-void on_trackbar(int, void* ) {
-    alpha = (double) alpha_slider/alpha_slider_max ;
-    beta = ( 1.0 - alpha ) * 10;
+
+void on_trackbar(int, void*) {
+    alpha = (double)alpha_slider / alpha_slider_max ;
+    beta = (1.0 - alpha) * 10;
     int level = (int)beta + 1;
-    display = 16 * level;
-    sbm_here.state->numberOfDisparities = 16 * level ; // 112
+    sbm_here.state->numberOfDisparities = 16 * level ; // the multiples of 16
 }
 
 // capture images from 2 cameras, and convert to grayscale images and 
 // show disparity map, in order to calculate depth
 int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
-    
     cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
     cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
     //imgLeft = cv::imread("left01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
     //imgRight = cv::imread("right01.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+
     // apply the calibration parameters to the first matrix captured by cam 0
     cv::Mat temp0 = imgLeft.clone();
-//    cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
-    cv::imshow("Camera 0", imgLeft);
-//    cv::imshow("Undistorted_cam0", temp0);
-    cv::imshow("Camera 1", imgRight);
+    cv::Mat temp1 = imgRight.clone();
+    cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
+    cv::undistort(temp1, imgRight, cameraMat[1], distCoeffMat[1]);
+
+    cv::imshow("Camera 0", temp0);
+    cv::imshow("Camera 1", temp1);
     if ((char)cv::waitKey(5) == 'q') return 0;
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
     cv::Mat imgDisparity8U = cv::Mat(imgLeft.rows, imgLeft.cols, CV_8UC1);
@@ -84,18 +84,16 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     // sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
     
     // setup paremeters
-    sbm.state->SADWindowSize = 87;
-    sbm.state->numberOfDisparities = 80; // 112
+    sbm.state->SADWindowSize = 11;
+    //sbm.state->numberOfDisparities = 32; // 112
     //sbm.state->blockSize=15;
-   
-    //sbm.state->preFilterSize = 9; // 5
-    
-    sbm.state->preFilterCap = 40; //6, 61
-    sbm.state->minDisparity = 0; // -39
+    sbm.state->preFilterSize = 31; // 5
+    sbm.state->preFilterCap = 31; //6, 61
+    sbm.state->minDisparity = 3; // -39
     sbm.state->textureThreshold = 0; // 507
     sbm.state->uniquenessRatio = 0;
-    sbm.state->speckleWindowSize = 30;
-    sbm.state->speckleRange = 29; // 8
+    sbm.state->speckleWindowSize = 10;
+    sbm.state->speckleRange = 10; // 8
     sbm.state->disp12MaxDiff = 0; // 1
     
     
@@ -117,9 +115,6 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     
     return 0;
 }
-
-
-
 
 // show cameradata, RGB format captured and convert to grayscale
 void StereoView::run() {
@@ -143,7 +138,6 @@ void StereoView::run() {
 // create trackbars
     cv::createTrackbar("num of disparities", "Disparity", &alpha_slider, 
                        alpha_slider_max, on_trackbar);
-    on_trackbar(display, 0);
     // TODO: 2 threads to show camera data?
     while (cv::waitKey(15) != 'q') {
         cameras[0] >> frames[0];
@@ -154,8 +148,8 @@ void StereoView::run() {
     }
 }
 
-int main(int argc, char** argv) {
+/*int main(int argc, char** argv) {
     StereoView view;
     view.run();
     return 0;
-}
+    }*/
