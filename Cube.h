@@ -23,7 +23,8 @@ private:
     GLFWwindow* window;
  
     float horizontalAngle = 3.14f;
-    float verticalAngle = 0.0f;
+    //float verticalAngle = 0.0f;
+    float verticalAngle = 0.0f; //testing
     float initialFoV = 45.0f;
 
     // eyeMoveSpeed relative to the movement of the cube

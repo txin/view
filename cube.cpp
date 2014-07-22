@@ -13,15 +13,15 @@ int deltaXpos, deltaYpos;
 glm::vec3 direction;
 glm::vec3 position(0, 0, 5);
 
-// TODO: change the up and down key functions
+// for testing
 static void key_callback(GLFWwindow* window, int key, int scancode,
                          int action, int modes) {
-    // Move forward
-    if (key == GLFW_KEY_UP && action == GLFW_PRESS){
+// Move forward
+    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
         position += direction * deltaTime * speed;
     }
 // Move backward
-    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS){
+    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
         position -= direction * deltaTime * speed;
     }
 // Strafe right
@@ -34,12 +34,11 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
     }
 }
 
-// TODO
 int Cube::setEyePosition(int deltaXpos, int deltaYpos) {
+
     position += right * deltaTime * eyeMoveSpeed * float(deltaXpos);
-    // horizontalAngle += eyeMoveSpeed * deltaTime * float(deltaXpos);
-   
-    //verticalAngle += eyeMoveSpeed * deltaTime * float(deltaYpos);
+    glm::vec3 yAxis(0, 1, 0);
+    position += yAxis * deltaTime * eyeMoveSpeed * float(deltaYpos);
 }
 
 int Cube::run() {
@@ -94,10 +93,10 @@ int Cube::run() {
     // Get a handle for our "MVP" uniform
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
-    
-
-    // Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
-    // A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
+    // Our vertices. Tree consecutive floats give a 3D vertex; 
+//Three consecutive vertices give a triangle.
+// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles,
+// and 12*3 vertices
     static const GLfloat g_vertex_buffer_data[] = { 
         -1.0f,-1.0f,-1.0f,
         -1.0f,-1.0f, 1.0f,
@@ -221,10 +220,12 @@ int Cube::run() {
                               cos(verticalAngle) * cos(horizontalAngle));
         
         // Right vector
+        // PI/2
         right = glm::vec3(
             sin(horizontalAngle - 3.14f/2.0f),
             0,
             cos(horizontalAngle - 3.14f/2.0f));
+        
         glm::vec3 up = glm::cross(right, direction);
 
 
