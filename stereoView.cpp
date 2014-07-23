@@ -45,60 +45,66 @@ int StereoView::cameraSetup() {
 
 cv::StereoBM sbm_here;
 
-void on_trackbar(int, void*) {
-    alpha = (double)alpha_slider / alpha_slider_max ;
-    beta = (1.0 - alpha) * 10;
-    int level = (int)beta + 1;
-    sbm_here.state->numberOfDisparities = 16 * level ; // the multiples of 16
-}
-
-void StereoView:: distortionRemoval(std::string windowName, cv::Mat& view){
-    cv::Mat rview, map1, map2;
-    cv::Size imageSize(640, 480); // testing
+void StereoView:: distortionRemoval(cv::Mat& view, cv::Mat& rview) {
+    cv::Mat map1, map2;
+    cv::Size imageSize(CAMERA_WIDTH, CAMERA_HEIGHT);
     cv::initUndistortRectifyMap(cameraMat[0], distCoeffMat[0], cv::Mat(),
                                 getOptimalNewCameraMatrix(cameraMat[0], 
                                                           distCoeffMat[0], 
                                                           imageSize,
                                                           1, imageSize, 0),
                                 imageSize, CV_16SC2, map1, map2);
-
-    // view  imread ?? images
-    // while (1) {
     cv::remap(view, rview, map1, map2, CV_INTER_LINEAR);
-    cv::imshow(windowName, rview);
-    char c = cv::waitKey(5);
-//    }
+    // cv::imshow(windowName, rview);
+    //char c = cv::waitKey(5);
+}
 
+// use rectifyStereo first and reprojectImage to 3D
+void StereoView::computeDepth(cv::Mat& disparity) {
+    
+    cv::Mat_<double> R(3,3); // 3x3 matrix, rotation left to right camera
+
+    cv::Mat_<double> T(3,1); // * 3 * x1 matrix, translation left to 
+    //right proj. center
+    
+    // output matrices
+    cv::Mat R1; // 3x3 matrix
+    cv::Mat R2; // 3x3 matrix
+    cv::Mat P1; // 3x4 matrix
+    cv::Mat P2; // 3x4 matrix
+    cv::Mat Q;  // 4x4 matrix
+
+    cv::Size imgSize(CAMERA_WIDTH, CAMERA_HEIGHT);
+    cv::stereoRectify(cameraMat[0], distCoeffMat[0],cameraMat[1],
+                      distCoeffMat[1], imgSize, R, T, R1, R2, P1, P2, Q);
+
+    cv::Mat img3D(disparity.size(), CV_32FC3);
+    cv::reprojectImageTo3D(disparity, img3D, Q, false, CV_32F);
 }
 
 // capture images from 2 cameras, and convert to grayscale images and 
 // show disparity map, in order to calculate depth
-bool debug_readimg = true;
 
+bool debug_readimg = false;
+
+// TODO: change to the camera reading
 int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
    
     if (!debug_readimg) {
         cv::cvtColor(imgLeft, imgLeft, CV_RGB2GRAY);
         cv::cvtColor(imgRight, imgRight, CV_RGB2GRAY);
     }
-    // apply the calibration parameters to the first matrix captured by cam 0
-    cv::Mat temp0 = imgLeft.clone();
-    cv::Mat temp1 = imgRight.clone();
-    
-    // TODO: change undistort method
-    // cv::undistort(temp0, imgLeft, cameraMat[0], distCoeffMat[0]);
-    
-    if (debug_readimg) {
-        cv::undistort(temp1, imgRight, cameraMat[0], distCoeffMat[0]);
-    } else {
-        cv::undistort(temp1, imgRight, cameraMat[1], distCoeffMat[1]);
-    }
-    
-    //cv::imshow("Camera 0", temp0);
-    distortionRemoval("Camera 0", imgLeft);
 
-    cv::imshow("Camera 1", temp1);
+    // apply the calibration parameters to the first matrix captured by cam 0
+    cv::Mat rImgLeft, rImgRight; 
+    distortionRemoval(imgLeft, rImgLeft);
+    distortionRemoval(imgRight, rImgRight);
+
+    cv::imshow("Camera 0", imgLeft);
+    cv::imshow("Camera 1", imgRight);
     if ((char)cv::waitKey(5) == 'q') return 0;
+
+
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
     cv::Mat imgDisparity8U = cv::Mat(imgLeft.rows, imgLeft.cols, CV_8UC1);
     
@@ -112,7 +118,7 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     
     // cv::StereoBM sbm(cv::StereoBM::BASIC_PRESET, ndisparities, SADWindowSize);    
     // sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
-    
+   
     //setup paremeters
     //sbm.state->SADWindowSize = 11;
     //sbm.state->numberOfDisparities = 32; // 112
@@ -130,20 +136,27 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     double minVal;
     double maxVal;
     
-//    cv::minMaxLoc(imgDisparity16S, &minVal, &maxVal);
-    
+//cv::minMaxLoc(imgDisparity16S, &minVal, &maxVal);
     //  imgDisparity16S.convertTo(imgDisparity8U, CV_8UC1, 255 / (maxVal - minVal));
+  
     cv::Mat disp;
     cv::Mat disp8;
     const char *windowName = "Disparity";
-    sbm(temp0, temp1, disp);
-//sbm(imgLeft, imgRight, disp);
+
+    // apply the rectified images to get the disparity map
+    if (!debug_readimg) {
+        sbm(rImgLeft, rImgRight, disp);
+    } else {
+        sbm(imgLeft, imgRight, disp);
+    }
+    
     cv::normalize(disp, disp8, 0, 255, CV_MINMAX, CV_8U);
     cv::imshow(windowName, disp8);
-    // cv::imshow(windowName, imgDisparity8U);
-    // cv::imwrite("SBM_sample.png", imgDisparity16S);
+
+    // TODO: depth format?
+    computeDepth(disp8);
+
     if ((char)cv::waitKey(5) == 'q') return 0;
-    
     return 0;
 }
 
@@ -162,8 +175,13 @@ void StereoView::run() {
     }
 
     cv::Mat imgLeft, imgRight;
-    imgLeft = cv::imread("cam0_l.jpg", CV_LOAD_IMAGE_GRAYSCALE);
-    imgRight = cv::imread("cam0_r.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+//    imgLeft = cv::imread("left1.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+//    imgRight = cv::imread("right1.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+    
+    // sample image
+    imgLeft = cv::imread("left.ppm", CV_LOAD_IMAGE_GRAYSCALE);
+    imgRight = cv::imread("right.ppm", CV_LOAD_IMAGE_GRAYSCALE);
+
 
     // TODO: 2 threads to show camera data?
 
