@@ -107,7 +107,7 @@ int EyeTracking::run() {
         cv::flip(frame, frame, 1);
 
         // Convert to grayscale and
-        // adjust the image contrast using histogram equalization
+        // adjust the image contrast using histogram equaligzation
         cv::Mat gray;
         cv::cvtColor(frame, gray, CV_BGR2GRAY);
 

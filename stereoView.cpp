@@ -8,6 +8,7 @@
  *                       /SBM_Sample.cpp
  */
 #include "StereoView.h"
+#include "Global.h"
 
 const int alpha_slider_max = 20;
 int alpha_slider;
@@ -62,8 +63,8 @@ void StereoView:: distortionRemoval(cv::Mat& view, cv::Mat& rview) {
 // use rectifyStereo first and reprojectImage to 3D
 void StereoView::computeDepth(cv::Mat& disparity) {
     
+    // TODO: change the values of the camera
     cv::Mat_<double> R(3,3); // 3x3 matrix, rotation left to right camera
-
     cv::Mat_<double> T(3,1); // * 3 * x1 matrix, translation left to 
     //right proj. center
     
@@ -79,7 +80,12 @@ void StereoView::computeDepth(cv::Mat& disparity) {
                       distCoeffMat[1], imgSize, R, T, R1, R2, P1, P2, Q);
 
     cv::Mat img3D(disparity.size(), CV_32FC3);
+
+    // TODO: get the depthImg reference from the global class
     cv::reprojectImageTo3D(disparity, img3D, Q, false, CV_32F);
+    
+    Global global = Global::getInstance();
+    global.setDepthImg(img3D);
 }
 
 // capture images from 2 cameras, and convert to grayscale images and 
