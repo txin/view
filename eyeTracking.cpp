@@ -70,12 +70,17 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         rect.x = rect.y = rect.width = rect.height = 0;
 }
 
+
+
 int EyeTracking::run() {
     // Load the cascade classifiers
     // Make sure you point the XML files to the right path, or
     // just copy the files from [OPENCV_DIR]/data/haarcascades directory
     face_cascade.load("haarcascade_frontalface_alt2.xml");
     eye_cascade.load("haarcascade_eye.xml");
+
+
+    Global global = Global::getInstance();
 
     // open the first web cam
     cv::VideoCapture cap(0);
@@ -94,8 +99,6 @@ int EyeTracking::run() {
 
     cv::Mat frame, eye_tpl;
     cv::Rect eye_bb;
-    
-    Global global = Global::getInstance();
 
     // TODO: change the template to eyes with glasses
     while (cv::waitKey(15) != 'q') {
