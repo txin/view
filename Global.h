@@ -12,6 +12,9 @@ private:
     cv::Point *position;
     // depth image generated from StereoView class
     cv::Mat *depthImg;
+    
+    // raw image from the camera, default use the cam0
+    cv::Mat *rawImg;
 
     pthread_mutex_t start;
     // eye position from EyeTracking class
@@ -19,6 +22,8 @@ private:
     Global() {
         pthread_mutex_init(&start, NULL);
         position = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+        
+        // TODO: need to initialise? or just assign to the new position
         depthImg = new cv::Mat(cv::Size(CAMERA_WIDTH, CAMERA_HEIGHT), CV_32FC3);
     };
 
@@ -45,9 +50,20 @@ public:
         return *position;
     }
 
+    inline void setRawImg(cv::Mat& raw) {
+        *rawImg = raw;
+    }
+
     // TODO: test reference or copyTo ?
     inline void setDepthImg(cv::Mat& img3D) {
         // TODO: lock the thread??
         img3D.copyTo(*depthImg);
+        // TODO: print the coordinates        
+    }
+    
+    inline void getDepthData(int row, int col) {
+        if (depthImg != NULL) {
+            std::cout << depthImg->at<cv::Point3f>(row, col) << std::endl;
+        }
     }
 };

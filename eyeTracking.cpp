@@ -118,8 +118,11 @@ int EyeTracking::run() {
         } else {
             // Tracking stage with template matching
             trackEye(gray, eye_tpl, eye_bb);
-            
+            // set eye position to change the view of the cube
             global.setPosition(eye_bb.x, eye_bb.y);
+            // get the corresponding depth data from global
+            global.getDepthData(eye_bb.x, eye_bb.y);
+            
             // Draw bounding rectangle for the eye
             cv::rectangle(frame, eye_bb, CV_RGB(0,255,0));
         }

@@ -15,7 +15,7 @@
 using namespace std;
 
 // task type for different thread
-enum Task {EYETRACKING, CUBE};
+enum Task {EYETRACKING, CUBE, STEREOVIEW};
 
 // thread id same to camera id
 void *doTask(void *t) {
@@ -33,6 +33,11 @@ void *doTask(void *t) {
     case CUBE: {
         Cube cube;
         cube.run();
+    }
+        break;
+    case STEREOVIEW: {
+        StereoView view;
+        view.run();
     }
         break;
     default: {

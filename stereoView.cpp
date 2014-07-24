@@ -91,7 +91,7 @@ void StereoView::computeDepth(cv::Mat& disparity) {
 // capture images from 2 cameras, and convert to grayscale images and 
 // show disparity map, in order to calculate depth
 
-bool debug_readimg = false;
+bool debug_readimg = true;
 
 // TODO: change to the camera reading
 int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
@@ -106,10 +106,14 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     distortionRemoval(imgLeft, rImgLeft);
     distortionRemoval(imgRight, rImgRight);
 
+    // set global
+    Global global = Global::getInstance();
+    global.setRawImg(rImgLeft);
+
     cv::imshow("Camera 0", imgLeft);
     cv::imshow("Camera 1", imgRight);
-    if ((char)cv::waitKey(5) == 'q') return 0;
 
+    if ((char)cv::waitKey(5) == 'q') return 0;
 
     cv::Mat imgDisparity16S = cv::Mat(imgLeft.rows, imgLeft.cols, CV_16S);
     cv::Mat imgDisparity8U = cv::Mat(imgLeft.rows, imgLeft.cols, CV_8UC1);
