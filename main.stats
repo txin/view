@@ -1,0 +1,1012 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+ 50.01      0.01     0.01                             glfwGetTime
+ 50.01      0.01     0.01                             glfwGetVideoMode
+  0.00      0.01     0.00   320526     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::tvec4(float const&, float const&, float const&, float const&)
+  0.00      0.01     0.00   235685     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::length() const
+  0.00      0.01     0.00   197973     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0>::length() const
+  0.00      0.01     0.00   150836     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, float const&)
+  0.00      0.01     0.00   150836     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::operator[](int) const
+  0.00      0.01     0.00   122553     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int)
+  0.00      0.01     0.00   113125     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, glm::detail::tvec4<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    94273     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::operator=(glm::detail::tvec4<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    94266     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::tvec4()
+  0.00      0.01     0.00    84846     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::operator[](int)
+  0.00      0.01     0.00    80137     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&)
+  0.00      0.01     0.00    75419     0.00     0.00  glm::detail::tvec4<float, (glm::precision)0>::tvec4(glm::detail::tvec4<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    75419     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) const
+  0.00      0.01     0.00    37712     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, float const&)
+  0.00      0.01     0.00    18856     0.00     0.00  glm::detail::tvec1<float, (glm::precision)0>::tvec1(float const&)
+  0.00      0.01     0.00    18855     0.00     0.00  float glm::cos<float>(float const&)
+  0.00      0.01     0.00    18855     0.00     0.00  std::cos(float)
+  0.00      0.01     0.00    14142     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0> glm::cross<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    14142     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    14142     0.00     0.00  std::sin(float)
+  0.00      0.01     0.00    14141     0.00     0.00  float glm::dot<float, (glm::precision)0, glm::detail::tvec3>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    14141     0.00     0.00  float glm::sin<float>(float const&)
+  0.00      0.01     0.00    14141     0.00     0.00  glm::detail::compute_dot<glm::detail::tvec3, float, (glm::precision)0>::call(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00    14140     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&)
+  0.00      0.01     0.00     9428     0.00     0.00  cv::Point_<int>::Point_(cv::Point_<int> const&)
+  0.00      0.01     0.00     9428     0.00     0.00  glm::sqrt(float)
+  0.00      0.01     0.00     9428     0.00     0.00  glm::detail::compute_sqrt<glm::detail::tvec1, float, (glm::precision)0>::call(glm::detail::tvec1<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     9428     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0>::operator=(glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     9428     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0>& glm::detail::tvec3<float, (glm::precision)0>::operator+=<float>(glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     9428     0.00     0.00  Global::getPosition()
+  0.00      0.01     0.00     9428     0.00     0.00  std::sqrt(float)
+  0.00      0.01     0.00     9427     0.00     0.00  glm::inversesqrt(float const&)
+  0.00      0.01     0.00     9427     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(glm::detail::tmat4x4<float, (glm::precision)0>::ctor)
+  0.00      0.01     0.00     9427     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     9427     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0> glm::normalize<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     4715     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0>::tvec3<int, int, int>(int const&, int const&, int const&)
+  0.00      0.01     0.00     4714     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&)
+  0.00      0.01     0.00     4714     0.00     0.00  float glm::tan<float>(float const&)
+  0.00      0.01     0.00     4714     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0>::tvec3<float, int, float>(float const&, int const&, float const&)
+  0.00      0.01     0.00     4714     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     4714     0.00     0.00  glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00     4714     0.00     0.00  Cube::setEyePosition(int, int)
+  0.00      0.01     0.00     4714     0.00     0.00  std::tan(float)
+  0.00      0.01     0.00     4713     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator-<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&)
+  0.00      0.01     0.00      519     0.00     0.00  double cv::saturate_cast<double>(double)
+  0.00      0.01     0.00      399     0.00     0.00  cv::Mat::release()
+  0.00      0.01     0.00      397     0.00     0.00  cv::Mat::~Mat()
+  0.00      0.01     0.00      390     0.00     0.00  cv::Rect_<int>::Rect_(int, int, int, int)
+  0.00      0.01     0.00      265     0.00     0.00  cv::Mat::MSize::MSize(int*)
+  0.00      0.01     0.00      265     0.00     0.00  cv::Mat::MStep::MStep()
+  0.00      0.01     0.00      265     0.00     0.00  cv::Mat::initEmpty()
+  0.00      0.01     0.00      260     0.00     0.00  int const& std::max<int>(int const&, int const&)
+  0.00      0.01     0.00      259     0.00     0.00  int const& std::min<int>(int const&, int const&)
+  0.00      0.01     0.00      255     0.00     0.00  cv::Point_<int>::Point_()
+  0.00      0.01     0.00      136     0.00     0.00  cv::Mat::Mat()
+  0.00      0.01     0.00      135     0.00     0.00  cv::Size_<int>::Size_(int, int)
+  0.00      0.01     0.00      134     0.00     0.00  cv::Mat::operator()(cv::Rect_<int> const&) const
+  0.00      0.01     0.00      133     0.00     0.00  cv::Point_<int>::Point_(int, int)
+  0.00      0.01     0.00      133     0.00     0.00  cv::Mat::empty() const
+  0.00      0.01     0.00      132     0.00     0.00  cv::Mat::create(int, int, int)
+  0.00      0.01     0.00      132     0.00     0.00  cv::Mat::total() const
+  0.00      0.01     0.00      131     0.00     0.00  EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&)
+  0.00      0.01     0.00      131     0.00     0.00  Global::setPosition(int, int)
+  0.00      0.01     0.00      131     0.00     0.00  Global::getDepthData(int, int)
+  0.00      0.01     0.00      130     0.00     0.00  cvScalar(double, double, double, double)
+  0.00      0.01     0.00      130     0.00     0.00  cv::Vec<double, 4>::Vec()
+  0.00      0.01     0.00      130     0.00     0.00  cv::Matx<double, 4, 1>::Matx()
+  0.00      0.01     0.00      130     0.00     0.00  cv::Rect_<int>::Rect_(cv::Rect_<int> const&)
+  0.00      0.01     0.00      130     0.00     0.00  cv::Scalar_<double>::Scalar_(CvScalar const&)
+  0.00      0.01     0.00      130     0.00     0.00  std::ostream& cv::operator<< <float>(std::ostream&, cv::Point3_<float> const&)
+  0.00      0.01     0.00      129     0.00     0.00  cv::Point3_<float>& cv::Mat::at<cv::Point3_<float> >(int, int)
+  0.00      0.01     0.00      129     0.00     0.00  cv::Mat::Mat(int, int, int)
+  0.00      0.01     0.00      129     0.00     0.00  cv::Rect_<int>& cv::operator&=<int>(cv::Rect_<int>&, cv::Rect_<int> const&)
+  0.00      0.01     0.00      129     0.00     0.00  cv::Rect_<int> cv::operator-<int>(cv::Rect_<int> const&, cv::Point_<int> const&)
+  0.00      0.01     0.00      128     0.00     0.00  cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Size_<int> const&)
+  0.00      0.01     0.00       36     0.00     0.00  std::char_traits<char>::length(char const*)
+  0.00      0.01     0.00       36     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      0.01     0.00        8     0.00     0.00  std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::size() const
+  0.00      0.01     0.00        8     0.00     0.00  std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::operator[](unsigned long)
+  0.00      0.01     0.00        6     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_M_get_Tp_allocator()
+  0.00      0.01     0.00        6     0.00     0.00  std::vector<char, std::allocator<char> >::operator[](unsigned long)
+  0.00      0.01     0.00        4     0.00     0.00  cv::Mat::MStep::operator[](int)
+  0.00      0.01     0.00        4     0.00     0.00  cv::Size_<int>::Size_()
+  0.00      0.01     0.00        4     0.00     0.00  __gnu_cxx::new_allocator<cv::Rect_<int> >::new_allocator()
+  0.00      0.01     0.00        4     0.00     0.00  __gnu_cxx::new_allocator<cv::Rect_<int> >::~new_allocator()
+  0.00      0.01     0.00        4     0.00     0.00  cv::Mat::MStep::operator[](int) const
+  0.00      0.01     0.00        4     0.00     0.00  std::allocator<cv::Rect_<int> >::allocator()
+  0.00      0.01     0.00        4     0.00     0.00  std::allocator<cv::Rect_<int> >::~allocator()
+  0.00      0.01     0.00        4     0.00     0.00  void std::_Destroy_aux<true>::__destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*)
+  0.00      0.01     0.00        4     0.00     0.00  std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::_Vector_impl()
+  0.00      0.01     0.00        4     0.00     0.00  std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::~_Vector_impl()
+  0.00      0.01     0.00        4     0.00     0.00  std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_deallocate(cv::Rect_<int>*, unsigned long)
+  0.00      0.01     0.00        4     0.00     0.00  std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_get_Tp_allocator()
+  0.00      0.01     0.00        4     0.00     0.00  std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_base()
+  0.00      0.01     0.00        4     0.00     0.00  std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~_Vector_base()
+  0.00      0.01     0.00        4     0.00     0.00  std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::vector()
+  0.00      0.01     0.00        4     0.00     0.00  std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector()
+  0.00      0.01     0.00        4     0.00     0.00  void std::_Destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*)
+  0.00      0.01     0.00        4     0.00     0.00  void std::_Destroy<cv::Rect_<int>*, cv::Rect_<int> >(cv::Rect_<int>*, cv::Rect_<int>*, std::allocator<cv::Rect_<int> >&)
+  0.00      0.01     0.00        3     0.00     0.00  Global::getInstance()
+  0.00      0.01     0.00        3     0.00     0.00  __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  __gnu_cxx::new_allocator<char>::allocate(unsigned long, void const*)
+  0.00      0.01     0.00        3     0.00     0.00  __gnu_cxx::new_allocator<char>::max_size() const
+  0.00      0.01     0.00        3     0.00     0.00  std::_Iter_base<char*, false>::_S_base(char*)
+  0.00      0.01     0.00        3     0.00     0.00  void std::_Destroy_aux<true>::__destroy<char*>(char*, char*)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_M_allocate(unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_Vector_impl::_Vector_impl(std::allocator<char> const&)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_Vector_impl::~_Vector_impl()
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_M_create_storage(unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::_Vector_base(unsigned long, std::allocator<char> const&)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Vector_base<char, std::allocator<char> >::~_Vector_base()
+  0.00      0.01     0.00        3     0.00     0.00  void std::__uninitialized_default_n_1<true>::__uninit_default_n<char*, unsigned long>(char*, unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  std::vector<char, std::allocator<char> >::_M_default_initialize(unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  std::vector<char, std::allocator<char> >::vector(unsigned long, std::allocator<char> const&)
+  0.00      0.01     0.00        3     0.00     0.00  std::vector<char, std::allocator<char> >::~vector()
+  0.00      0.01     0.00        3     0.00     0.00  __gnu_cxx::__enable_if<std::__is_byte<char>::__value, char*>::__type std::__fill_n_a<unsigned long, char>(char*, unsigned long, char const&)
+  0.00      0.01     0.00        3     0.00     0.00  std::_Niter_base<char*>::iterator_type std::__niter_base<char*>(char*)
+  0.00      0.01     0.00        3     0.00     0.00  void std::__uninitialized_default_n<char*, unsigned long>(char*, unsigned long)
+  0.00      0.01     0.00        3     0.00     0.00  void std::__uninitialized_default_n_a<char*, unsigned long, char>(char*, unsigned long, std::allocator<char>&)
+  0.00      0.01     0.00        3     0.00     0.00  char* std::fill_n<char*, unsigned long, char>(char*, unsigned long, char const&)
+  0.00      0.01     0.00        3     0.00     0.00  void std::_Destroy<char*>(char*, char*)
+  0.00      0.01     0.00        3     0.00     0.00  void std::_Destroy<char*, char>(char*, char*, std::allocator<char>&)
+  0.00      0.01     0.00        3     0.00     0.00  __gnu_cxx::__enable_if<std::__is_byte<char>::__value, void>::__type std::__fill_a<char>(char*, char*, char const&)
+  0.00      0.01     0.00        2     0.00     0.00  EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&)
+  0.00      0.01     0.00        2     0.00     0.00  cv::Mat::operator=(cv::Mat const&)
+  0.00      0.01     0.00        2     0.00     0.00  cv::Rect_<int>::operator=(cv::Rect_<int> const&)
+  0.00      0.01     0.00        2     0.00     0.00  cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Point_<int> const&)
+  0.00      0.01     0.00        2     0.00     0.00  glm::detail::tvec3<float, (glm::precision)0>::tvec3()
+  0.00      0.01     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<cv::Rect_<int> >::deallocate(cv::Rect_<int>*, unsigned long)
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11LoadShadersPKcS0_
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z6doTaskPv
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN11EyeTracking9detectEyeERN2cv3MatES2_RNS0_5Rect_IiEE
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I_speed
+  0.00      0.01     0.00        1     0.00     0.00  LoadShaders(char const*, char const*)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  key_callback(GLFWwindow*, int, int, int, int)
+  0.00      0.01     0.00        1     0.00     0.00  EyeTracking::run()
+  0.00      0.01     0.00        1     0.00     0.00  EyeTracking::EyeTracking()
+  0.00      0.01     0.00        1     0.00     0.00  EyeTracking::~EyeTracking()
+  0.00      0.01     0.00        1     0.00     0.00  cv::Mat::Mat(cv::Size_<int>, int)
+  0.00      0.01     0.00        1     0.00     0.00  cv::Rect_<int>::Rect_()
+  0.00      0.01     0.00        1     0.00     0.00  Cube::run()
+  0.00      0.01     0.00        1     0.00     0.00  Cube::Cube()
+  0.00      0.01     0.00        1     0.00     0.00  Global::Global()
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 99.99% of 0.01 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     50.0    0.01    0.00                 glfwGetTime [1]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     50.0    0.01    0.00                 glfwGetVideoMode [2]
+-----------------------------------------------
+                0.00    0.00   56561/320526      glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+                0.00    0.00  113129/320526      glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, glm::detail::tvec4<float, (glm::precision)0> const&) [118]
+                0.00    0.00  150836/320526      glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, float const&) [115]
+[112]    0.0    0.00    0.00  320526         glm::detail::tvec4<float, (glm::precision)0>::tvec4(float const&, float const&, float const&, float const&) [112]
+-----------------------------------------------
+                0.00    0.00   84847/235685      glm::detail::tvec4<float, (glm::precision)0>::operator[](int) [121]
+                0.00    0.00  150838/235685      glm::detail::tvec4<float, (glm::precision)0>::operator[](int) const [116]
+[113]    0.0    0.00    0.00  235685         glm::detail::tvec4<float, (glm::precision)0>::length() const [113]
+-----------------------------------------------
+                0.00    0.00   75420/197973      glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) const [124]
+                0.00    0.00  122553/197973      glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [117]
+[114]    0.0    0.00    0.00  197973         glm::detail::tmat4x4<float, (glm::precision)0>::length() const [114]
+-----------------------------------------------
+                0.00    0.00  150836/150836      glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+[115]    0.0    0.00    0.00  150836         glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, float const&) [115]
+                0.00    0.00  150836/320526      glm::detail::tvec4<float, (glm::precision)0>::tvec4(float const&, float const&, float const&, float const&) [112]
+-----------------------------------------------
+                0.00    0.00  150836/150836      glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+[116]    0.0    0.00    0.00  150836         glm::detail::tvec4<float, (glm::precision)0>::operator[](int) const [116]
+                0.00    0.00  150838/235685      glm::detail::tvec4<float, (glm::precision)0>::length() const [113]
+-----------------------------------------------
+                0.00    0.00    4711/122553      Cube::run() [257]
+                0.00    0.00   23566/122553      glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [148]
+                0.00    0.00   37710/122553      glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+                0.00    0.00   56566/122553      glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[117]    0.0    0.00    0.00  122553         glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [117]
+                0.00    0.00  122553/197973      glm::detail::tmat4x4<float, (glm::precision)0>::length() const [114]
+-----------------------------------------------
+                0.00    0.00  113125/113125      glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+[118]    0.0    0.00    0.00  113125         glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, glm::detail::tvec4<float, (glm::precision)0> const&) [118]
+                0.00    0.00  113129/320526      glm::detail::tvec4<float, (glm::precision)0>::tvec4(float const&, float const&, float const&, float const&) [112]
+-----------------------------------------------
+                0.00    0.00   37710/94273       glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+                0.00    0.00   56563/94273       glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+[119]    0.0    0.00    0.00   94273         glm::detail::tvec4<float, (glm::precision)0>::operator=(glm::detail::tvec4<float, (glm::precision)0> const&) [119]
+-----------------------------------------------
+                0.00    0.00   37709/94266       glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(glm::detail::tmat4x4<float, (glm::precision)0>::ctor) [144]
+                0.00    0.00   56557/94266       glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+[120]    0.0    0.00    0.00   94266         glm::detail::tvec4<float, (glm::precision)0>::tvec4() [120]
+-----------------------------------------------
+                0.00    0.00    4713/84846       Cube::run() [257]
+                0.00    0.00   23566/84846       glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [148]
+                0.00    0.00   56567/84846       glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[121]    0.0    0.00    0.00   84846         glm::detail::tvec4<float, (glm::precision)0>::operator[](int) [121]
+                0.00    0.00   84847/235685      glm::detail::tvec4<float, (glm::precision)0>::length() const [113]
+-----------------------------------------------
+                0.00    0.00    4713/80137       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator-<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [155]
+                0.00    0.00    4714/80137       Cube::run() [257]
+                0.00    0.00    4714/80137       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [151]
+                0.00    0.00   14142/80137       glm::detail::tvec3<float, (glm::precision)0> glm::cross<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [129]
+                0.00    0.00   14142/80137       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [130]
+                0.00    0.00   37712/80137       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, float const&) [125]
+[122]    0.0    0.00    0.00   80137         glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+-----------------------------------------------
+                0.00    0.00   75419/75419       glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+[123]    0.0    0.00    0.00   75419         glm::detail::tvec4<float, (glm::precision)0>::tvec4(glm::detail::tvec4<float, (glm::precision)0> const&) [123]
+-----------------------------------------------
+                0.00    0.00   75419/75419       glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+[124]    0.0    0.00    0.00   75419         glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) const [124]
+                0.00    0.00   75420/197973      glm::detail::tmat4x4<float, (glm::precision)0>::length() const [114]
+-----------------------------------------------
+                0.00    0.00    9428/37712       glm::detail::tvec3<float, (glm::precision)0> glm::normalize<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&) [146]
+                0.00    0.00   28284/37712       Cube::setEyePosition(int, int) [153]
+[125]    0.0    0.00    0.00   37712         glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, float const&) [125]
+                0.00    0.00   37712/80137       glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+-----------------------------------------------
+                0.00    0.00    9428/18856       glm::sqrt(float) [137]
+                0.00    0.00    9428/18856       glm::detail::compute_sqrt<glm::detail::tvec1, float, (glm::precision)0>::call(glm::detail::tvec1<float, (glm::precision)0> const&) [138]
+[126]    0.0    0.00    0.00   18856         glm::detail::tvec1<float, (glm::precision)0>::tvec1(float const&) [126]
+-----------------------------------------------
+                0.00    0.00   18855/18855       Cube::run() [257]
+[127]    0.0    0.00    0.00   18855         float glm::cos<float>(float const&) [127]
+                0.00    0.00   18855/18855       std::cos(float) [128]
+-----------------------------------------------
+                0.00    0.00   18855/18855       float glm::cos<float>(float const&) [127]
+[128]    0.0    0.00    0.00   18855         std::cos(float) [128]
+-----------------------------------------------
+                0.00    0.00    4714/14142       Cube::run() [257]
+                0.00    0.00    9428/14142       glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[129]    0.0    0.00    0.00   14142         glm::detail::tvec3<float, (glm::precision)0> glm::cross<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [129]
+                0.00    0.00   14142/80137       glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+-----------------------------------------------
+                0.00    0.00   14142/14142       glm::detail::compute_dot<glm::detail::tvec3, float, (glm::precision)0>::call(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [134]
+[130]    0.0    0.00    0.00   14142         glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [130]
+                0.00    0.00   14142/80137       glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+-----------------------------------------------
+                0.00    0.00   14142/14142       float glm::sin<float>(float const&) [133]
+[131]    0.0    0.00    0.00   14142         std::sin(float) [131]
+-----------------------------------------------
+                0.00    0.00   14141/14141       glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[132]    0.0    0.00    0.00   14141         float glm::dot<float, (glm::precision)0, glm::detail::tvec3>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [132]
+                0.00    0.00   14141/14141       glm::detail::compute_dot<glm::detail::tvec3, float, (glm::precision)0>::call(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [134]
+-----------------------------------------------
+                0.00    0.00   14141/14141       Cube::run() [257]
+[133]    0.0    0.00    0.00   14141         float glm::sin<float>(float const&) [133]
+                0.00    0.00   14142/14142       std::sin(float) [131]
+-----------------------------------------------
+                0.00    0.00   14141/14141       float glm::dot<float, (glm::precision)0, glm::detail::tvec3>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [132]
+[134]    0.0    0.00    0.00   14141         glm::detail::compute_dot<glm::detail::tvec3, float, (glm::precision)0>::call(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [134]
+                0.00    0.00   14142/14142       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [130]
+-----------------------------------------------
+                0.00    0.00    4712/14140       glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [148]
+                0.00    0.00    4714/14140       Cube::run() [257]
+                0.00    0.00    4714/14140       glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[135]    0.0    0.00    0.00   14140         glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+                0.00    0.00   56563/94273       glm::detail::tvec4<float, (glm::precision)0>::operator=(glm::detail::tvec4<float, (glm::precision)0> const&) [119]
+                0.00    0.00   56561/320526      glm::detail::tvec4<float, (glm::precision)0>::tvec4(float const&, float const&, float const&, float const&) [112]
+                0.00    0.00   56557/94266       glm::detail::tvec4<float, (glm::precision)0>::tvec4() [120]
+-----------------------------------------------
+                0.00    0.00    9428/9428        Global::getPosition() [141]
+[136]    0.0    0.00    0.00    9428         cv::Point_<int>::Point_(cv::Point_<int> const&) [136]
+-----------------------------------------------
+                0.00    0.00    9428/9428        glm::inversesqrt(float const&) [143]
+[137]    0.0    0.00    0.00    9428         glm::sqrt(float) [137]
+                0.00    0.00    9428/18856       glm::detail::tvec1<float, (glm::precision)0>::tvec1(float const&) [126]
+                0.00    0.00    9428/9428        glm::detail::compute_sqrt<glm::detail::tvec1, float, (glm::precision)0>::call(glm::detail::tvec1<float, (glm::precision)0> const&) [138]
+-----------------------------------------------
+                0.00    0.00    9428/9428        glm::sqrt(float) [137]
+[138]    0.0    0.00    0.00    9428         glm::detail::compute_sqrt<glm::detail::tvec1, float, (glm::precision)0>::call(glm::detail::tvec1<float, (glm::precision)0> const&) [138]
+                0.00    0.00    9428/9428        std::sqrt(float) [142]
+                0.00    0.00    9428/18856       glm::detail::tvec1<float, (glm::precision)0>::tvec1(float const&) [126]
+-----------------------------------------------
+                0.00    0.00    9428/9428        Cube::run() [257]
+[139]    0.0    0.00    0.00    9428         glm::detail::tvec3<float, (glm::precision)0>::operator=(glm::detail::tvec3<float, (glm::precision)0> const&) [139]
+-----------------------------------------------
+                0.00    0.00    9428/9428        Cube::setEyePosition(int, int) [153]
+[140]    0.0    0.00    0.00    9428         glm::detail::tvec3<float, (glm::precision)0>& glm::detail::tvec3<float, (glm::precision)0>::operator+=<float>(glm::detail::tvec3<float, (glm::precision)0> const&) [140]
+-----------------------------------------------
+                0.00    0.00    9428/9428        Cube::run() [257]
+[141]    0.0    0.00    0.00    9428         Global::getPosition() [141]
+                0.00    0.00    9428/9428        cv::Point_<int>::Point_(cv::Point_<int> const&) [136]
+-----------------------------------------------
+                0.00    0.00    9428/9428        glm::detail::compute_sqrt<glm::detail::tvec1, float, (glm::precision)0>::call(glm::detail::tvec1<float, (glm::precision)0> const&) [138]
+[142]    0.0    0.00    0.00    9428         std::sqrt(float) [142]
+-----------------------------------------------
+                0.00    0.00    9427/9427        glm::detail::tvec3<float, (glm::precision)0> glm::normalize<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&) [146]
+[143]    0.0    0.00    0.00    9427         glm::inversesqrt(float const&) [143]
+                0.00    0.00    9428/9428        glm::sqrt(float) [137]
+-----------------------------------------------
+                0.00    0.00    9427/9427        glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+[144]    0.0    0.00    0.00    9427         glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(glm::detail::tmat4x4<float, (glm::precision)0>::ctor) [144]
+                0.00    0.00   37709/94266       glm::detail::tvec4<float, (glm::precision)0>::tvec4() [120]
+-----------------------------------------------
+                0.00    0.00    9427/9427        Cube::run() [257]
+[145]    0.0    0.00    0.00    9427         glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+                0.00    0.00  150836/150836      glm::detail::tvec4<float, (glm::precision)0>::operator[](int) const [116]
+                0.00    0.00  150836/150836      glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, float const&) [115]
+                0.00    0.00  113125/113125      glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, glm::detail::tvec4<float, (glm::precision)0> const&) [118]
+                0.00    0.00   75419/75419       glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) const [124]
+                0.00    0.00   75419/75419       glm::detail::tvec4<float, (glm::precision)0>::tvec4(glm::detail::tvec4<float, (glm::precision)0> const&) [123]
+                0.00    0.00   37710/122553      glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [117]
+                0.00    0.00   37710/94273       glm::detail::tvec4<float, (glm::precision)0>::operator=(glm::detail::tvec4<float, (glm::precision)0> const&) [119]
+                0.00    0.00    9427/9427        glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(glm::detail::tmat4x4<float, (glm::precision)0>::ctor) [144]
+-----------------------------------------------
+                0.00    0.00    9427/9427        glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[146]    0.0    0.00    0.00    9427         glm::detail::tvec3<float, (glm::precision)0> glm::normalize<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&) [146]
+                0.00    0.00    9428/37712       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, float const&) [125]
+                0.00    0.00    9427/9427        glm::inversesqrt(float const&) [143]
+-----------------------------------------------
+                0.00    0.00       1/4715        __static_initialization_and_destruction_0(int, int) [247]
+                0.00    0.00    4714/4715        Cube::setEyePosition(int, int) [153]
+[147]    0.0    0.00    0.00    4715         glm::detail::tvec3<float, (glm::precision)0>::tvec3<int, int, int>(int const&, int const&, int const&) [147]
+-----------------------------------------------
+                0.00    0.00    4714/4714        Cube::run() [257]
+[148]    0.0    0.00    0.00    4714         glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [148]
+                0.00    0.00   23566/122553      glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [117]
+                0.00    0.00   23566/84846       glm::detail::tvec4<float, (glm::precision)0>::operator[](int) [121]
+                0.00    0.00    4714/4714        float glm::tan<float>(float const&) [149]
+                0.00    0.00    4712/14140       glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+-----------------------------------------------
+                0.00    0.00    4714/4714        glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [148]
+[149]    0.0    0.00    0.00    4714         float glm::tan<float>(float const&) [149]
+                0.00    0.00    4714/4714        std::tan(float) [154]
+-----------------------------------------------
+                0.00    0.00    4714/4714        Cube::run() [257]
+[150]    0.0    0.00    0.00    4714         glm::detail::tvec3<float, (glm::precision)0>::tvec3<float, int, float>(float const&, int const&, float const&) [150]
+-----------------------------------------------
+                0.00    0.00    4714/4714        Cube::run() [257]
+[151]    0.0    0.00    0.00    4714         glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [151]
+                0.00    0.00    4714/80137       glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+-----------------------------------------------
+                0.00    0.00    4714/4714        Cube::run() [257]
+[152]    0.0    0.00    0.00    4714         glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+                0.00    0.00   56567/84846       glm::detail::tvec4<float, (glm::precision)0>::operator[](int) [121]
+                0.00    0.00   56566/122553      glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [117]
+                0.00    0.00   14141/14141       float glm::dot<float, (glm::precision)0, glm::detail::tvec3>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [132]
+                0.00    0.00    9428/14142       glm::detail::tvec3<float, (glm::precision)0> glm::cross<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [129]
+                0.00    0.00    9427/9427        glm::detail::tvec3<float, (glm::precision)0> glm::normalize<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&) [146]
+                0.00    0.00    4714/14140       glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+                0.00    0.00    4713/4713        glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator-<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [155]
+-----------------------------------------------
+                0.00    0.00    4714/4714        Cube::run() [257]
+[153]    0.0    0.00    0.00    4714         Cube::setEyePosition(int, int) [153]
+                0.00    0.00   28284/37712       glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, float const&) [125]
+                0.00    0.00    9428/9428        glm::detail::tvec3<float, (glm::precision)0>& glm::detail::tvec3<float, (glm::precision)0>::operator+=<float>(glm::detail::tvec3<float, (glm::precision)0> const&) [140]
+                0.00    0.00    4714/4715        glm::detail::tvec3<float, (glm::precision)0>::tvec3<int, int, int>(int const&, int const&, int const&) [147]
+-----------------------------------------------
+                0.00    0.00    4714/4714        float glm::tan<float>(float const&) [149]
+[154]    0.0    0.00    0.00    4714         std::tan(float) [154]
+-----------------------------------------------
+                0.00    0.00    4713/4713        glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+[155]    0.0    0.00    0.00    4713         glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator-<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [155]
+                0.00    0.00    4713/80137       glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+-----------------------------------------------
+                0.00    0.00     519/519         cv::Scalar_<double>::Scalar_(CvScalar const&) [180]
+[156]    0.0    0.00    0.00     519         double cv::saturate_cast<double>(double) [156]
+-----------------------------------------------
+                0.00    0.00       2/399         cv::Mat::operator=(cv::Mat const&) [237]
+                0.00    0.00     397/399         cv::Mat::~Mat() [158]
+[157]    0.0    0.00    0.00     399         cv::Mat::release() [157]
+-----------------------------------------------
+                0.00    0.00       4/397         EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+                0.00    0.00     134/397         EyeTracking::run() [252]
+                0.00    0.00     259/397         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[158]    0.0    0.00    0.00     397         cv::Mat::~Mat() [158]
+                0.00    0.00     397/399         cv::Mat::release() [157]
+-----------------------------------------------
+                0.00    0.00       2/390         cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [239]
+                0.00    0.00     129/390         cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Size_<int> const&) [186]
+                0.00    0.00     129/390         cv::Rect_<int> cv::operator-<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [185]
+                0.00    0.00     130/390         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[159]    0.0    0.00    0.00     390         cv::Rect_<int>::Rect_(int, int, int, int) [159]
+-----------------------------------------------
+                0.00    0.00       1/265         cv::Mat::Mat(cv::Size_<int>, int) [255]
+                0.00    0.00     130/265         cv::Mat::Mat(int, int, int) [183]
+                0.00    0.00     134/265         cv::Mat::Mat() [166]
+[160]    0.0    0.00    0.00     265         cv::Mat::MSize::MSize(int*) [160]
+-----------------------------------------------
+                0.00    0.00       1/265         cv::Mat::Mat(cv::Size_<int>, int) [255]
+                0.00    0.00     130/265         cv::Mat::Mat(int, int, int) [183]
+                0.00    0.00     134/265         cv::Mat::Mat() [166]
+[161]    0.0    0.00    0.00     265         cv::Mat::MStep::MStep() [161]
+-----------------------------------------------
+                0.00    0.00       1/265         cv::Mat::Mat(cv::Size_<int>, int) [255]
+                0.00    0.00     129/265         cv::Mat::Mat(int, int, int) [183]
+                0.00    0.00     135/265         cv::Mat::Mat() [166]
+[162]    0.0    0.00    0.00     265         cv::Mat::initEmpty() [162]
+-----------------------------------------------
+                0.00    0.00     260/260         cv::Rect_<int>& cv::operator&=<int>(cv::Rect_<int>&, cv::Rect_<int> const&) [184]
+[163]    0.0    0.00    0.00     260         int const& std::max<int>(int const&, int const&) [163]
+-----------------------------------------------
+                0.00    0.00     259/259         cv::Rect_<int>& cv::operator&=<int>(cv::Rect_<int>&, cv::Rect_<int> const&) [184]
+[164]    0.0    0.00    0.00     259         int const& std::min<int>(int const&, int const&) [164]
+-----------------------------------------------
+                0.00    0.00     255/255         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[165]    0.0    0.00    0.00     255         cv::Point_<int>::Point_() [165]
+-----------------------------------------------
+                0.00    0.00       1/136         Global::Global() [259]
+                0.00    0.00     135/136         EyeTracking::run() [252]
+[166]    0.0    0.00    0.00     136         cv::Mat::Mat() [166]
+                0.00    0.00     135/265         cv::Mat::initEmpty() [162]
+                0.00    0.00     134/265         cv::Mat::MSize::MSize(int*) [160]
+                0.00    0.00     134/265         cv::Mat::MStep::MStep() [161]
+-----------------------------------------------
+                0.00    0.00       1/135         Global::Global() [259]
+                0.00    0.00       4/135         EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+                0.00    0.00     130/135         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[167]    0.0    0.00    0.00     135         cv::Size_<int>::Size_(int, int) [167]
+-----------------------------------------------
+                0.00    0.00       4/134         EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+                0.00    0.00     130/134         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[168]    0.0    0.00    0.00     134         cv::Mat::operator()(cv::Rect_<int> const&) const [168]
+-----------------------------------------------
+                0.00    0.00       1/133         Global::Global() [259]
+                0.00    0.00       2/133         EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+                0.00    0.00     130/133         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[169]    0.0    0.00    0.00     133         cv::Point_<int>::Point_(int, int) [169]
+-----------------------------------------------
+                0.00    0.00     133/133         EyeTracking::run() [252]
+[170]    0.0    0.00    0.00     133         cv::Mat::empty() const [170]
+                0.00    0.00     132/132         cv::Mat::total() const [172]
+-----------------------------------------------
+                0.00    0.00       1/132         cv::Mat::Mat(cv::Size_<int>, int) [255]
+                0.00    0.00     131/132         cv::Mat::Mat(int, int, int) [183]
+[171]    0.0    0.00    0.00     132         cv::Mat::create(int, int, int) [171]
+-----------------------------------------------
+                0.00    0.00     132/132         cv::Mat::empty() const [170]
+[172]    0.0    0.00    0.00     132         cv::Mat::total() const [172]
+-----------------------------------------------
+                0.00    0.00     131/131         EyeTracking::run() [252]
+[173]    0.0    0.00    0.00     131         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+                0.00    0.00     259/397         cv::Mat::~Mat() [158]
+                0.00    0.00     255/255         cv::Point_<int>::Point_() [165]
+                0.00    0.00     130/135         cv::Size_<int>::Size_(int, int) [167]
+                0.00    0.00     130/133         cv::Point_<int>::Point_(int, int) [169]
+                0.00    0.00     130/390         cv::Rect_<int>::Rect_(int, int, int, int) [159]
+                0.00    0.00     130/134         cv::Mat::operator()(cv::Rect_<int> const&) const [168]
+                0.00    0.00     129/129         cv::Rect_<int> cv::operator-<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [185]
+                0.00    0.00     129/129         cv::Rect_<int>& cv::operator&=<int>(cv::Rect_<int>&, cv::Rect_<int> const&) [184]
+                0.00    0.00     129/129         cv::Mat::Mat(int, int, int) [183]
+                0.00    0.00     128/128         cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Size_<int> const&) [186]
+-----------------------------------------------
+                0.00    0.00       1/131         main [94]
+                0.00    0.00     130/131         EyeTracking::run() [252]
+[174]    0.0    0.00    0.00     131         Global::setPosition(int, int) [174]
+-----------------------------------------------
+                0.00    0.00     131/131         EyeTracking::run() [252]
+[175]    0.0    0.00    0.00     131         Global::getDepthData(int, int) [175]
+                0.00    0.00     130/130         std::ostream& cv::operator<< <float>(std::ostream&, cv::Point3_<float> const&) [181]
+                0.00    0.00     129/129         cv::Point3_<float>& cv::Mat::at<cv::Point3_<float> >(int, int) [182]
+-----------------------------------------------
+                0.00    0.00     130/130         EyeTracking::run() [252]
+[176]    0.0    0.00    0.00     130         cvScalar(double, double, double, double) [176]
+-----------------------------------------------
+                0.00    0.00     130/130         cv::Scalar_<double>::Scalar_(CvScalar const&) [180]
+[177]    0.0    0.00    0.00     130         cv::Vec<double, 4>::Vec() [177]
+                0.00    0.00     130/130         cv::Matx<double, 4, 1>::Matx() [178]
+-----------------------------------------------
+                0.00    0.00     130/130         cv::Vec<double, 4>::Vec() [177]
+[178]    0.0    0.00    0.00     130         cv::Matx<double, 4, 1>::Matx() [178]
+-----------------------------------------------
+                0.00    0.00     130/130         EyeTracking::run() [252]
+[179]    0.0    0.00    0.00     130         cv::Rect_<int>::Rect_(cv::Rect_<int> const&) [179]
+-----------------------------------------------
+                0.00    0.00     130/130         EyeTracking::run() [252]
+[180]    0.0    0.00    0.00     130         cv::Scalar_<double>::Scalar_(CvScalar const&) [180]
+                0.00    0.00     519/519         double cv::saturate_cast<double>(double) [156]
+                0.00    0.00     130/130         cv::Vec<double, 4>::Vec() [177]
+-----------------------------------------------
+                0.00    0.00     130/130         Global::getDepthData(int, int) [175]
+[181]    0.0    0.00    0.00     130         std::ostream& cv::operator<< <float>(std::ostream&, cv::Point3_<float> const&) [181]
+-----------------------------------------------
+                0.00    0.00     129/129         Global::getDepthData(int, int) [175]
+[182]    0.0    0.00    0.00     129         cv::Point3_<float>& cv::Mat::at<cv::Point3_<float> >(int, int) [182]
+-----------------------------------------------
+                0.00    0.00     129/129         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[183]    0.0    0.00    0.00     129         cv::Mat::Mat(int, int, int) [183]
+                0.00    0.00     131/132         cv::Mat::create(int, int, int) [171]
+                0.00    0.00     130/265         cv::Mat::MSize::MSize(int*) [160]
+                0.00    0.00     130/265         cv::Mat::MStep::MStep() [161]
+                0.00    0.00     129/265         cv::Mat::initEmpty() [162]
+-----------------------------------------------
+                0.00    0.00     129/129         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[184]    0.0    0.00    0.00     129         cv::Rect_<int>& cv::operator&=<int>(cv::Rect_<int>&, cv::Rect_<int> const&) [184]
+                0.00    0.00     260/260         int const& std::max<int>(int const&, int const&) [163]
+                0.00    0.00     259/259         int const& std::min<int>(int const&, int const&) [164]
+-----------------------------------------------
+                0.00    0.00     129/129         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[185]    0.0    0.00    0.00     129         cv::Rect_<int> cv::operator-<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [185]
+                0.00    0.00     129/390         cv::Rect_<int>::Rect_(int, int, int, int) [159]
+-----------------------------------------------
+                0.00    0.00     128/128         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+[186]    0.0    0.00    0.00     128         cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Size_<int> const&) [186]
+                0.00    0.00     129/390         cv::Rect_<int>::Rect_(int, int, int, int) [159]
+-----------------------------------------------
+                0.00    0.00      36/36          std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [188]
+[187]    0.0    0.00    0.00      36         std::char_traits<char>::length(char const*) [187]
+-----------------------------------------------
+                0.00    0.00      36/36          LoadShaders(char const*, char const*) [246]
+[188]    0.0    0.00    0.00      36         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [188]
+                0.00    0.00      36/36          std::char_traits<char>::length(char const*) [187]
+-----------------------------------------------
+                0.00    0.00       8/8           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[189]    0.0    0.00    0.00       8         std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::size() const [189]
+-----------------------------------------------
+                0.00    0.00       8/8           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[190]    0.0    0.00    0.00       8         std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::operator[](unsigned long) [190]
+-----------------------------------------------
+                0.00    0.00       3/6           std::vector<char, std::allocator<char> >::~vector() [227]
+                0.00    0.00       3/6           std::vector<char, std::allocator<char> >::_M_default_initialize(unsigned long) [225]
+[191]    0.0    0.00    0.00       6         std::_Vector_base<char, std::allocator<char> >::_M_get_Tp_allocator() [191]
+-----------------------------------------------
+                0.00    0.00       6/6           LoadShaders(char const*, char const*) [246]
+[192]    0.0    0.00    0.00       6         std::vector<char, std::allocator<char> >::operator[](unsigned long) [192]
+-----------------------------------------------
+                0.00    0.00       4/4           cv::Mat::operator=(cv::Mat const&) [237]
+[193]    0.0    0.00    0.00       4         cv::Mat::MStep::operator[](int) [193]
+-----------------------------------------------
+                0.00    0.00       4/4           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[194]    0.0    0.00    0.00       4         cv::Size_<int>::Size_() [194]
+-----------------------------------------------
+                0.00    0.00       4/4           std::allocator<cv::Rect_<int> >::allocator() [198]
+[195]    0.0    0.00    0.00       4         __gnu_cxx::new_allocator<cv::Rect_<int> >::new_allocator() [195]
+-----------------------------------------------
+                0.00    0.00       4/4           std::allocator<cv::Rect_<int> >::~allocator() [199]
+[196]    0.0    0.00    0.00       4         __gnu_cxx::new_allocator<cv::Rect_<int> >::~new_allocator() [196]
+-----------------------------------------------
+                0.00    0.00       4/4           cv::Mat::operator=(cv::Mat const&) [237]
+[197]    0.0    0.00    0.00       4         cv::Mat::MStep::operator[](int) const [197]
+-----------------------------------------------
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::_Vector_impl() [201]
+[198]    0.0    0.00    0.00       4         std::allocator<cv::Rect_<int> >::allocator() [198]
+                0.00    0.00       4/4           __gnu_cxx::new_allocator<cv::Rect_<int> >::new_allocator() [195]
+-----------------------------------------------
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::~_Vector_impl() [202]
+[199]    0.0    0.00    0.00       4         std::allocator<cv::Rect_<int> >::~allocator() [199]
+                0.00    0.00       4/4           __gnu_cxx::new_allocator<cv::Rect_<int> >::~new_allocator() [196]
+-----------------------------------------------
+                0.00    0.00       4/4           void std::_Destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*) [209]
+[200]    0.0    0.00    0.00       4         void std::_Destroy_aux<true>::__destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*) [200]
+-----------------------------------------------
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_base() [205]
+[201]    0.0    0.00    0.00       4         std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::_Vector_impl() [201]
+                0.00    0.00       4/4           std::allocator<cv::Rect_<int> >::allocator() [198]
+-----------------------------------------------
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~_Vector_base() [206]
+[202]    0.0    0.00    0.00       4         std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::~_Vector_impl() [202]
+                0.00    0.00       4/4           std::allocator<cv::Rect_<int> >::~allocator() [199]
+-----------------------------------------------
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~_Vector_base() [206]
+[203]    0.0    0.00    0.00       4         std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_deallocate(cv::Rect_<int>*, unsigned long) [203]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<cv::Rect_<int> >::deallocate(cv::Rect_<int>*, unsigned long) [241]
+-----------------------------------------------
+                0.00    0.00       4/4           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector() [208]
+[204]    0.0    0.00    0.00       4         std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_get_Tp_allocator() [204]
+-----------------------------------------------
+                0.00    0.00       4/4           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::vector() [207]
+[205]    0.0    0.00    0.00       4         std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_base() [205]
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::_Vector_impl() [201]
+-----------------------------------------------
+                0.00    0.00       4/4           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector() [208]
+[206]    0.0    0.00    0.00       4         std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~_Vector_base() [206]
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_deallocate(cv::Rect_<int>*, unsigned long) [203]
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::~_Vector_impl() [202]
+-----------------------------------------------
+                0.00    0.00       4/4           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[207]    0.0    0.00    0.00       4         std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::vector() [207]
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_base() [205]
+-----------------------------------------------
+                0.00    0.00       4/4           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[208]    0.0    0.00    0.00       4         std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector() [208]
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_get_Tp_allocator() [204]
+                0.00    0.00       4/4           void std::_Destroy<cv::Rect_<int>*, cv::Rect_<int> >(cv::Rect_<int>*, cv::Rect_<int>*, std::allocator<cv::Rect_<int> >&) [210]
+                0.00    0.00       4/4           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~_Vector_base() [206]
+-----------------------------------------------
+                0.00    0.00       4/4           void std::_Destroy<cv::Rect_<int>*, cv::Rect_<int> >(cv::Rect_<int>*, cv::Rect_<int>*, std::allocator<cv::Rect_<int> >&) [210]
+[209]    0.0    0.00    0.00       4         void std::_Destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*) [209]
+                0.00    0.00       4/4           void std::_Destroy_aux<true>::__destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*) [200]
+-----------------------------------------------
+                0.00    0.00       4/4           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector() [208]
+[210]    0.0    0.00    0.00       4         void std::_Destroy<cv::Rect_<int>*, cv::Rect_<int> >(cv::Rect_<int>*, cv::Rect_<int>*, std::allocator<cv::Rect_<int> >&) [210]
+                0.00    0.00       4/4           void std::_Destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*) [209]
+-----------------------------------------------
+                0.00    0.00       1/3           Cube::run() [257]
+                0.00    0.00       1/3           EyeTracking::run() [252]
+                0.00    0.00       1/3           main [94]
+[211]    0.0    0.00    0.00       3         Global::getInstance() [211]
+                0.00    0.00       1/1           Global::Global() [259]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long) [220]
+[212]    0.0    0.00    0.00       3         __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long) [212]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_M_allocate(unsigned long) [217]
+[213]    0.0    0.00    0.00       3         __gnu_cxx::new_allocator<char>::allocate(unsigned long, void const*) [213]
+                0.00    0.00       3/3           __gnu_cxx::new_allocator<char>::max_size() const [214]
+-----------------------------------------------
+                0.00    0.00       3/3           __gnu_cxx::new_allocator<char>::allocate(unsigned long, void const*) [213]
+[214]    0.0    0.00    0.00       3         __gnu_cxx::new_allocator<char>::max_size() const [214]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Niter_base<char*>::iterator_type std::__niter_base<char*>(char*) [229]
+[215]    0.0    0.00    0.00       3         std::_Iter_base<char*, false>::_S_base(char*) [215]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::_Destroy<char*>(char*, char*) [233]
+[216]    0.0    0.00    0.00       3         void std::_Destroy_aux<true>::__destroy<char*>(char*, char*) [216]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_M_create_storage(unsigned long) [221]
+[217]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::_M_allocate(unsigned long) [217]
+                0.00    0.00       3/3           __gnu_cxx::new_allocator<char>::allocate(unsigned long, void const*) [213]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_Vector_base(unsigned long, std::allocator<char> const&) [222]
+[218]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::_Vector_impl::_Vector_impl(std::allocator<char> const&) [218]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::~_Vector_base() [223]
+[219]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::_Vector_impl::~_Vector_impl() [219]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::~_Vector_base() [223]
+[220]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long) [220]
+                0.00    0.00       3/3           __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long) [212]
+-----------------------------------------------
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_Vector_base(unsigned long, std::allocator<char> const&) [222]
+[221]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::_M_create_storage(unsigned long) [221]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_M_allocate(unsigned long) [217]
+-----------------------------------------------
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::vector(unsigned long, std::allocator<char> const&) [226]
+[222]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::_Vector_base(unsigned long, std::allocator<char> const&) [222]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_Vector_impl::_Vector_impl(std::allocator<char> const&) [218]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_M_create_storage(unsigned long) [221]
+-----------------------------------------------
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::~vector() [227]
+[223]    0.0    0.00    0.00       3         std::_Vector_base<char, std::allocator<char> >::~_Vector_base() [223]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_Vector_impl::~_Vector_impl() [219]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long) [220]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::__uninitialized_default_n<char*, unsigned long>(char*, unsigned long) [230]
+[224]    0.0    0.00    0.00       3         void std::__uninitialized_default_n_1<true>::__uninit_default_n<char*, unsigned long>(char*, unsigned long) [224]
+                0.00    0.00       3/3           char* std::fill_n<char*, unsigned long, char>(char*, unsigned long, char const&) [232]
+-----------------------------------------------
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::vector(unsigned long, std::allocator<char> const&) [226]
+[225]    0.0    0.00    0.00       3         std::vector<char, std::allocator<char> >::_M_default_initialize(unsigned long) [225]
+                0.00    0.00       3/6           std::_Vector_base<char, std::allocator<char> >::_M_get_Tp_allocator() [191]
+                0.00    0.00       3/3           void std::__uninitialized_default_n_a<char*, unsigned long, char>(char*, unsigned long, std::allocator<char>&) [231]
+-----------------------------------------------
+                0.00    0.00       3/3           LoadShaders(char const*, char const*) [246]
+[226]    0.0    0.00    0.00       3         std::vector<char, std::allocator<char> >::vector(unsigned long, std::allocator<char> const&) [226]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::_Vector_base(unsigned long, std::allocator<char> const&) [222]
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::_M_default_initialize(unsigned long) [225]
+-----------------------------------------------
+                0.00    0.00       3/3           LoadShaders(char const*, char const*) [246]
+[227]    0.0    0.00    0.00       3         std::vector<char, std::allocator<char> >::~vector() [227]
+                0.00    0.00       3/6           std::_Vector_base<char, std::allocator<char> >::_M_get_Tp_allocator() [191]
+                0.00    0.00       3/3           void std::_Destroy<char*, char>(char*, char*, std::allocator<char>&) [234]
+                0.00    0.00       3/3           std::_Vector_base<char, std::allocator<char> >::~_Vector_base() [223]
+-----------------------------------------------
+                0.00    0.00       3/3           char* std::fill_n<char*, unsigned long, char>(char*, unsigned long, char const&) [232]
+[228]    0.0    0.00    0.00       3         __gnu_cxx::__enable_if<std::__is_byte<char>::__value, char*>::__type std::__fill_n_a<unsigned long, char>(char*, unsigned long, char const&) [228]
+                0.00    0.00       3/3           __gnu_cxx::__enable_if<std::__is_byte<char>::__value, void>::__type std::__fill_a<char>(char*, char*, char const&) [235]
+-----------------------------------------------
+                0.00    0.00       3/3           char* std::fill_n<char*, unsigned long, char>(char*, unsigned long, char const&) [232]
+[229]    0.0    0.00    0.00       3         std::_Niter_base<char*>::iterator_type std::__niter_base<char*>(char*) [229]
+                0.00    0.00       3/3           std::_Iter_base<char*, false>::_S_base(char*) [215]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::__uninitialized_default_n_a<char*, unsigned long, char>(char*, unsigned long, std::allocator<char>&) [231]
+[230]    0.0    0.00    0.00       3         void std::__uninitialized_default_n<char*, unsigned long>(char*, unsigned long) [230]
+                0.00    0.00       3/3           void std::__uninitialized_default_n_1<true>::__uninit_default_n<char*, unsigned long>(char*, unsigned long) [224]
+-----------------------------------------------
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::_M_default_initialize(unsigned long) [225]
+[231]    0.0    0.00    0.00       3         void std::__uninitialized_default_n_a<char*, unsigned long, char>(char*, unsigned long, std::allocator<char>&) [231]
+                0.00    0.00       3/3           void std::__uninitialized_default_n<char*, unsigned long>(char*, unsigned long) [230]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::__uninitialized_default_n_1<true>::__uninit_default_n<char*, unsigned long>(char*, unsigned long) [224]
+[232]    0.0    0.00    0.00       3         char* std::fill_n<char*, unsigned long, char>(char*, unsigned long, char const&) [232]
+                0.00    0.00       3/3           std::_Niter_base<char*>::iterator_type std::__niter_base<char*>(char*) [229]
+                0.00    0.00       3/3           __gnu_cxx::__enable_if<std::__is_byte<char>::__value, char*>::__type std::__fill_n_a<unsigned long, char>(char*, unsigned long, char const&) [228]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::_Destroy<char*, char>(char*, char*, std::allocator<char>&) [234]
+[233]    0.0    0.00    0.00       3         void std::_Destroy<char*>(char*, char*) [233]
+                0.00    0.00       3/3           void std::_Destroy_aux<true>::__destroy<char*>(char*, char*) [216]
+-----------------------------------------------
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::~vector() [227]
+[234]    0.0    0.00    0.00       3         void std::_Destroy<char*, char>(char*, char*, std::allocator<char>&) [234]
+                0.00    0.00       3/3           void std::_Destroy<char*>(char*, char*) [233]
+-----------------------------------------------
+                0.00    0.00       3/3           __gnu_cxx::__enable_if<std::__is_byte<char>::__value, char*>::__type std::__fill_n_a<unsigned long, char>(char*, unsigned long, char const&) [228]
+[235]    0.0    0.00    0.00       3         __gnu_cxx::__enable_if<std::__is_byte<char>::__value, void>::__type std::__fill_a<char>(char*, char*, char const&) [235]
+-----------------------------------------------
+                0.00    0.00       2/2           EyeTracking::run() [252]
+[236]    0.0    0.00    0.00       2         EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+                0.00    0.00       8/8           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::operator[](unsigned long) [190]
+                0.00    0.00       8/8           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::size() const [189]
+                0.00    0.00       4/4           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::vector() [207]
+                0.00    0.00       4/4           cv::Size_<int>::Size_() [194]
+                0.00    0.00       4/135         cv::Size_<int>::Size_(int, int) [167]
+                0.00    0.00       4/134         cv::Mat::operator()(cv::Rect_<int> const&) const [168]
+                0.00    0.00       4/397         cv::Mat::~Mat() [158]
+                0.00    0.00       4/4           std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector() [208]
+                0.00    0.00       2/133         cv::Point_<int>::Point_(int, int) [169]
+                0.00    0.00       2/2           cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [239]
+                0.00    0.00       2/2           cv::Rect_<int>::operator=(cv::Rect_<int> const&) [238]
+                0.00    0.00       2/2           cv::Mat::operator=(cv::Mat const&) [237]
+-----------------------------------------------
+                0.00    0.00       2/2           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[237]    0.0    0.00    0.00       2         cv::Mat::operator=(cv::Mat const&) [237]
+                0.00    0.00       4/4           cv::Mat::MStep::operator[](int) [193]
+                0.00    0.00       4/4           cv::Mat::MStep::operator[](int) const [197]
+                0.00    0.00       2/399         cv::Mat::release() [157]
+-----------------------------------------------
+                0.00    0.00       2/2           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[238]    0.0    0.00    0.00       2         cv::Rect_<int>::operator=(cv::Rect_<int> const&) [238]
+-----------------------------------------------
+                0.00    0.00       2/2           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+[239]    0.0    0.00    0.00       2         cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [239]
+                0.00    0.00       2/390         cv::Rect_<int>::Rect_(int, int, int, int) [159]
+-----------------------------------------------
+                0.00    0.00       2/2           __static_initialization_and_destruction_0(int, int) [247]
+[240]    0.0    0.00    0.00       2         glm::detail::tvec3<float, (glm::precision)0>::tvec3() [240]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_deallocate(cv::Rect_<int>*, unsigned long) [203]
+[241]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<cv::Rect_<int> >::deallocate(cv::Rect_<int>*, unsigned long) [241]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [307]
+[242]    0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11LoadShadersPKcS0_ [242]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [249]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [307]
+[243]    0.0    0.00    0.00       1         _GLOBAL__sub_I__Z6doTaskPv [243]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [250]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [307]
+[244]    0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN11EyeTracking9detectEyeERN2cv3MatES2_RNS0_5Rect_IiEE [244]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [248]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [307]
+[245]    0.0    0.00    0.00       1         _GLOBAL__sub_I_speed [245]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [247]
+-----------------------------------------------
+                0.00    0.00       1/1           Cube::run() [257]
+[246]    0.0    0.00    0.00       1         LoadShaders(char const*, char const*) [246]
+                0.00    0.00      36/36          std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [188]
+                0.00    0.00       6/6           std::vector<char, std::allocator<char> >::operator[](unsigned long) [192]
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::vector(unsigned long, std::allocator<char> const&) [226]
+                0.00    0.00       3/3           std::vector<char, std::allocator<char> >::~vector() [227]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_speed [245]
+[247]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [247]
+                0.00    0.00       2/2           glm::detail::tvec3<float, (glm::precision)0>::tvec3() [240]
+                0.00    0.00       1/4715        glm::detail::tvec3<float, (glm::precision)0>::tvec3<int, int, int>(int const&, int const&, int const&) [147]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN11EyeTracking9detectEyeERN2cv3MatES2_RNS0_5Rect_IiEE [244]
+[248]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [248]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z11LoadShadersPKcS0_ [242]
+[249]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [249]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z6doTaskPv [243]
+[250]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [250]
+-----------------------------------------------
+                0.00    0.00       1/1           _glfwInputKey [333]
+[251]    0.0    0.00    0.00       1         key_callback(GLFWwindow*, int, int, int, int) [251]
+-----------------------------------------------
+                0.00    0.00       1/1           doTask(void*) [262]
+[252]    0.0    0.00    0.00       1         EyeTracking::run() [252]
+                0.00    0.00     135/136         cv::Mat::Mat() [166]
+                0.00    0.00     134/397         cv::Mat::~Mat() [158]
+                0.00    0.00     133/133         cv::Mat::empty() const [170]
+                0.00    0.00     131/131         EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [173]
+                0.00    0.00     131/131         Global::getDepthData(int, int) [175]
+                0.00    0.00     130/131         Global::setPosition(int, int) [174]
+                0.00    0.00     130/130         cvScalar(double, double, double, double) [176]
+                0.00    0.00     130/130         cv::Scalar_<double>::Scalar_(CvScalar const&) [180]
+                0.00    0.00     130/130         cv::Rect_<int>::Rect_(cv::Rect_<int> const&) [179]
+                0.00    0.00       2/2           EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [236]
+                0.00    0.00       1/3           Global::getInstance() [211]
+                0.00    0.00       1/1           cv::Rect_<int>::Rect_() [256]
+-----------------------------------------------
+                0.00    0.00       1/1           doTask(void*) [262]
+[253]    0.0    0.00    0.00       1         EyeTracking::EyeTracking() [253]
+-----------------------------------------------
+                0.00    0.00       1/1           doTask(void*) [262]
+[254]    0.0    0.00    0.00       1         EyeTracking::~EyeTracking() [254]
+-----------------------------------------------
+                0.00    0.00       1/1           Global::Global() [259]
+[255]    0.0    0.00    0.00       1         cv::Mat::Mat(cv::Size_<int>, int) [255]
+                0.00    0.00       1/265         cv::Mat::MSize::MSize(int*) [160]
+                0.00    0.00       1/265         cv::Mat::MStep::MStep() [161]
+                0.00    0.00       1/265         cv::Mat::initEmpty() [162]
+                0.00    0.00       1/132         cv::Mat::create(int, int, int) [171]
+-----------------------------------------------
+                0.00    0.00       1/1           EyeTracking::run() [252]
+[256]    0.0    0.00    0.00       1         cv::Rect_<int>::Rect_() [256]
+-----------------------------------------------
+                0.00    0.00       1/1           doTask(void*) [262]
+[257]    0.0    0.00    0.00       1         Cube::run() [257]
+                0.00    0.00   18855/18855       float glm::cos<float>(float const&) [127]
+                0.00    0.00   14141/14141       float glm::sin<float>(float const&) [133]
+                0.00    0.00    9428/9428        Global::getPosition() [141]
+                0.00    0.00    9428/9428        glm::detail::tvec3<float, (glm::precision)0>::operator=(glm::detail::tvec3<float, (glm::precision)0> const&) [139]
+                0.00    0.00    9427/9427        glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [145]
+                0.00    0.00    4714/4714        Cube::setEyePosition(int, int) [153]
+                0.00    0.00    4714/80137       glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [122]
+                0.00    0.00    4714/4714        glm::detail::tvec3<float, (glm::precision)0>::tvec3<float, int, float>(float const&, int const&, float const&) [150]
+                0.00    0.00    4714/14142       glm::detail::tvec3<float, (glm::precision)0> glm::cross<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [129]
+                0.00    0.00    4714/4714        glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [148]
+                0.00    0.00    4714/4714        glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [151]
+                0.00    0.00    4714/4714        glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [152]
+                0.00    0.00    4714/14140       glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [135]
+                0.00    0.00    4713/84846       glm::detail::tvec4<float, (glm::precision)0>::operator[](int) [121]
+                0.00    0.00    4711/122553      glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [117]
+                0.00    0.00       1/1           LoadShaders(char const*, char const*) [246]
+                0.00    0.00       1/3           Global::getInstance() [211]
+-----------------------------------------------
+                0.00    0.00       1/1           doTask(void*) [262]
+[258]    0.0    0.00    0.00       1         Cube::Cube() [258]
+-----------------------------------------------
+                0.00    0.00       1/1           Global::getInstance() [211]
+[259]    0.0    0.00    0.00       1         Global::Global() [259]
+                0.00    0.00       1/133         cv::Point_<int>::Point_(int, int) [169]
+                0.00    0.00       1/135         cv::Size_<int>::Size_(int, int) [167]
+                0.00    0.00       1/1           cv::Mat::Mat(cv::Size_<int>, int) [255]
+                0.00    0.00       1/136         cv::Mat::Mat() [166]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+ [242] _GLOBAL__sub_I__Z11LoadShadersPKcS0_ [133] float glm::sin<float>(float const&) [124] glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) const
+ [243] _GLOBAL__sub_I__Z6doTaskPv [149] float glm::tan<float>(float const&) [214] __gnu_cxx::new_allocator<char>::max_size() const
+ [244] _GLOBAL__sub_I__ZN11EyeTracking9detectEyeERN2cv3MatES2_RNS0_5Rect_IiEE [137] glm::sqrt(float) [189] std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::size() const
+ [245] _GLOBAL__sub_I_speed  [129] glm::detail::tvec3<float, (glm::precision)0> glm::cross<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [198] std::allocator<cv::Rect_<int> >::allocator()
+ [246] LoadShaders(char const*, char const*) [134] glm::detail::compute_dot<glm::detail::tvec3, float, (glm::precision)0>::call(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [199] std::allocator<cv::Rect_<int> >::~allocator()
+ [247] __static_initialization_and_destruction_0(int, int) [138] glm::detail::compute_sqrt<glm::detail::tvec1, float, (glm::precision)0>::call(glm::detail::tvec1<float, (glm::precision)0> const&) [215] std::_Iter_base<char*, false>::_S_base(char*)
+ [248] __static_initialization_and_destruction_0(int, int) [126] glm::detail::tvec1<float, (glm::precision)0>::tvec1(float const&) [187] std::char_traits<char>::length(char const*)
+ [249] __static_initialization_and_destruction_0(int, int) [122] glm::detail::tvec3<float, (glm::precision)0>::tvec3(float const&, float const&, float const&) [200] void std::_Destroy_aux<true>::__destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*)
+ [250] __static_initialization_and_destruction_0(int, int) [240] glm::detail::tvec3<float, (glm::precision)0>::tvec3() [216] void std::_Destroy_aux<true>::__destroy<char*>(char*, char*)
+ [176] cvScalar(double, double, double, double) [150] glm::detail::tvec3<float, (glm::precision)0>::tvec3<float, int, float>(float const&, int const&, float const&) [201] std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::_Vector_impl()
+ [251] key_callback(GLFWwindow*, int, int, int, int) [147] glm::detail::tvec3<float, (glm::precision)0>::tvec3<int, int, int>(int const&, int const&, int const&) [202] std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_impl::~_Vector_impl()
+ [252] EyeTracking::run()    [139] glm::detail::tvec3<float, (glm::precision)0>::operator=(glm::detail::tvec3<float, (glm::precision)0> const&) [203] std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_deallocate(cv::Rect_<int>*, unsigned long)
+ [173] EyeTracking::trackEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [140] glm::detail::tvec3<float, (glm::precision)0>& glm::detail::tvec3<float, (glm::precision)0>::operator+=<float>(glm::detail::tvec3<float, (glm::precision)0> const&) [204] std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_M_get_Tp_allocator()
+ [236] EyeTracking::detectEye(cv::Mat&, cv::Mat&, cv::Rect_<int>&) [123] glm::detail::tvec4<float, (glm::precision)0>::tvec4(glm::detail::tvec4<float, (glm::precision)0> const&) [205] std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::_Vector_base()
+ [253] EyeTracking::EyeTracking() [112] glm::detail::tvec4<float, (glm::precision)0>::tvec4(float const&, float const&, float const&, float const&) [206] std::_Vector_base<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~_Vector_base()
+ [254] EyeTracking::~EyeTracking() [120] glm::detail::tvec4<float, (glm::precision)0>::tvec4() [217] std::_Vector_base<char, std::allocator<char> >::_M_allocate(unsigned long)
+ [182] cv::Point3_<float>& cv::Mat::at<cv::Point3_<float> >(int, int) [119] glm::detail::tvec4<float, (glm::precision)0>::operator=(glm::detail::tvec4<float, (glm::precision)0> const&) [218] std::_Vector_base<char, std::allocator<char> >::_Vector_impl::_Vector_impl(std::allocator<char> const&)
+ [160] cv::Mat::MSize::MSize(int*) [121] glm::detail::tvec4<float, (glm::precision)0>::operator[](int) [219] std::_Vector_base<char, std::allocator<char> >::_Vector_impl::~_Vector_impl()
+ [161] cv::Mat::MStep::MStep() [144] glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(glm::detail::tmat4x4<float, (glm::precision)0>::ctor) [220] std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long)
+ [193] cv::Mat::MStep::operator[](int) [135] glm::detail::tmat4x4<float, (glm::precision)0>::tmat4x4(float const&) [221] std::_Vector_base<char, std::allocator<char> >::_M_create_storage(unsigned long)
+ [171] cv::Mat::create(int, int, int) [117] glm::detail::tmat4x4<float, (glm::precision)0>::operator[](int) [191] std::_Vector_base<char, std::allocator<char> >::_M_get_Tp_allocator()
+ [157] cv::Mat::release()    [155] glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator-<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [222] std::_Vector_base<char, std::allocator<char> >::_Vector_base(unsigned long, std::allocator<char> const&)
+ [162] cv::Mat::initEmpty()  [125] glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, float const&) [223] std::_Vector_base<char, std::allocator<char> >::~_Vector_base()
+ [255] cv::Mat::Mat(cv::Size_<int>, int) [130] glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [224] void std::__uninitialized_default_n_1<true>::__uninit_default_n<char*, unsigned long>(char*, unsigned long)
+ [183] cv::Mat::Mat(int, int, int) [115] glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, float const&) [207] std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::vector()
+ [166] cv::Mat::Mat()        [145] glm::detail::tmat4x4<float, (glm::precision)0> glm::detail::operator*<float, (glm::precision)0>(glm::detail::tmat4x4<float, (glm::precision)0> const&, glm::detail::tmat4x4<float, (glm::precision)0> const&) [208] std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::~vector()
+ [158] cv::Mat::~Mat()       [151] glm::detail::tvec3<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [190] std::vector<cv::Rect_<int>, std::allocator<cv::Rect_<int> > >::operator[](unsigned long)
+ [237] cv::Mat::operator=(cv::Mat const&) [118] glm::detail::tvec4<float, (glm::precision)0> glm::detail::operator+<float, (glm::precision)0>(glm::detail::tvec4<float, (glm::precision)0> const&, glm::detail::tvec4<float, (glm::precision)0> const&) [225] std::vector<char, std::allocator<char> >::_M_default_initialize(unsigned long)
+ [177] cv::Vec<double, 4>::Vec() [152] glm::detail::tmat4x4<float, (glm::precision)0> glm::lookAt<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [226] std::vector<char, std::allocator<char> >::vector(unsigned long, std::allocator<char> const&)
+ [178] cv::Matx<double, 4, 1>::Matx() [146] glm::detail::tvec3<float, (glm::precision)0> glm::normalize<float, (glm::precision)0>(glm::detail::tvec3<float, (glm::precision)0> const&) [227] std::vector<char, std::allocator<char> >::~vector()
+ [179] cv::Rect_<int>::Rect_(cv::Rect_<int> const&) [153] Cube::setEyePosition(int, int) [192] std::vector<char, std::allocator<char> >::operator[](unsigned long)
+ [256] cv::Rect_<int>::Rect_() [257] Cube::run()         [228] __gnu_cxx::__enable_if<std::__is_byte<char>::__value, char*>::__type std::__fill_n_a<unsigned long, char>(char*, unsigned long, char const&)
+ [159] cv::Rect_<int>::Rect_(int, int, int, int) [258] Cube::Cube() [229] std::_Niter_base<char*>::iterator_type std::__niter_base<char*>(char*)
+ [238] cv::Rect_<int>::operator=(cv::Rect_<int> const&) [211] Global::getInstance() [230] void std::__uninitialized_default_n<char*, unsigned long>(char*, unsigned long)
+ [167] cv::Size_<int>::Size_(int, int) [141] Global::getPosition() [231] void std::__uninitialized_default_n_a<char*, unsigned long, char>(char*, unsigned long, std::allocator<char>&)
+ [194] cv::Size_<int>::Size_() [174] Global::setPosition(int, int) [128] std::cos(float)
+ [136] cv::Point_<int>::Point_(cv::Point_<int> const&) [175] Global::getDepthData(int, int) [163] int const& std::max<int>(int const&, int const&)
+ [169] cv::Point_<int>::Point_(int, int) [259] Global::Global() [164] int const& std::min<int>(int const&, int const&)
+ [165] cv::Point_<int>::Point_() [241] __gnu_cxx::new_allocator<cv::Rect_<int> >::deallocate(cv::Rect_<int>*, unsigned long) [131] std::sin(float)
+ [180] cv::Scalar_<double>::Scalar_(CvScalar const&) [195] __gnu_cxx::new_allocator<cv::Rect_<int> >::new_allocator() [154] std::tan(float)
+ [156] double cv::saturate_cast<double>(double) [196] __gnu_cxx::new_allocator<cv::Rect_<int> >::~new_allocator() [142] std::sqrt(float)
+ [184] cv::Rect_<int>& cv::operator&=<int>(cv::Rect_<int>&, cv::Rect_<int> const&) [212] __gnu_cxx::new_allocator<char>::deallocate(char*, unsigned long) [232] char* std::fill_n<char*, unsigned long, char>(char*, unsigned long, char const&)
+ [181] std::ostream& cv::operator<< <float>(std::ostream&, cv::Point3_<float> const&) [213] __gnu_cxx::new_allocator<char>::allocate(unsigned long, void const*) [209] void std::_Destroy<cv::Rect_<int>*>(cv::Rect_<int>*, cv::Rect_<int>*)
+ [185] cv::Rect_<int> cv::operator-<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [197] cv::Mat::MStep::operator[](int) const [210] void std::_Destroy<cv::Rect_<int>*, cv::Rect_<int> >(cv::Rect_<int>*, cv::Rect_<int>*, std::allocator<cv::Rect_<int> >&)
+ [186] cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Size_<int> const&) [170] cv::Mat::empty() const [233] void std::_Destroy<char*>(char*, char*)
+ [239] cv::Rect_<int> cv::operator+<int>(cv::Rect_<int> const&, cv::Point_<int> const&) [172] cv::Mat::total() const [234] void std::_Destroy<char*, char>(char*, char*, std::allocator<char>&)
+ [143] glm::inversesqrt(float const&) [168] cv::Mat::operator()(cv::Rect_<int> const&) const [235] __gnu_cxx::__enable_if<std::__is_byte<char>::__value, void>::__type std::__fill_a<char>(char*, char*, char const&)
+ [148] glm::detail::tmat4x4<float, (glm::precision)0> glm::perspective<float>(float const&, float const&, float const&, float const&) [113] glm::detail::tvec4<float, (glm::precision)0>::length() const [188] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+ [127] float glm::cos<float>(float const&) [116] glm::detail::tvec4<float, (glm::precision)0>::operator[](int) const [1] glfwGetTime
+ [132] float glm::dot<float, (glm::precision)0, glm::detail::tvec3>(glm::detail::tvec3<float, (glm::precision)0> const&, glm::detail::tvec3<float, (glm::precision)0> const&) [114] glm::detail::tmat4x4<float, (glm::precision)0>::length() const [2] glfwGetVideoMode

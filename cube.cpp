@@ -39,6 +39,7 @@ int Cube::setEyePosition(int deltaXpos, int deltaYpos) {
     position += right * deltaTime * eyeMoveSpeed * float(deltaXpos);
     glm::vec3 yAxis(0, 1, 0);
     position += yAxis * deltaTime * eyeMoveSpeed * float(deltaYpos);
+    return 0;
 }
 
 int Cube::run() {
@@ -291,6 +292,10 @@ int Cube::run() {
     } // Check if the ESC key was pressed or the window was closed
     while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
            glfwWindowShouldClose(window) == 0 );
+
+
+    std::cout << "glfw ends" << std::endl;
+
 
     // Cleanup VBO and shader
     glDeleteBuffers(1, &vertexbuffer);

@@ -1,5 +1,5 @@
 CV_FLAGS = `pkg-config --cflags opencv` 
-C_FLAG = -std=c++11
+C_FLAG = -std=c++11 -Wall -pg
 CV_LIBS = `pkg-config --libs opencv` -lpthread
 GL_LIBS = -lGL -lGLU -lglfw3 -lX11 -lXxf86vm -lXrandr -lpthread -lXi -lGLEW
 
@@ -27,7 +27,7 @@ cube.o : cube.cpp shader.cpp shader.hpp
 
 main : cube.o eyeTracking.o shader.o stereoView.o Global.h
 	g++ $(C_FLAG) -c main.cpp
-	g++ cube.o eyeTracking.o shader.o stereoView.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
+	g++ $(C_FLAG) cube.o eyeTracking.o shader.o stereoView.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
 
 clean :
 	rm *.o *.out

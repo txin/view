@@ -28,7 +28,7 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     std::vector<cv::Rect> faces, eyes;
     face_cascade.detectMultiScale(im, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30,30));
 
-    for (int i = 0; i < faces.size(); i++) {
+    for (unsigned int i = 0; i < faces.size(); i++) {
         cv::Mat face = im(faces[i]);
         eye_cascade.detectMultiScale(face, eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20,20));
 
@@ -77,7 +77,7 @@ int EyeTracking::run() {
     // Make sure you point the XML files to the right path, or
     // just copy the files from [OPENCV_DIR]/data/haarcascades directory
     face_cascade.load("haarcascade_frontalface_alt2.xml");
-    eye_cascade.load("haarcascade_eye.xml");
+    eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
 
 
     Global global = Global::getInstance();
@@ -100,8 +100,9 @@ int EyeTracking::run() {
     cv::Mat frame, eye_tpl;
     cv::Rect eye_bb;
 
-    // TODO: change the template to eyes with glasses
-    while (cv::waitKey(15) != 'q') {
+    char k;
+    
+    while ((k = cv::waitKey(15)) && (k != 'q') && (k != 27)) {
         cap >> frame;
         if (frame.empty())
             break;
@@ -133,6 +134,7 @@ int EyeTracking::run() {
         // Display video
         cv::imshow(windowName, frame);
     }
+    std::cout << "eyeTracking ends" << std::endl;
     return 0;
 }
 
