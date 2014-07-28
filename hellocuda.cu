@@ -19,14 +19,12 @@ int main(void) {
     b = 7;
     
     cudaMemcpy(d_a, &a, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_a, &b, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, &b, size, cudaMemcpyHostToDevice);
 
     add<<<1, 1>>>(d_a, d_b, d_c);
 
     cudaMemcpy(&c, d_c, size, cudaMemcpyDeviceToHost);
     
-    printf("c=%d\n", c);
-
     cudaFree(d_a);
     cudaFree(d_b);
     cudaFree(d_c);
