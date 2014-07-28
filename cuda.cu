@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main(void)
-{
+int main(void) {
   int num_elements = 16;
   int num_bytes = num_elements * sizeof(int);
 
