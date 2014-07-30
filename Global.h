@@ -16,12 +16,18 @@ private:
     // raw image from the camera, default use the cam0
     cv::Mat *rawImg;
 
+    // running status
+    bool* running;
+
     pthread_mutex_t start;
     // eye position from EyeTracking class
     // share with Cube class to compute the dynamic view matrix
     Global() {
         pthread_mutex_init(&start, NULL);
         position = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+        
+        running = new bool;
+        *running = true;
         
         // TODO: need to initialise? or just assign to the new position
         depthImg = new cv::Mat(cv::Size(CAMERA_WIDTH, CAMERA_HEIGHT), CV_32FC3);
@@ -67,5 +73,15 @@ public:
         if (depthImg != NULL) {
             //std::cout << depthImg->at<cv::Point3f>(row, col) << std::endl;
         }
+    }
+
+    inline bool getRunningStatus() {
+        return *running;
+    }
+
+    inline void setRunningStatus(bool val) {
+        pthread_mutex_lock(&start);
+        *running = val;
+        pthread_mutex_unlock(&start);
     }
 };

@@ -200,6 +200,7 @@ int Cube::run() {
     int ypos = CAMERA_HEIGHT / 2;
     int tempX, tempY;
     // display main loop
+    bool runningStatus = global.getRunningStatus();
     do {
         tempX = global.getPosition().x;
         tempY = global.getPosition().y;
@@ -288,14 +289,17 @@ int Cube::run() {
         // Swap buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
-
+        runningStatus = global.getRunningStatus();
+       
     } // Check if the ESC key was pressed or the window was closed
     while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-           glfwWindowShouldClose(window) == 0 );
+           glfwWindowShouldClose(window) == 0 
+        && runningStatus != false);
 
 
     std::cout << "glfw ends" << std::endl;
 
+    global.setRunningStatus(false);
 
     // Cleanup VBO and shader
     glDeleteBuffers(1, &vertexbuffer);

@@ -101,8 +101,9 @@ int EyeTracking::run() {
     cv::Rect eye_bb;
 
     char k;
-    
-    while ((k = cv::waitKey(15)) && (k != 'q') && (k != 27)) {
+    bool runningStatus = global.getRunningStatus();
+    while ((k = cv::waitKey(15)) && (k != 'q') && (k != 27) 
+           && runningStatus != false) {
         cap >> frame;
         if (frame.empty())
             break;
@@ -133,8 +134,10 @@ int EyeTracking::run() {
 
         // Display video
         cv::imshow(windowName, frame);
+        runningStatus = global.getRunningStatus();
     }
     std::cout << "eyeTracking ends" << std::endl;
+    global.setRunningStatus(false);
     return 0;
 }
 
