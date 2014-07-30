@@ -65,7 +65,7 @@ public:
     
     inline void getDepthData(int row, int col) {
         if (depthImg != NULL) {
-            std::cout << depthImg->at<cv::Point3f>(row, col) << std::endl;
+            //std::cout << depthImg->at<cv::Point3f>(row, col) << std::endl;
         }
     }
 };

@@ -24,6 +24,7 @@ int StereoView::loadConfiguration() {
         fs["Distortion_Coefficients"] >> distCoeffMat[i];
         fs.release();
     }
+    return 0;
 }
 
 // open cameras, currently 2 cameras
@@ -123,8 +124,8 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
         return -1;
     }
 
-    int ndisparities = 16 * 5;
-    int SADWindowSize = 21;
+//    int ndisparities = 16 * 5;
+//    int SADWindowSize = 21;
     
     // cv::StereoBM sbm(cv::StereoBM::BASIC_PRESET, ndisparities, SADWindowSize);    
     // sbm(imgLeft, imgRight, imgDisparity16S, CV_16S);
@@ -143,8 +144,8 @@ int StereoView::showDepthData(cv::Mat& imgLeft, cv::Mat& imgRight) {
     //sbm.state->disp12MaxDiff = 0; // 1
     
     
-    double minVal;
-    double maxVal;
+//    double minVal;
+//    double maxVal;
     
 //cv::minMaxLoc(imgDisparity16S, &minVal, &maxVal);
     //  imgDisparity16S.convertTo(imgDisparity8U, CV_8UC1, 255 / (maxVal - minVal));
@@ -175,7 +176,7 @@ void StereoView::run() {
 
 
     cv::Mat frames[CAMERA_NUM];
-    cv::Mat grayFrames[CAMERA_NUM];
+//    cv::Mat grayFrames[CAMERA_NUM];
     sbm_here = sbm;
     for (int i = 0; i < CAMERA_NUM; i++) {
         std::string windowName("Camera ");
