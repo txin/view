@@ -16,18 +16,18 @@ tuner.o: tuner.cpp
 sbmTuner : stereoView.o tuner.o
 	g++ $(CV_FLAGS) $(C_FLAG) stereoView.o tuner.o -o sbmTuner.out $(CV_LIBS) 
 
-eyeTracking.o : eyeTracking.cpp Global.h 
+global.o : global.cpp
+	g++ $(CV-FLAGS) $(C_FLAG) -c global.cpp	
+
+eyeTracking.o : eyeTracking.cpp global.o
 	g++ $(C_FLAG) -c eyeTracking.cpp	
 
 cube.o : cube.cpp shader.cpp shader.hpp
 	g++ $(C_FLAG) -c cube.cpp shader.cpp shader.hpp
 
-#global.o : global.cpp
-#	g++ $(CV-FLAGS) $(C_FLAG) -c global.cpp
-
-main : cube.o eyeTracking.o shader.o stereoView.o Global.h
+main : cube.o eyeTracking.o shader.o stereoView.o global.o
 	g++ $(C_FLAG) -c main.cpp
-	g++ $(C_FLAG) cube.o eyeTracking.o shader.o stereoView.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
+	g++ $(C_FLAG) cube.o eyeTracking.o shader.o stereoView.o global.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
 
 clean :
 	rm *.o *.out
