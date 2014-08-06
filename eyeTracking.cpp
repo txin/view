@@ -23,18 +23,48 @@
 #include "Cube.h"
 #include "Global.h"
 
+
+// Size constants
+const int kEyePercentTop = 25;
+const int kEyePercentSide = 13;
+const int kEyePercentHeight = 30;
+const int kEyePercentWidth = 35;
+
+
 int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces, eyes;
-    face_cascade.detectMultiScale(im, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30,30));
+    face_cascade.detectMultiScale(im, faces, 1.1, 2, 
+                                  0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
+                                  cv::Size(30, 30));
 
     for (unsigned int i = 0; i < faces.size(); i++) {
         cv::Mat face = im(faces[i]);
-        eye_cascade.detectMultiScale(face, eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20,20));
+       
+        
+// TODO: find the left eye
+        
+        //-- Find eye regions and draw them
+        int eye_region_width = faces[i].width * (kEyePercentWidth/100.0);
+        int eye_region_height = faces[i].width * (kEyePercentHeight/100.0);
+        int eye_region_top = faces[i].height * (kEyePercentTop/100.0);
+
+        cv::Rect leftEyeRegion(faces[i].width*(kEyePercentSide/100.0),
+        eye_region_top,eye_region_width,eye_region_height);
+        
+        //  cv::imshow("eye region", face(leftEyeRegion));
+        // cv::waitKey(5);
+
+
+        eye_cascade.detectMultiScale(face(leftEyeRegion), eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
 
         if (eyes.size()) {
-            rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
-            tpl  = im(rect);
+            rect = leftEyeRegion + cv::Point(faces[i].x, faces[i].y);
+            //rect = faces[i] + cv::Point(faces[i].x, faces[i].y);
+//rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
+            //tpl  = im(rect);
+            tpl = face(leftEyeRegion);
+            //tpl = face;
         }
     }
 
@@ -78,7 +108,8 @@ int EyeTracking::run() {
     // just copy the files from [OPENCV_DIR]/data/haarcascades directory
     face_cascade.load("haarcascade_frontalface_alt2.xml");
     eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
-
+    // eye_cascade.load("haarcascade_mcs_nose.xml");
+    // eye_cascade.load("haarcascade_mcs_mouth.xml");
 
     Global global = Global::getInstance();
 
@@ -123,7 +154,8 @@ int EyeTracking::run() {
         } else {
             // Tracking stage with template matching
             trackEye(gray, eye_tpl, eye_bb);
-            // set eye position to change the view of the cube
+            //detectEye(gray, eye_tpl, eye_bb);
+// set eye position to change the view of the cube
             global.setPosition(eye_bb.x, eye_bb.y);
             // get the corresponding depth data from global
             global.getDepthData(eye_bb.x, eye_bb.y);
@@ -132,7 +164,7 @@ int EyeTracking::run() {
             cv::rectangle(frame, eye_bb, CV_RGB(0,255,0));
         }
 
-        // Display video
+        // display window
         cv::imshow(windowName, frame);
         runningStatus = global.getRunningStatus();
     }
@@ -143,9 +175,9 @@ int EyeTracking::run() {
 
 // for unit testing
 /*
-int main() {
-    EyeTracking eyeTracking;
-    eyeTracking.run();
-    return 0;
-}
+  int main() {
+  EyeTracking eyeTracking;
+  eyeTracking.run();
+  return 0;
+  }
 */
