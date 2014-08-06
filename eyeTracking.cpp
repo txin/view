@@ -55,7 +55,7 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         //  cv::imshow("eye region", face(leftEyeRegion));
         // cv::waitKey(5);
 
-
+        //eye_cascade.detectMultiScale(face, eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
         eye_cascade.detectMultiScale(face(leftEyeRegion), eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
 
         if (eyes.size()) {
@@ -154,7 +154,7 @@ int EyeTracking::run() {
         } else {
             // Tracking stage with template matching
             trackEye(gray, eye_tpl, eye_bb);
-            //detectEye(gray, eye_tpl, eye_bb);
+            // detectEye(gray, eye_tpl, eye_bb);
 // set eye position to change the view of the cube
             global.setPosition(eye_bb.x, eye_bb.y);
             // get the corresponding depth data from global
