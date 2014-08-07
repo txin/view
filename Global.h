@@ -9,6 +9,9 @@ class Global {
 private:
     // eye position from EyeTracking class
     cv::Point *position;
+    // eye position depth
+    int *depth;
+
     // depth image generated from StereoView class
     cv::Mat *depthImg;
     
@@ -35,4 +38,8 @@ public:
     void getDepthData(int row, int col);
     bool getRunningStatus();
     void setRunningStatus(bool val);
+    void setEyeDepth(float val);
+    inline int getEyeDepth() {
+        return *depth;
+    }
 };

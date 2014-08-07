@@ -34,6 +34,7 @@ private:
 public:
     Cube() {};
     int run();
-    // set view matrix from the x, y positions of eyeTracking class
-    int setEyePosition(int xpos, int ypos);
+    // update view matrix with the values from the x, y positions
+    // and depth information from the eyeTracking class
+    int setEyePosition(int xpos, int ypos, int zpos);
 };

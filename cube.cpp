@@ -9,7 +9,7 @@ float speed = 0.1f;
 glm::vec3 right;
 float deltaTime;
 // movement of x y coordinates of the eye, int pixels
-int deltaXpos, deltaYpos;
+int deltaXpos, deltaYpos, deltaZpos;
 glm::vec3 direction;
 glm::vec3 position(0, 0, 5);
 
@@ -34,11 +34,15 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
     }
 }
 
-int Cube::setEyePosition(int deltaXpos, int deltaYpos) {
+int Cube::setEyePosition(int deltaXpos, int deltaYpos, int deltaZpos) {
 
     position += right * deltaTime * eyeMoveSpeed * float(deltaXpos);
     glm::vec3 yAxis(0, 1, 0);
     position += yAxis * deltaTime * eyeMoveSpeed * float(deltaYpos);
+    
+    // depth scaling factor
+    float depthChangeSpeed = 0.01;
+    position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
     return 0;
 }
 
@@ -198,21 +202,24 @@ int Cube::run() {
     // position of eye
     int xpos = CAMERA_WIDTH / 2;
     int ypos = CAMERA_HEIGHT / 2;
-    int tempX, tempY;
+    int zpos = DEFAULT_DEPTH;
+    int tempX, tempY, tempZ;
     // display main loop
     bool runningStatus = global.getRunningStatus();
     do {
         tempX = global.getPosition().x;
         tempY = global.getPosition().y;
-        
-        // TODO: don't need??
+        tempZ = global.getEyeDepth();
+
         deltaXpos = tempX - xpos;
         deltaYpos = tempY - ypos;
-                
+        deltaZpos = tempZ - zpos;
+
         xpos = tempX;
         ypos = tempY;
-        
-        setEyePosition(deltaXpos, deltaYpos);
+        zpos = tempZ;
+
+        setEyePosition(deltaXpos, deltaYpos, deltaZpos);
 
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);

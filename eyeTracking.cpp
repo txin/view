@@ -34,13 +34,16 @@ const int kEyePercentWidth = 35;
 int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces, eyes;
+
+
     face_cascade.detectMultiScale(im, faces, 1.1, 2, 
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
 
+    // TODO: find the first face
     for (unsigned int i = 0; i < faces.size(); i++) {
         cv::Mat face = im(faces[i]);
-       
+        std::cout << "face height" << faces[i].height << std::endl;
         
 // TODO: find the left eye
         
@@ -78,7 +81,17 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
  * @param   tpl   The eye template
  * @param   rect  The eye bounding box, will be updated with the new location of the eye
  */
+// define default face height 200
 void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
+
+    std::vector<cv::Rect> faces;
+    face_cascade.detectMultiScale(im, faces, 1.1, 2, 
+                                  0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
+                                  cv::Size(30, 30));
+    if (faces.size() > 0) {
+        Global global = Global::getInstance();
+        global.setEyeDepth(faces[0].height);
+    }
 
     cv::Size size(rect.width * 2, rect.height * 2);
     cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
@@ -86,8 +99,9 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     window &= cv::Rect(0, 0, im.cols, im.rows);
 
     cv::Mat dst(window.width - tpl.rows + 1, window.height - tpl.cols + 1, CV_32FC1);
+    
+    // match the eye template
     cv::matchTemplate(im(window), tpl, dst, CV_TM_SQDIFF_NORMED);
-
     double minval, maxval;
     cv::Point minloc, maxloc;
     cv::minMaxLoc(dst, &minval, &maxval, &minloc, &maxloc);

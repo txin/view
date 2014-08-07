@@ -9,6 +9,7 @@
 #define CAMERA_NUM 2
 #define CAMERA_WIDTH 640
 #define CAMERA_HEIGHT 480
+#define DEFAULT_DEPTH 200
 
 class StereoView {
 private:

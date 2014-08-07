@@ -1,12 +1,16 @@
 #include "Global.h"
 
+
 Global::Global() {
     pthread_mutex_init(&start, NULL);
     position = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
         
     running = new bool;
     *running = true;
-        
+   
+    depth = new int;
+    *depth = DEFAULT_DEPTH;
+    
     // TODO: need to initialise? or just assign to the new position
     depthImg = new cv::Mat(cv::Size(CAMERA_WIDTH, CAMERA_HEIGHT), CV_32FC3);
     // TODO: camera mat type?
@@ -17,6 +21,12 @@ Global::Global() {
 void Global::setPosition(cv::Point posIn) {
     pthread_mutex_lock(&start);
     *position = posIn;
+    pthread_mutex_unlock(&start);
+}
+
+void Global::setEyeDepth(float val) {
+    pthread_mutex_lock(&start);
+    *depth = val;
     pthread_mutex_unlock(&start);
 }
     
