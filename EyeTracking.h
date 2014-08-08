@@ -16,7 +16,7 @@ private:
     void trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
-    
+    int trackObject = -1;
 public:
     EyeTracking(){};
     int run();

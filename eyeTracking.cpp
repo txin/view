@@ -122,9 +122,15 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
 // use camshift algorithm for tracking
 void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
+    if (im.empty() || rect.area() == 0) return ;
+    
     // TODO: initialise with zeros
     cv::Mat frame, hsv, hue, mask, hist, backproj;
-    cv::Mat histimg = cv::Mat::zeros(200, 320, CV_8UC3);
+    cv::Rect trackWindow;
+    int hsize = 16;
+    float hranges[] = {0, 180};
+    const float *phranges = hranges;
+    cv::Mat histimg = cv::Mat::zeros(640, 480, CV_8UC3);
     int vmin = 10, vmax = 256, smin = 30;
 
     cv::namedWindow( "CamShift", 0 );
@@ -137,8 +143,32 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     hue.create(hsv.size(), hsv.depth());
     cv::mixChannels(&hsv, 1, &hue, 1, ch, 1);
    
-//    cv::calcBackProject(hsv, 0, roi_hist, );
+    if (trackObject < 0) {
+        cv::Mat roi(hue, rect), maskroi(mask, rect);
+        cv::calcHist(&roi, 1, 0, maskroi, hist, 1, &hsize, &phranges);
+        // change NORM_MINMAX to 32
+        cv::normalize(hist, hist, 0, 255, 32);
+        trackObject = 1;
+    }
+   
+    // trackobject
 
+    cv::calcBackProject(&hue, 1, 0, hist, backproj, &phranges);
+    backproj &= mask;
+    cv::RotatedRect trackBox = cv::CamShift(backproj, trackWindow, 
+                                            cv::TermCriteria(cv::TermCriteria::EPS
+                                           | cv::TermCriteria::COUNT, 10, 1));
+    
+    if( trackWindow.area() <= 1 )  {
+        int cols = backproj.cols, rows = backproj.rows, r = (MIN(cols, rows) + 5)/6;
+        trackWindow = cv::Rect(trackWindow.x - r, trackWindow.y - r,
+                           trackWindow.x + r, trackWindow.y + r) &
+            cv::Rect(0, 0, cols, rows);
+    }
+
+    //if( backprojMode )
+    //    cvtColor( backproj, image, COLOR_GRAY2BGR );
+    cv::ellipse( im, trackBox, cv::Scalar(0,0,255));
 }
 
 // Track eye feature with SurfFeatureDetector
