@@ -63,13 +63,13 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
         if (eyes.size()) {
             // TODO: test with tracking face
-            rect = faces[i];
-//rect = leftEyeRegion + cv::Point(faces[i].x, faces[i].y);
+            //rect = faces[i];
+            rect = leftEyeRegion + cv::Point(faces[i].x, faces[i].y);
             //rect = faces[i] + cv::Point(faces[i].x, faces[i].y);
 //rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
             //tpl  = im(rect);
-            //tpl = face(leftEyeRegion);
-            tpl = face;
+            tpl = face(leftEyeRegion);
+            //tpl = face;
 //tpl = face;
         }
     }
@@ -88,13 +88,13 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces;
-    face_cascade.detectMultiScale(im, faces, 1.1, 2, 
+    /*face_cascade.detectMultiScale(im, faces, 1.1, 2, 
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
     if (faces.size() > 0) {
         Global global = Global::getInstance();
         global.setEyeDepth(faces[0].height);
-    }
+        } */
 
     cv::Size size(rect.width * 2, rect.height * 2);
     cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
@@ -123,19 +123,21 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 // use camshift algorithm for tracking
 void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     // TODO: initialise with zeros
-    cv::Mat frame, hsv, hue, mask, hist, histimg;
+    cv::Mat frame, hsv, hue, mask, hist, backproj;
+    cv::Mat histimg = cv::Mat::zeros(200, 320, CV_8UC3);
+    int vmin = 10, vmax = 256, smin = 30;
 
-    //cv::namedWindow( "Histogram", 0 );
     cv::namedWindow( "CamShift", 0 );
-    //cv::setMouseCallback( "CamShift Demo", onMouse, 0 );
-    // cv::createTrackbar( "Vmin", "CamShift Demo", &vmin, 256, 0 );
-    //cv::createTrackbar( "Vmax", "CamShift Demo", &vmax, 256, 0 );
-    //cv::createTrackbar( "Smin", "CamShift Demo", &smin, 256, 0 );
-
     
-    cv::cvtColor(im, hsv, COLOR_BGR2HSV);
+    cv::cvtColor(im, hsv, CV_BGR2HSV);
+    cv::inRange(hsv, cv::Scalar(0, smin, vmin),
+                cv::Scalar(180, 256, vmax), mask);
 
-
+    int ch[] = {0, 0};
+    hue.create(hsv.size(), hsv.depth());
+    cv::mixChannels(&hsv, 1, &hue, 1, ch, 1);
+   
+//    cv::calcBackProject(hsv, 0, roi_hist, );
 
 }
 
@@ -244,10 +246,10 @@ int EyeTracking::run() {
             detectEye(gray, eye_tpl, eye_bb);
         } else {
             // Tracking stage with template matching
-            //trackEye(gray, eye_tpl, eye_bb);
-
+            trackEye(gray, eye_tpl, eye_bb);
+            trackCamShift(frame, eye_tpl, eye_bb);
             // TODO: trackEyeFeature
-            trackEyeFeature(gray, eye_tpl, eye_bb);
+            //        trackEyeFeature(gray, eye_tpl, eye_bb);
 
             // detectEye(gray, eye_tpl, eye_bb);
 // set eye position to change the view of the cube
