@@ -62,12 +62,15 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         eye_cascade.detectMultiScale(face(leftEyeRegion), eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
 
         if (eyes.size()) {
-            rect = leftEyeRegion + cv::Point(faces[i].x, faces[i].y);
+            // TODO: test with tracking face
+            rect = faces[i];
+//rect = leftEyeRegion + cv::Point(faces[i].x, faces[i].y);
             //rect = faces[i] + cv::Point(faces[i].x, faces[i].y);
 //rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
             //tpl  = im(rect);
-            tpl = face(leftEyeRegion);
-            //tpl = face;
+            //tpl = face(leftEyeRegion);
+            tpl = face;
+//tpl = face;
         }
     }
 
@@ -115,6 +118,25 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     }
     else
         rect.x = rect.y = rect.width = rect.height = 0;
+}
+
+// use camshift algorithm for tracking
+void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
+    // TODO: initialise with zeros
+    cv::Mat frame, hsv, hue, mask, hist, histimg;
+
+    //cv::namedWindow( "Histogram", 0 );
+    cv::namedWindow( "CamShift", 0 );
+    //cv::setMouseCallback( "CamShift Demo", onMouse, 0 );
+    // cv::createTrackbar( "Vmin", "CamShift Demo", &vmin, 256, 0 );
+    //cv::createTrackbar( "Vmax", "CamShift Demo", &vmax, 256, 0 );
+    //cv::createTrackbar( "Smin", "CamShift Demo", &smin, 256, 0 );
+
+    
+    cv::cvtColor(im, hsv, COLOR_BGR2HSV);
+
+
+
 }
 
 // Track eye feature with SurfFeatureDetector
