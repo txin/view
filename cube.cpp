@@ -40,9 +40,11 @@ int Cube::setEyePosition(int deltaXpos, int deltaYpos, int deltaZpos) {
     glm::vec3 yAxis(0, 1, 0);
     position += yAxis * deltaTime * eyeMoveSpeed * float(deltaYpos);
     
+
+    // set eyeDepth
     // depth scaling factor
-    float depthChangeSpeed = 0.01;
-    position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
+    float depthChangeSpeed = 0.005;
+    //position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
     return 0;
 }
 

@@ -100,6 +100,9 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     cv::Mat dst(window.width - tpl.rows + 1, window.height - tpl.cols + 1, CV_32FC1);
     
+    //cv::imshow("template", tpl);
+    //cv::waitKey(5);
+
     // match the eye template
     cv::matchTemplate(im(window), tpl, dst, CV_TM_SQDIFF_NORMED);
     double minval, maxval;
