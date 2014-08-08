@@ -53,7 +53,7 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         int eye_region_top = faces[i].height * (kEyePercentTop/100.0);
 
         cv::Rect leftEyeRegion(faces[i].width*(kEyePercentSide/100.0),
-        eye_region_top,eye_region_width,eye_region_height);
+                               eye_region_top,eye_region_width,eye_region_height);
         
         //  cv::imshow("eye region", face(leftEyeRegion));
         // cv::waitKey(5);
@@ -117,6 +117,58 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         rect.x = rect.y = rect.width = rect.height = 0;
 }
 
+// Track eye feature with SurfFeatureDetector
+void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
+
+    std::vector<cv::Rect> faces;
+    cv::Size size(rect.width * 2, rect.height * 2);
+    cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
+
+    window &= cv::Rect(0, 0, im.cols, im.rows);
+
+    cv::Mat dst(window.width - tpl.rows + 1, window.height - tpl.cols + 1, CV_32FC1);
+    
+    //cv::imshow("template", tpl);
+    //cv::waitKey(5);
+
+    //-- Step 1: Detect the keypoints using SURF Detector
+    int minHessian = 400;
+
+    cv::SurfFeatureDetector detector( minHessian );
+
+    std::vector<cv::KeyPoint> keypoints_1, keypoints_2;
+
+    detector.detect(tpl , keypoints_1 );
+    detector.detect(im, keypoints_2 );
+
+    //-- Draw keypoints
+    cv::Mat img_keypoints_1; cv::Mat img_keypoints_2;
+
+    cv::drawKeypoints(tpl, keypoints_1, img_keypoints_1, 
+                      cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT );
+    cv::drawKeypoints(im, keypoints_2, img_keypoints_2,
+                      cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT );
+
+    //-- Show detected (drawn) keypoints
+    imshow("Keypoints 1", img_keypoints_1 );
+    imshow("Keypoints 2", img_keypoints_2 );
+
+    cv::waitKey(5);
+
+
+    // match the eye template
+    cv::matchTemplate(im(window), tpl, dst, CV_TM_SQDIFF_NORMED);
+    double minval, maxval;
+    cv::Point minloc, maxloc;
+    cv::minMaxLoc(dst, &minval, &maxval, &minloc, &maxloc);
+
+    if (minval <= 0.2) {
+        rect.x = window.x + minloc.x;
+        rect.y = window.y + minloc.y;
+    }
+    else
+        rect.x = rect.y = rect.width = rect.height = 0;
+}
 
 
 int EyeTracking::run() {
@@ -170,7 +222,11 @@ int EyeTracking::run() {
             detectEye(gray, eye_tpl, eye_bb);
         } else {
             // Tracking stage with template matching
-            trackEye(gray, eye_tpl, eye_bb);
+            //trackEye(gray, eye_tpl, eye_bb);
+
+            // TODO: trackEyeFeature
+            trackEyeFeature(gray, eye_tpl, eye_bb);
+
             // detectEye(gray, eye_tpl, eye_bb);
 // set eye position to change the view of the cube
             global.setPosition(eye_bb.x, eye_bb.y);
