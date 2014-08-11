@@ -121,10 +121,9 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 }
 
 // use camshift algorithm for tracking
-void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
-    if (im.empty() || rect.area() == 0) return ;
-    
-    // TODO: initialise with zeros
+// TODO: need to put outside of the loop
+
+
     cv::Mat frame, hsv, hue, mask, hist, backproj;
     cv::Rect trackWindow;
     int hsize = 16;
@@ -133,7 +132,9 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     cv::Mat histimg = cv::Mat::zeros(640, 480, CV_8UC3);
     int vmin = 10, vmax = 256, smin = 30;
 
-    cv::namedWindow( "CamShift", 0 );
+
+void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
+    if (im.empty() || rect.area() == 0) return ;
     
     cv::cvtColor(im, hsv, CV_BGR2HSV);
     cv::inRange(hsv, cv::Scalar(0, smin, vmin),
@@ -153,17 +154,13 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         trackWindow = rect;
         trackObject = 1;
     }
-
-    cv::calcBackProject(&hue, 1, 0, hist, backproj, &phranges);
-
-    std::cout << "calc back project" << std::endl;
+   
+    cv::calcBackProject(&hue, 1, 0, hist, backproj, &phranges);    
     backproj &= mask;
     cv::RotatedRect trackBox = cv::CamShift(backproj, trackWindow, 
                                             cv::TermCriteria(cv::TermCriteria::EPS
                                            | cv::TermCriteria::COUNT, 10, 1));
     
-
-
      
     // trackobject
 
@@ -174,8 +171,6 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
             cv::Rect(0, 0, cols, rows);
     }
 
-    //if( backprojMode )
-    //    cvtColor( backproj, image, COLOR_GRAY2BGR );
     cv::ellipse( im, trackBox, cv::Scalar(0,0,255));
 }
 
@@ -284,7 +279,7 @@ int EyeTracking::run() {
             detectEye(gray, eye_tpl, eye_bb);
         } else {
             // Tracking stage with template matching
-            trackEye(gray, eye_tpl, eye_bb);
+            // trackEye(gray, eye_tpl, eye_bb);
             trackCamShift(frame, eye_tpl, eye_bb);
             // TODO: trackEyeFeature
             //        trackEyeFeature(gray, eye_tpl, eye_bb);
