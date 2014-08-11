@@ -89,10 +89,10 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     face_cascade.detectMultiScale(im, faces, 1.1, 2, 
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
-    if (faces.size() > 0) {
-        Global global = Global::getInstance();
-        global.setEyeDepth(faces[0].height);
-    } 
+    //  if (faces.size() > 0) {
+    //    Global global = Global::getInstance();
+    //    global.setEyeDepth(faces[0].height);
+    //} 
 
 
     cv::Size size(rect.width * 2, rect.height * 2);
@@ -278,7 +278,7 @@ int EyeTracking::run() {
             detectEye(gray, eye_tpl, eye_bb);
         } else {
             // Tracking stage with template matching
-            // trackEye(gray, eye_tpl, eye_bb);
+            trackEye(gray, eye_tpl, eye_bb);
             trackCamShift(frame, eye_tpl, eye_bb);
             // TODO: trackEyeFeature
             //        trackEyeFeature(gray, eye_tpl, eye_bb);
