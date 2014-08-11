@@ -88,13 +88,14 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces;
-    /*face_cascade.detectMultiScale(im, faces, 1.1, 2, 
+    face_cascade.detectMultiScale(im, faces, 1.1, 2, 
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
     if (faces.size() > 0) {
         Global global = Global::getInstance();
         global.setEyeDepth(faces[0].height);
-        } */
+    } 
+
 
     cv::Size size(rect.width * 2, rect.height * 2);
     cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
@@ -121,17 +122,15 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 }
 
 // use camshift algorithm for tracking
-// TODO: need to put outside of the loop
 
-
+// will track the neck
     cv::Mat frame, hsv, hue, mask, hist, backproj;
     cv::Rect trackWindow;
     int hsize = 16;
     float hranges[] = {0, 180};
     const float *phranges = hranges;
     cv::Mat histimg = cv::Mat::zeros(640, 480, CV_8UC3);
-    int vmin = 10, vmax = 256, smin = 30;
-
+    int vmin = 32, vmax = 256, smin = 60;
 
 void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     if (im.empty() || rect.area() == 0) return ;
@@ -171,7 +170,12 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
             cv::Rect(0, 0, cols, rows);
     }
 
-    cv::ellipse( im, trackBox, cv::Scalar(0,0,255));
+    cv::Rect faceBox = trackBox.boundingRect();
+    
+    cv::rectangle( im, faceBox, cv::Scalar(0,0,255));
+
+    Global global = Global::getInstance();
+    global.setEyeDepth(faceBox.height);
 }
 
 // Track eye feature with SurfFeatureDetector
@@ -288,7 +292,7 @@ int EyeTracking::run() {
 // set eye position to change the view of the cube
             global.setPosition(eye_bb.x, eye_bb.y);
             // get the corresponding depth data from global
-            global.getDepthData(eye_bb.x, eye_bb.y);
+            // global.getDepthData(eye_bb.x, eye_bb.y);
             
             // Draw bounding rectangle for the eye
             cv::rectangle(frame, eye_bb, CV_RGB(0,255,0));
@@ -302,12 +306,3 @@ int EyeTracking::run() {
     global.setRunningStatus(false);
     return 0;
 }
-
-// for unit testing
-/*
-  int main() {
-  EyeTracking eyeTracking;
-  eyeTracking.run();
-  return 0;
-  }
-*/

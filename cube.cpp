@@ -44,7 +44,7 @@ int Cube::setEyePosition(int deltaXpos, int deltaYpos, int deltaZpos) {
     // set eyeDepth
     // depth scaling factor
     float depthChangeSpeed = 0.005;
-    //position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
+    position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
     return 0;
 }
 
