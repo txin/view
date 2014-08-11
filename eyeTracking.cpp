@@ -7,6 +7,8 @@
  * using OpenCV's built-in Haar cascade classifier. If the user's eye detected
  * successfully, an eye template is extracted. This template will be used in
  * the subsequent template matching for tracking the eye.
+ * functions provided:
+ *
  */
 
 /**
@@ -24,7 +26,7 @@
 #include "Global.h"
 
 
-// Size constants
+// size constants for eye position in face
 const int kEyePercentTop = 25;
 const int kEyePercentSide = 13;
 const int kEyePercentHeight = 30;
@@ -34,47 +36,43 @@ const int kEyePercentWidth = 35;
 int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces, eyes;
-
-
+    // detect largest face
     face_cascade.detectMultiScale(im, faces, 1.1, 2, 
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
 
-    // TODO: find the first face
-    for (unsigned int i = 0; i < faces.size(); i++) {
-        cv::Mat face = im(faces[i]);
-        std::cout << "face height" << faces[i].height << std::endl;
-        
-// TODO: find the left eye
-        
-        //-- Find eye regions and draw them
-        int eye_region_width = faces[i].width * (kEyePercentWidth/100.0);
-        int eye_region_height = faces[i].width * (kEyePercentHeight/100.0);
-        int eye_region_top = faces[i].height * (kEyePercentTop/100.0);
+    if (faces.size() > 0) {      
+        cv::Mat face = im(faces[0]);
+//        std::cout << "face height" << faces[i].height << std::endl;
 
-        cv::Rect leftEyeRegion(faces[i].width*(kEyePercentSide/100.0),
+    //-- Find eye regions and draw them
+        int eye_region_width = faces[0].width * (kEyePercentWidth/100.0);
+        int eye_region_height = faces[0].width * (kEyePercentHeight/100.0);
+        int eye_region_top = faces[0].height * (kEyePercentTop/100.0);
+        
+        cv::Rect leftEyeRegion(faces[0].width*(kEyePercentSide/100.0),
                                eye_region_top,eye_region_width,eye_region_height);
-        
-        //  cv::imshow("eye region", face(leftEyeRegion));
-        // cv::waitKey(5);
-
-        //eye_cascade.detectMultiScale(face, eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
-        eye_cascade.detectMultiScale(face(leftEyeRegion), eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
-
-        if (eyes.size()) {
-            // TODO: test with tracking face
-            //rect = faces[i];
-            rect = leftEyeRegion + cv::Point(faces[i].x, faces[i].y);
-            //rect = faces[i] + cv::Point(faces[i].x, faces[i].y);
-//rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
-            //tpl  = im(rect);
-            tpl = face(leftEyeRegion);
-            //tpl = face;
-//tpl = face;
-        }
+        rect = leftEyeRegion + cv::Point(faces[0].x, faces[0].y);
+        tpl = face(leftEyeRegion);
     }
 
-    return eyes.size();
+        
+    // cv::imshow("eye region", face(leftEyeRegion));
+      // cv::waitKey(5);
+      // eye_cascade.detectMultiScale(face, eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
+      // eye_cascade.detectMultiScale(face, eyes, 
+      //                             1.1, 2, 0|CV_HAAR_SCALE_IMAGE,
+      //                             cv::Size(20, 20));        
+    // if (eyes.size()) {
+      //rect = faces[i];
+      //rect = faces[i] + cv::Point(faces[i].x, faces[i].y);
+//rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
+//tpl  = im(rect);
+//tpl = face(leftEyeRegion);
+
+//tpl = face;
+
+    return 1;
 }
 
 /**
@@ -122,15 +120,14 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 }
 
 // use camshift algorithm for tracking
-
 // will track the neck
-    cv::Mat frame, hsv, hue, mask, hist, backproj;
-    cv::Rect trackWindow;
-    int hsize = 16;
-    float hranges[] = {0, 180};
-    const float *phranges = hranges;
-    cv::Mat histimg = cv::Mat::zeros(640, 480, CV_8UC3);
-    int vmin = 32, vmax = 256, smin = 60;
+cv::Mat frame, hsv, hue, mask, hist, backproj;
+cv::Rect trackWindow;
+int hsize = 16;
+float hranges[] = {0, 180};
+const float *phranges = hranges;
+cv::Mat histimg = cv::Mat::zeros(640, 480, CV_8UC3);
+int vmin = 32, vmax = 256, smin = 60;
 
 void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     if (im.empty() || rect.area() == 0) return ;
@@ -158,7 +155,7 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     backproj &= mask;
     cv::RotatedRect trackBox = cv::CamShift(backproj, trackWindow, 
                                             cv::TermCriteria(cv::TermCriteria::EPS
-                                           | cv::TermCriteria::COUNT, 10, 1));
+                                                             | cv::TermCriteria::COUNT, 10, 1));
     
      
     // trackobject
@@ -234,8 +231,6 @@ void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
 int EyeTracking::run() {
     // Load the cascade classifiers
-    // Make sure you point the XML files to the right path, or
-    // just copy the files from [OPENCV_DIR]/data/haarcascades directory
     face_cascade.load("haarcascade_frontalface_alt2.xml");
     eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
     // eye_cascade.load("haarcascade_mcs_nose.xml");
@@ -243,7 +238,7 @@ int EyeTracking::run() {
 
     Global global = Global::getInstance();
 
-    // open the first web cam
+    // open the default webcam
     cv::VideoCapture cap(0);
 
     const char *windowName = "EyeTracking";
@@ -269,7 +264,7 @@ int EyeTracking::run() {
         if (frame.empty())
             break;
 
-        // Flip the frame horizontally, Windows users might need this
+        // flip the frame horizontally
         cv::flip(frame, frame, 1);
 
         // Convert to grayscale and
