@@ -153,7 +153,7 @@ static void checkErrors(vector<vector<Point2f> > *imagePoints,
     int npoints = 0;
     vector<Vec3f> lines[2];
    
-    // TODO: testing about the reprojection error,
+    // testing about the reprojection error
     int nImageSize = 10;
     for (int i = 0; i < nImageSize; i++) {
         int npt = (int)imagePoints[0][i].size();
@@ -173,17 +173,11 @@ static void checkErrors(vector<vector<Point2f> > *imagePoints,
                                 lines[1][j][2]) +
                 fabs(imagePoints[1][i][j].x*lines[0][j][0] +
                      imagePoints[1][i][j].y*lines[0][j][1] + lines[0][j][2]);
-         
-
-            cout << "errij=" << errij << endl;
             err += errij;
         }
         npoints += npt;
     }
-    cout << "npoings = " << npoints << endl;
-    cout << "err = " << err << endl;
     cout << "average reprojection err = " <<  err/npoints << endl;
-
 }
 
 // run cameraCalibration separtely for 2 imagePoints, then run stereoCalibration
