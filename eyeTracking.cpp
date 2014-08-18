@@ -56,22 +56,6 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         tpl = face(leftEyeRegion);
     }
 
-        
-    // cv::imshow("eye region", face(leftEyeRegion));
-      // cv::waitKey(5);
-      // eye_cascade.detectMultiScale(face, eyes, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(20, 20));
-      // eye_cascade.detectMultiScale(face, eyes, 
-      //                             1.1, 2, 0|CV_HAAR_SCALE_IMAGE,
-      //                             cv::Size(20, 20));        
-    // if (eyes.size()) {
-      //rect = faces[i];
-      //rect = faces[i] + cv::Point(faces[i].x, faces[i].y);
-//rect = eyes[0] + cv::Point(faces[i].x, faces[i].y);
-//tpl  = im(rect);
-//tpl = face(leftEyeRegion);
-
-//tpl = face;
-
     return 1;
 }
 
@@ -89,11 +73,6 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     face_cascade.detectMultiScale(im, faces, 1.1, 2, 
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
-    //  if (faces.size() > 0) {
-    //    Global global = Global::getInstance();
-    //    global.setEyeDepth(faces[0].height);
-    //} 
-
 
     cv::Size size(rect.width * 2, rect.height * 2);
     cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
@@ -101,10 +80,7 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     window &= cv::Rect(0, 0, im.cols, im.rows);
 
     cv::Mat dst(window.width - tpl.rows + 1, window.height - tpl.cols + 1, CV_32FC1);
-    
-    //cv::imshow("template", tpl);
-    //cv::waitKey(5);
-
+   
     // match the eye template
     cv::matchTemplate(im(window), tpl, dst, CV_TM_SQDIFF_NORMED);
     double minval, maxval;
@@ -154,14 +130,14 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     cv::calcBackProject(&hue, 1, 0, hist, backproj, &phranges);    
     backproj &= mask;
     cv::RotatedRect trackBox = cv::CamShift(backproj, trackWindow, 
-                                            cv::TermCriteria(cv::TermCriteria::EPS
-                                                             | cv::TermCriteria::COUNT, 10, 1));
-    
+                               cv::TermCriteria(cv::TermCriteria::EPS
+                                  | cv::TermCriteria::COUNT, 10, 1));
      
     // trackobject
 
     if( trackWindow.area() <= 1 )  {
-        int cols = backproj.cols, rows = backproj.rows, r = (MIN(cols, rows) + 5)/6;
+        int cols = backproj.cols, rows = backproj.rows, 
+            r = (MIN(cols, rows) + 5)/6;
         trackWindow = cv::Rect(trackWindow.x - r, trackWindow.y - r,
                                trackWindow.x + r, trackWindow.y + r) &
             cv::Rect(0, 0, cols, rows);
@@ -176,6 +152,7 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 }
 
 // Track eye feature with SurfFeatureDetector
+// SurfFeatureDetector implementation
 void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces;
@@ -184,11 +161,9 @@ void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     window &= cv::Rect(0, 0, im.cols, im.rows);
 
-    cv::Mat dst(window.width - tpl.rows + 1, window.height - tpl.cols + 1, CV_32FC1);
+    cv::Mat dst(window.width - tpl.rows + 1, 
+                window.height - tpl.cols + 1, CV_32FC1);
     
-    //cv::imshow("template", tpl);
-    //cv::waitKey(5);
-
     //-- Step 1: Detect the keypoints using SURF Detector
     int minHessian = 400;
 
@@ -213,7 +188,6 @@ void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     cv::waitKey(5);
 
-
     // match the eye template
     cv::matchTemplate(im(window), tpl, dst, CV_TM_SQDIFF_NORMED);
     double minval, maxval;
@@ -228,13 +202,11 @@ void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         rect.x = rect.y = rect.width = rect.height = 0;
 }
 
-
 int EyeTracking::run() {
+ 
     // Load the cascade classifiers
     face_cascade.load("haarcascade_frontalface_alt2.xml");
     eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
-    // eye_cascade.load("haarcascade_mcs_nose.xml");
-    // eye_cascade.load("haarcascade_mcs_mouth.xml");
 
     Global global = Global::getInstance();
 
@@ -280,19 +252,15 @@ int EyeTracking::run() {
             // Tracking stage with template matching
             trackEye(gray, eye_tpl, eye_bb);
             trackCamShift(frame, eye_tpl, eye_bb);
-            // TODO: trackEyeFeature
-            //        trackEyeFeature(gray, eye_tpl, eye_bb);
+            // trackEyeFeature(gray, eye_tpl, eye_bb);
 
             // detectEye(gray, eye_tpl, eye_bb);
-// set eye position to change the view of the cube
-            global.setPosition(eye_bb.x, eye_bb.y);
-            // get the corresponding depth data from global
-            // global.getDepthData(eye_bb.x, eye_bb.y);
             
+            // set eye position to change the view of the cube
+            global.setPosition(eye_bb.x, eye_bb.y);
             // Draw bounding rectangle for the eye
             cv::rectangle(frame, eye_bb, CV_RGB(0,255,0));
         }
-
         // display window
         cv::imshow(windowName, frame);
         runningStatus = global.getRunningStatus();

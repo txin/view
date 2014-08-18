@@ -14,7 +14,7 @@ tuner.o: tuner.cpp
 	g++ $(C_FLAG) -c tuner.cpp	
 
 sbmTuner : stereoView.o tuner.o
-	g++ $(CV_FLAGS) $(C_FLAG) stereoView.o tuner.o -o sbmTuner.out $(CV_LIBS) 
+	g++ $(CV_FLAGS) $(C_FLAG) stereoView.o tuner.o global.o -o sbmTuner.out $(CV_LIBS) 
 
 camshift : 
 	g++ $(CV_FLAGS) $(C_FLAG) -c camshiftdemo.cpp
