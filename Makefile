@@ -17,7 +17,7 @@ sbmTuner : stereoView.o tuner.o
 	g++ $(CV_FLAGS) $(C_FLAG) stereoView.o tuner.o -o sbmTuner.out $(CV_LIBS) 
 
 global.o : global.cpp
-	g++ $(CV-FLAGS) $(C_FLAG) -c global.cpp	
+	g++ $(CV_FLAGS) $(C_FLAG) -c global.cpp	
 
 eyeTracking.o : eyeTracking.cpp global.o
 	g++ $(C_FLAG) -c eyeTracking.cpp	
