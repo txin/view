@@ -30,4 +30,4 @@ main : cube.o eyeTracking.o shader.o stereoView.o global.o
 	g++ $(C_FLAG) cube.o eyeTracking.o shader.o stereoView.o global.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
 
 clean :
-	rm *.o *.out
+	rm *.o *.out *.gch
