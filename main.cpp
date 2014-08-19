@@ -10,7 +10,7 @@
 #include "Cube.h"
 #include "Global.h"
 
-#define THREAD_NUM 2
+#define THREAD_NUM 3
 
 using namespace std;
 
