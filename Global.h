@@ -4,20 +4,24 @@
 #include <pthread.h>
 #include "StereoView.h"
 
+#define EYEBOX_SIDE 20
+
 class Global {
 
 private:
     // eye position from EyeTracking class
     cv::Point *position;
-    // eye position depth
+    // depth image generated from StereoView class
     int *depth;
 
-    // depth image generated from StereoView class
     cv::Mat *depthImg;
-    
     // raw image from the camera, default use the cam0
     cv::Mat *rawImg;
-
+    // bounding boxes of the eyes for different cameras
+    cv::Mat *eyeBox[CAMERA_NUM];
+    cv::Point *eyePosition[CAMERA_NUM];
+    // face rectangle from eyeTracking class
+    cv::Rect *faceRect;
     // running status
     bool* running;
     pthread_mutex_t start;
@@ -30,16 +34,19 @@ public:
         static Global instance;
         return instance;        
     }
-    void setPosition(cv::Point posIn);
-    void setPosition(int x, int y);
-    cv::Point getPosition();
+    void setEyePosition(cv::Point posIn);
+    cv::Point getEyePosition();
     void setRawImg(cv::Mat& raw);
     void setDepthImg(cv::Mat& img3D);
     void getDepthData(int row, int col);
     bool getRunningStatus();
     void setRunningStatus(bool val);
-    void setEyeDepth(float val);
+    void setFaceRect(cv::Rect rect);
+    cv::Rect getFaceRect();
+    void setEyeBox(int index, cv::Mat eyeMat);
+    cv::Mat getEyeBox(int index);
     inline int getEyeDepth() {
         return *depth;
     }
+
 };

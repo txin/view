@@ -1,41 +1,60 @@
 #include "Global.h"
 
-
 Global::Global() {
     pthread_mutex_init(&start, NULL);
+    // average position of the two eye
     position = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-        
     running = new bool;
     *running = true;
-   
-    depth = new int;
-    *depth = DEFAULT_DEPTH;
     
-    // TODO: need to initialise? or just assign to the new position
+    // TODO: clean depthImg or rawImg
+    // initialise depthImg
     depthImg = new cv::Mat(cv::Size(CAMERA_WIDTH, CAMERA_HEIGHT), CV_32FC3);
-    // TODO: camera mat type?
     rawImg = new cv::Mat;
+    faceRect = new cv::Rect;
+
+    // set up eyeBox, initialise the matrices of the eyeBox
+    // use the fixed length of the square
+    // allocate space for eyeBoxes
+    for (int i = 0; i < CAMERA_NUM; i++) {
+        eyeBox[i] = new cv::Mat(cv::Size(EYEBOX_SIDE, EYEBOX_SIDE), CV_32FC3);
+        eyePosition[i] = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+    }
+    
 };
     
+// lock to update the bounding box matrix for the eyes
+// index refering to the index of the cameras
+void Global::setEyeBox(int index, cv::Mat eyeMat) {
+    pthread_mutex_lock(&start);
+    eyeMat.copyTo(*eyeBox[index]);
+    pthread_mutex_unlock(&start);
+}
+
+// get the eyeBox matrix
+cv::Mat Global::getEyeBox(int index) {
+    return *eyeBox[index];
+}
+
+// TODO: set face bounding box, rectangle
+void Global::setFaceRect(cv::Rect rect) {
+    pthread_mutex_lock(&start);
+    *faceRect = rect;
+    pthread_mutex_unlock(&start);
+}
+
+cv::Rect Global::getFaceRect() {
+    return *faceRect;
+}
+
 // lock to update the position
-void Global::setPosition(cv::Point posIn) {
+void Global::setEyePosition(cv::Point posIn) {
     pthread_mutex_lock(&start);
     *position = posIn;
     pthread_mutex_unlock(&start);
 }
-
-void Global::setEyeDepth(float val) {
-    pthread_mutex_lock(&start);
-    *depth = val;
-    pthread_mutex_unlock(&start);
-}
-    
-void Global::setPosition(int x, int y) {
-    position->x = x;
-    position->y = y;
-} 
-    
-cv::Point Global::getPosition() {
+  
+cv::Point Global::getEyePosition() {
     return *position;
 }
 

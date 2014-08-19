@@ -209,8 +209,8 @@ int Cube::run() {
     // display main loop
     bool runningStatus = global.getRunningStatus();
     do {
-        tempX = global.getPosition().x;
-        tempY = global.getPosition().y;
+        tempX = global.getEyePosition().x;
+        tempY = global.getEyePosition().y;
         tempZ = global.getEyeDepth();
 
         deltaXpos = tempX - xpos;

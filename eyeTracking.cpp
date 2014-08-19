@@ -31,6 +31,59 @@ const int kEyePercentHeight = 30;
 const int kEyePercentWidth = 35;
 
 
+
+int EyeTracking::detectEye(cv::Mat& frame) {
+    std::vector<cv::Rect> faces;
+    face_cascade.detectMultiScale( frame, faces, 1.1, 2, 
+                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
+                                   cv::Size(30, 30) );
+
+    for (unsigned int i = 0; i < faces.size(); i++ ) {
+        rectangle(frame, faces[i], 1234);
+    }
+
+    if (faces.size() > 0) {
+        findEyes(frame, faces[0]);
+    }
+    return 0;
+}
+
+int EyeTracking::setUp() {
+// Load the cascade classifiers
+    face_cascade.load("haarcascade_frontalface_alt2.xml");
+    eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
+    
+// Check if everything is ok
+    if (face_cascade.empty() || eye_cascade.empty())
+        return 1;
+
+    return 0;
+}
+
+void EyeTracking::findEyes(cv::Mat frame_gray, cv::Rect face) {
+
+    cv::Mat faceROI = frame_gray(face);
+    cv::Mat debugFace = faceROI;
+
+    // extract leftEyeRegion, rightEyeRegion
+    int eye_region_width = face.width * (kEyePercentWidth/100.0);
+    int eye_region_height = face.width * (kEyePercentHeight/100.0);
+    int eye_region_top = face.height * (kEyePercentTop/100.0);
+
+    cv::Rect leftEyeRegion(face.width*(kEyePercentSide/100.0),
+                           eye_region_top,eye_region_width,eye_region_height);
+
+    cv::Rect rightEyeRegion(face.width - eye_region_width - 
+                            face.width*(kEyePercentSide/100.0),
+                            eye_region_top,eye_region_width,eye_region_height);
+    
+    // set up eyebox and faceRect in global class
+    Global global = Global::getInstance();
+    global.setFaceRect(face);
+    global.setEyeBox(index, faceROI);
+    global.setEyePosition(cv::Point(face.x, face.y));
+}
+
 int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces, eyes;
@@ -83,15 +136,6 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
  */
 // define default face height 200
 void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
-
-    std::vector<cv::Rect> faces;
-    face_cascade.detectMultiScale(im, faces, 1.1, 2, 
-                                  0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
-                                  cv::Size(30, 30));
-    if (faces.size() > 0) {
-        Global global = Global::getInstance();
-        global.setEyeDepth(faces[0].height);
-    }
 
     cv::Size size(rect.width * 2, rect.height * 2);
     cv::Rect window(rect + size - cv::Point(size.width/2, size.height/2));
@@ -173,7 +217,7 @@ int EyeTracking::run() {
             trackEye(gray, eye_tpl, eye_bb);
             // detectEye(gray, eye_tpl, eye_bb);
 // set eye position to change the view of the cube
-            global.setPosition(eye_bb.x, eye_bb.y);
+            global.setEyePosition(cv::Point(eye_bb.x, eye_bb.y));
             // get the corresponding depth data from global
             global.getDepthData(eye_bb.x, eye_bb.y);
             
