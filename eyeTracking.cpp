@@ -96,7 +96,6 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     // TODO: find the first face
     for (unsigned int i = 0; i < faces.size(); i++) {
         cv::Mat face = im(faces[i]);
-        std::cout << "face height" << faces[i].height << std::endl;
         
 // TODO: find the left eye
         

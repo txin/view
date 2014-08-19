@@ -6,11 +6,9 @@ Global::Global() {
     position = new cv::Point(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
     running = new bool;
     *running = true;
-    
-    // TODO: clean depthImg or rawImg
-    // initialise depthImg
-    depthImg = new cv::Mat(cv::Size(CAMERA_WIDTH, CAMERA_HEIGHT), CV_32FC3);
-    rawImg = new cv::Mat;
+    // initialise the depth pointer
+    depth = new int;
+    *depth = DEFAULT_DEPTH;
     faceRect = new cv::Rect;
 
     // set up eyeBox, initialise the matrices of the eyeBox

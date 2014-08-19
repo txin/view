@@ -48,5 +48,4 @@ public:
     inline int getEyeDepth() {
         return *depth;
     }
-
 };
