@@ -135,7 +135,8 @@ void StereoView::run() {
     }
     
     // rectified images
-    cv::Mat rFrames[2];
+    cv::Mat rGrayFrames[2];
+    cv::Mat grayFrames[2];
     while (cv::waitKey(15) != 'q') {
         for (int i = 0; i < 2; i++) {
             cameras[i] >> frames[i];
@@ -144,15 +145,17 @@ void StereoView::run() {
                 break;
             }
             cv::flip(frames[i], frames[i], 1);
-            cv::cvtColor(frames[i], frames[i], CV_RGB2GRAY);
+            cv::cvtColor(frames[i], grayFrames[i], CV_RGB2GRAY);
             // apply the calibration parameters to remove distortions
-            distortionRemoval(frames[i], rFrames[i], i);
+            distortionRemoval(grayFrames[i], rGrayFrames[i], i);
         }
-        eyeTracking[0].detectEye(rFrames[0]);
-        cv::imshow("Camera 0", rFrames[0]);
-        cv::imshow("Camera 1", rFrames[1]);
+//        eyeTracking[0].detectEye(rFrames[0]);
+        eyeTracking[0].detectEye(frames[0]);
+        cv::imshow("EyeTracking", frames[0]);
+        cv::imshow("Camera 0", rGrayFrames[0]);
+        cv::imshow("Camera 1", rGrayFrames[1]);
 
-        showDepthData(rFrames[0], rFrames[1]);
+        showDepthData(rGrayFrames[0], rGrayFrames[1]);
     }
     cameras[0].release();
     cameras[1].release();

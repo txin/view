@@ -35,8 +35,6 @@ const int kEyePercentWidth = 35;
 // detectEye used in stereoView
 // detectEye, detecting the face first, and then use parameters to 
 
-cv::Mat eyeTemplate;
-cv::Rect eyeBoundingBox;
 
 int EyeTracking::detectEye(cv::Mat& frame) {
     std::vector<cv::Rect> faces;
@@ -52,7 +50,7 @@ int EyeTracking::detectEye(cv::Mat& frame) {
         findEyes(frame, faces[0]);
     } 
 
-    /*Global global = Global::getInstance();
+    /* Global global = Global::getInstance();
     if (eyeBoundingBox.width == 0 && eyeBoundingBox.height == 0) {
         // Detection stage
         // Try to detect the face and the eye of the user
@@ -111,6 +109,7 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     if (faces.size() > 0) {      
         cv::Mat face = im(faces[0]);
+        cv::rectangle(im, faces[0], cv::Scalar(0,0,255));
 
     //-- Find eye regions and draw them
         int eye_region_width = faces[0].width * (kEyePercentWidth/100.0);
@@ -121,6 +120,7 @@ int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
                                eye_region_top,eye_region_width,eye_region_height);
         rect = leftEyeRegion + cv::Point(faces[0].x, faces[0].y);
         tpl = face(leftEyeRegion);
+        std::cout << "updated rect" << std::endl;
     }
 
     return 1;
@@ -152,6 +152,7 @@ void EyeTracking::trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
     }
     else
         rect.x = rect.y = rect.width = rect.height = 0;
+
 }
 
 
