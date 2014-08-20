@@ -17,6 +17,9 @@ corresponding 3D coordinates
 Using harcarscade classifying method for eye tracking
 
 
+### Global
+Global class provides the parameters and storage for global use
+
 By Tianxin Tang
 University of Bristol
 Contact: titian.tang@gmail.com

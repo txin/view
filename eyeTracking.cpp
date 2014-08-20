@@ -50,8 +50,8 @@ int EyeTracking::detectEye(cv::Mat& frame) {
 
 int EyeTracking::setUp() {
    // Load the cascade classifiers
-   face_cascade.load("haarcascade_frontalface_alt2.xml");
-   eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
+   face_cascade.load("res/haarcascade_frontalface_alt2.xml");
+   eye_cascade.load("res/haarcascade_eye_tree_eyeglasses.xml");
     
    // Check if everything is ok
    if (face_cascade.empty() || eye_cascade.empty())

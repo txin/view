@@ -20,7 +20,7 @@ double alpha, beta;
 int StereoView::loadConfiguration() {
 
     // load calibration file for stereo camera pair
-    cv::FileStorage fs1("intrinsics.yml", cv::FileStorage::READ);
+    cv::FileStorage fs1("res/intrinsics.yml", cv::FileStorage::READ);
     fs1["M1"] >> cameraMatrix[0];
     fs1["D1"] >> distCoeffs[0];
     fs1["M2"] >> cameraMatrix[1];
@@ -28,7 +28,7 @@ int StereoView::loadConfiguration() {
     fs1.release();
 
     // load extrinsics file, R, T translation and rotation matrix of 2 cameras
-    cv::FileStorage fs2("extrinsics.yml", cv::FileStorage::READ);
+    cv::FileStorage fs2("res/extrinsics.yml", cv::FileStorage::READ);
     fs2["R"] >> R;
     fs2["T"] >> T;
     fs2["R1"] >> R1;

@@ -3,8 +3,7 @@
  * reference: opencv sample code
  * opencv-2.4.9/samples/cpp/tutorial_code/calib3d/
  * camera_calibration/camera_calibration.cpp
- * 1. live feed
- * 2. image html didnt't work out
+ * calibration from live camera
  */
 
 #include "Calibration.h"
@@ -76,33 +75,11 @@ public:
         if (input.empty()) {      // Check for valid input
             inputType = INVALID;
         } else {
-            
-            // for input configuration
-            // use camera id passed in
-            /*if (input[0] >= '0' && input[0] <= '9') {
-                stringstream ss(input);
-                //ss >> cameraID;
-                inputType = CAMERA;
-            } else {
-                if (readStringList(input, imageList)) {
-                    nrFrames = (nrFrames < (int)imageList.size()) ? 
-                        nrFrames : (int)imageList.size();
-                } else {
-                    inputType = VIDEO_FILE;
-                }
-                }*/
             // default input Type camera
             inputType = CAMERA;
-
-
             if (inputType == CAMERA) {
                 inputCapture.open(cameraID);
             }
-            
-            //if (inputType == VIDEO_FILE)
-            //              inputCapture.open(input);
-            //if (inputType != IMAGE_LIST && !inputCapture.isOpened())
-            //     inputType = INVALID;
         }
         if (inputType == INVALID) {
             cerr << "Input is invalid here" << input;
@@ -330,7 +307,7 @@ bool runCalibrationAndSave(Settings& s, Size imageSize, Mat&  cameraMatrix,
 int Calibration::setup(int cameraNo) {
     Settings s;
     // default configuration file for camera use
-    const string inputSettingsFile = "default.xml";
+    const string inputSettingsFile = "res/default.xml";
 
     string windowName = "Camera";
     string indexStr = std::to_string(cameraNo);
@@ -438,7 +415,7 @@ int Calibration::setup(int cameraNo) {
 
         if( blinkOutput )
             bitwise_not(view, view);
-        //------------------------- Video capture  output  undistorted --------
+        // display video calibrated and undistorted
         if(mode == CALIBRATED && s.showUndistorsed) {
             Mat temp = view.clone();
             undistort(temp, view, cameraMatrix, distCoeffs);
@@ -488,14 +465,16 @@ void *calibrate(void *t) {
     Calibration test;
     long tid = (long)t;
     int cameraNo = (int)tid;
-    int returnVal = test.setup(cameraNo);
+    test.setup(cameraNo);
     pthread_exit(NULL);
 }
-
-// for unit testing
-
-int main() {
+/*
+ * may have several threads for different camera calibrations
+ */
+int main(int argc, char* argv[]) {
+    
     // creat 2 threads
+    /*
     pthread_t threads[CAMERA_NUM];
 
     pthread_attr_t attr;
@@ -527,6 +506,18 @@ int main() {
         cout << " exiting with status : " << status << std::endl;
     }
     std::cout << "Main: program exiting." << std::endl;
+    */
+
+    // default camera
+    int cameraNo = 0;
+
+    if (argc == 2) {
+        if (*argv[1] < '9' && *argv[1] >= '0') {
+            cameraNo = *argv[1] - '0';
+        }
+    }
+    Calibration test;
+    test.setup(cameraNo);
     return 0;
 }
 

@@ -239,7 +239,7 @@ static bool runStereoCalibration(vector<vector<Point2f> > *imagePoints,
     cout << "stereo rms" << rmsStereo << endl;
     checkErrors(imagePoints, cameraMatrix, distCoeffs, F); 
     // save intrinsic parameters
-    FileStorage fs("intrinsics.yml", CV_STORAGE_WRITE);
+    FileStorage fs("res/intrinsics.yml", CV_STORAGE_WRITE);
     if (fs.isOpened()) {
         fs << "M1" << cameraMatrix[0] << "D1" << distCoeffs[0] <<
             "M2" << cameraMatrix[1] << "D2" << distCoeffs[1];
@@ -257,7 +257,7 @@ static bool runStereoCalibration(vector<vector<Point2f> > *imagePoints,
                   CALIB_ZERO_DISPARITY, 1, 
                   imageSize, &validRoi[0], &validRoi[1]);
 
-    fs.open("extrinsics.yml", CV_STORAGE_WRITE);
+    fs.open("res/extrinsics.yml", CV_STORAGE_WRITE);
     if( fs.isOpened() ) {
         fs << "R" << R << "T" << T << "R1" 
            << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;
@@ -308,7 +308,7 @@ void display(Mat& view, int mode, Settings& s, bool blinkOutput,
 int StereoCalibration::setup(int cameraNo) {
     Settings s;
     // default configuration file for camera use
-    const string inputSettingsFile = "default.xml";
+    const string inputSettingsFile = "res/default.xml";
 
     string windowName = "Camera";
     string indexStr = std::to_string(cameraNo);
