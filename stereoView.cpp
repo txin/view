@@ -1,13 +1,12 @@
 /*
  * Getting depth from 2 cameras (stereo vision system setup)
  * 1. cameras calibration
- * 2. get the fundamental matrix and essential matrix, disprity
+ * 2. get the fundamental matrix and essential matrix, disparity
  * 3. compute depth
  * reference: docs.opencv.org
  * disparity opencv-2.4.9/samples/cpp/tutorial_code/calib3d/stereoBM
  *                       /SBM_Sample.cpp
  */
-// #include "StereoView.h"
 #include "Global.h"
 
 using namespace cv;
@@ -135,33 +134,26 @@ void StereoView::run() {
         cv::namedWindow(windowName, CV_WINDOW_NORMAL);
         cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
     }
-
-    cv::Mat imgLeft, imgRight;
-    // TODO: change the camera Index
-    while (cv::waitKey(15) != 'q') {
-
-        cameras[0] >> frames[0];
-        cameras[1] >> frames[1];
-        if (frames[0].empty()) break;
-        if (frames[1].empty()) break;
-            
-        // Flip the frame horizontally, Windows users might need this
-        cv::flip(frames[0], frames[0], 1);
-        cv::flip(frames[1], frames[1], 1);
-
-        cv::cvtColor(frames[0], frames[0], CV_RGB2GRAY);
-        cv::cvtColor(frames[1], frames[1], CV_RGB2GRAY);
     
-        // apply the calibration parameters to the first matrix captured by cam 0
-        cv::Mat rImgLeft, rImgRight; 
-        distortionRemoval(frames[0], rImgLeft, 0);
-        distortionRemoval(frames[1], rImgRight, 1);
-        
-        cv::imshow("Camera 0", rImgLeft);
-        cv::imshow("Camera 1", rImgRight);
+    // rectified images
+    cv::Mat rFrames[2];
+    while (cv::waitKey(15) != 'q') {
+        for (int i = 0; i < 2; i++) {
+            cameras[i] >> frames[i];
+            // TODO: break outer loop
+            if (frames[i].empty()) {
+                break;
+            }
+            cv::flip(frames[i], frames[i], 1);
+            cv::cvtColor(frames[i], frames[i], CV_RGB2GRAY);
+            // apply the calibration parameters to remove distortions
+            distortionRemoval(frames[i], rFrames[i], i);
+        }
+        cv::imshow("Camera 0", rFrames[0]);
+        cv::imshow("Camera 1", rFrames[1]);
             
-        eyeTracking[0].detectEye(rImgLeft);
-        showDepthData(rImgLeft, rImgRight);
+        eyeTracking[0].detectEye(rFrames[0]);
+        showDepthData(rFrames[0], rFrames[1]);
     }
     cameras[0].release();
     cameras[1].release();

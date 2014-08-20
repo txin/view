@@ -1,5 +1,5 @@
 /**
- * eye-tracking.cpp:
+ * eyeTracking.cpp:
  * Eye detection and tracking with OpenCV
  *
  * This program tries to detect and tracking the user's eye with webcam.
@@ -48,8 +48,8 @@ int EyeTracking::detectEye(cv::Mat& frame) {
     return 0;
 }
 
+// Load the cascade classifiers
 int EyeTracking::setUp() {
-   // Load the cascade classifiers
    face_cascade.load("res/haarcascade_frontalface_alt2.xml");
    eye_cascade.load("res/haarcascade_eye_tree_eyeglasses.xml");
     
@@ -185,6 +185,7 @@ void EyeTracking::trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
 // Track eye feature with SurfFeatureDetector
 // SurfFeatureDetector implementation
+// not used for detecting&tracking eyes
 void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces;
@@ -235,25 +236,14 @@ void EyeTracking::trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 }
 
 int EyeTracking::run() {
- 
-    // Load the cascade classifiers
-    face_cascade.load("haarcascade_frontalface_alt2.xml");
-    eye_cascade.load("haarcascade_eye_tree_eyeglasses.xml");
-
+    setUp();
     // open the first, default web cam
-
     Global global = Global::getInstance();
-
-    // open the default webcam
     cv::VideoCapture cap(0);
 
     const char *windowName = "EyeTracking";
     cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE);
     cv::moveWindow(windowName, CAMERA_WIDTH, 0);
-
-    // Check if everything is ok
-    if (face_cascade.empty() || eye_cascade.empty() || !cap.isOpened())
-        return 1;
 
     // Set video to 640 * 480
     cap.set(CV_CAP_PROP_FRAME_WIDTH, CAMERA_WIDTH);
@@ -268,9 +258,7 @@ int EyeTracking::run() {
         cap >> frame;
         if (frame.empty())
             break;
-
         // flip the frame horizontally
-
         cv::flip(frame, frame, 1);
         // Convert to grayscale and
         // adjust the image contrast using histogram equaligzation

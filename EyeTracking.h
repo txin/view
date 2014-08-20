@@ -12,17 +12,19 @@ class EyeTracking {
 private:
     cv::CascadeClassifier face_cascade;
     cv::CascadeClassifier eye_cascade;
+    int trackObject = -1;
+
     int detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void findEyes(cv::Mat frame_gray, cv::Rect face);
     void trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
-    int trackObject = -1;
 
 public:
-    EyeTracking(){};
-    int run();
     int index;
+
+    EyeTracking() {};
+    int setUp(); 
+    int run();
     int detectEye(cv::Mat& frame);
-    int setUp();
 };

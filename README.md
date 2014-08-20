@@ -12,6 +12,10 @@ Tuner: SBM tuner for disparity map
 make sbmTuner
 gpuStereo: SBM with GPU module
 make gpuStero
+calibration: calibration for single camera
+make calibration
+./calibration.out 1
+// calibrate camera index 1, default camera 0
 
 ### StereoCalibration
 calibration for customized stereo cameras pair,
