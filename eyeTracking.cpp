@@ -32,6 +32,12 @@ const int kEyePercentSide = 13;
 const int kEyePercentHeight = 30;
 const int kEyePercentWidth = 35;
 
+// detectEye used in stereoView
+// detectEye, detecting the face first, and then use parameters to 
+
+cv::Mat eyeTemplate;
+cv::Rect eyeBoundingBox;
+
 int EyeTracking::detectEye(cv::Mat& frame) {
     std::vector<cv::Rect> faces;
     face_cascade.detectMultiScale(frame, faces, 1.1, 2, 
@@ -44,7 +50,20 @@ int EyeTracking::detectEye(cv::Mat& frame) {
 
     if (faces.size() > 0) {
         findEyes(frame, faces[0]);
-    }
+    } 
+
+    /*Global global = Global::getInstance();
+    if (eyeBoundingBox.width == 0 && eyeBoundingBox.height == 0) {
+        // Detection stage
+        // Try to detect the face and the eye of the user
+        detectEye(frame, eyeTemplate, eyeBoundingBox);
+    } else {
+        // Tracking stage with template matching
+        trackEye(frame, eyeTemplate, eyeBoundingBox);
+        // set eye position to change the view of the cube
+        global.setEyePosition(cv::Point(eyeBoundingBox.x, eyeBoundingBox.y));
+        cv::rectangle(frame, eyeBoundingBox, CV_RGB(0,255,0));
+        } */
     return 0;
 }
 
@@ -72,16 +91,14 @@ void EyeTracking::findEyes(cv::Mat frame_gray, cv::Rect face) {
 
     cv::Rect leftEyeRegion(face.width*(kEyePercentSide/100.0),
                            eye_region_top,eye_region_width,eye_region_height);
-
-    cv::Rect rightEyeRegion(face.width - eye_region_width - 
-                            face.width*(kEyePercentSide/100.0),
-                            eye_region_top,eye_region_width,eye_region_height);
     
+    cv::Rect rect = leftEyeRegion + cv::Point(face.x, face.y);
+
     // set up eyebox and faceRect in global class
     Global global = Global::getInstance();
     global.setFaceRect(face);
-    global.setEyeBox(index, faceROI);
-    global.setEyePosition(cv::Point(face.x, face.y));
+    global.setEyeBox(index, faceROI(leftEyeRegion));
+    global.setEyePosition(cv::Point(rect.x, rect.y));
 }
 
 int EyeTracking::detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
@@ -273,7 +290,6 @@ int EyeTracking::run() {
             trackEye(gray, eye_tpl, eye_bb);
             trackCamShift(frame, eye_tpl, eye_bb);
             // trackEyeFeature(gray, eye_tpl, eye_bb);
-
             // detectEye(gray, eye_tpl, eye_bb);
             // set eye position to change the view of the cube
             global.setEyePosition(cv::Point(eye_bb.x, eye_bb.y));

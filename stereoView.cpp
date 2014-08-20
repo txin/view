@@ -127,7 +127,6 @@ void StereoView::run() {
 
     cv::Mat frames[CAMERA_NUM];
     sbm_here = sbm;
-
     for (int i = 0; i < CAMERA_NUM; i++) {
         std::string windowName("Camera ");
         windowName += std::to_string(i);
@@ -149,10 +148,10 @@ void StereoView::run() {
             // apply the calibration parameters to remove distortions
             distortionRemoval(frames[i], rFrames[i], i);
         }
+        eyeTracking[0].detectEye(rFrames[0]);
         cv::imshow("Camera 0", rFrames[0]);
         cv::imshow("Camera 1", rFrames[1]);
-            
-        eyeTracking[0].detectEye(rFrames[0]);
+
         showDepthData(rFrames[0], rFrames[1]);
     }
     cameras[0].release();

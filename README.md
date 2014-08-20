@@ -39,6 +39,10 @@ SBM tuner, adjust the slider to find the optimum parameters of the SBM function
 ### Global
 Global class provides the parameters and storage for global use
 
+## Profiler
+Using gprofiler for profiling the memory usage of the program
+
+
 By Tianxin Tang
 University of Bristol
 Contact: titian.tang@gmail.com
