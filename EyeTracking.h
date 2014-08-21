@@ -15,13 +15,12 @@ private:
     int trackObject = -1;
     cv::Mat eyeTpl;
     cv::Rect eyeRect;
-    cv::Mat face;
 
     int extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
-    void trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
+    void trackEye(cv::Mat& im);
     void findEyes(cv::Mat frame_gray, cv::Rect face);
     void trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
-    void trackCamShift(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
+    void trackCamShift(cv::Mat& im);
 
 public:
     int index;
