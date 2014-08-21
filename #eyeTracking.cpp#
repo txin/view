@@ -72,11 +72,9 @@ int EyeTracking::extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
                                   0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT,
                                   cv::Size(30, 30));
 
-
     if (faces.size() > 0) {      
         face = im(faces[0]).clone();
         cv::rectangle(im, faces[0], cv::Scalar(0,0,255));
-
     //-- Find eye regions and draw them
         int eye_region_width = faces[0].width * (kEyePercentWidth/100.0);
         int eye_region_height = faces[0].width * (kEyePercentHeight/100.0);

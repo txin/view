@@ -13,10 +13,11 @@ private:
     cv::CascadeClassifier face_cascade;
     cv::CascadeClassifier eye_cascade;
     int trackObject = -1;
-    cv::Mat eyeTemplate;
-    cv::Rect eyeBoundingBox;
+    cv::Mat eyeTpl;
+    cv::Rect eyeRect;
+    cv::Mat face;
 
-    int detectEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
+    int extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void trackEye(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
     void findEyes(cv::Mat frame_gray, cv::Rect face);
     void trackEyeFeature(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect);
@@ -25,7 +26,9 @@ private:
 public:
     int index;
 
-    EyeTracking() {};
+    EyeTracking() {
+       
+    };
     int setUp(); 
     int run();
     int detectEye(cv::Mat& frame);
