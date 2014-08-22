@@ -96,8 +96,8 @@ void StereoView::computeDepth(cv::Mat& disparity) {
     // get the depthImg reference from the global class
     cv::reprojectImageTo3D(disparity32F, img3D, Q, false, CV_32F);
     // display the 3d image
-    cv::imshow("img3D", img3D);
-    cv::waitKey(5);
+//    cv::imshow("img3D", img3D);
+//    cv::waitKey(5);
 }
 
 // capture images from 2 cameras, and convert to grayscale images and 

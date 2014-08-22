@@ -1,9 +1,8 @@
 /**
  * eyeTracking.cpp:
- * Eye detection and tracking with OpenCV
  *
  * This program tries to detect and tracking the user's eye with webcam.
- * At startup, the program performs face detection followed by eye detection
+ * the program performs face detection followed by eye detection
  * using OpenCV's built-in Haar cascade classifier. If the user's eye detected
  * successfully, an eye template is extracted. This template will be used in
  * the subsequent template matching for tracking the eye.
@@ -17,7 +16,6 @@
  * @param  im    The source image
  * @param  tpl   Will be filled with the eye template, if detection success.
  * @param  rect  Will be filled with the bounding box of the eye
- * @return zero=failed, nonzero=success
  */
 
 #include "EyeTracking.h"
@@ -43,6 +41,8 @@ int EyeTracking::detectEye(cv::Mat& frame) {
     } else {
         // Tracking stage with template matching
         trackEye(frame);
+        // Use camShift algorithm to track the face, camShift can match
+        // different size of face.
         trackCamShift(frame);
         // set eye position to change the view of the cube
         global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
@@ -115,8 +115,9 @@ void EyeTracking::trackEye(cv::Mat& im) {
 }
 
 
-// use camshift algorithm for tracking
-// will track the neck
+// use camshift algorithm for tracking face, and set eyeDepth determined by
+// the size of face 
+
 cv::Mat frame, hsv, hue, mask, hist, backproj;
 cv::Rect trackWindow;
 int hsize = 16;
@@ -158,5 +159,9 @@ void EyeTracking::trackCamShift(cv::Mat& im) {
             cv::Rect(0, 0, cols, rows);
     }
     cv::Rect faceBox = trackBox.boundingRect();
-    cv::rectangle( im, faceBox, cv::Scalar(0,0,255));
+    cv::rectangle(im, faceBox, cv::Scalar(0,0,255));
+    Global global = Global::getInstance();
+
+    // setEyeDepth
+    global.setEyeDepth(faceBox.height);
 }

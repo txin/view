@@ -13,10 +13,7 @@ private:
     cv::Point *position;
     // depth image generated from StereoView class
     int *depth;
-
     cv::Mat *depthImg;
-    // raw image from the camera, default use the cam0
-    cv::Mat *rawImg;
     // bounding boxes of the eyes for different cameras
     cv::Mat *eyeBox[CAMERA_NUM];
     cv::Point *eyePosition[CAMERA_NUM];
@@ -35,17 +32,16 @@ public:
         return instance;        
     }
     void setEyePosition(cv::Point posIn);
-    cv::Point getEyePosition();
-    void setRawImg(cv::Mat& raw);
     void setDepthImg(cv::Mat& img3D);
-    void getDepthData(int row, int col);
-    bool getRunningStatus();
     void setRunningStatus(bool val);
     void setFaceRect(cv::Rect rect);
-    cv::Rect getFaceRect();
     void setEyeBox(int index, cv::Mat eyeMat);
+    void setEyeDepth(int val);
+  
+    cv::Point getEyePosition();
+    cv::Rect getFaceRect();
+    void getDepthData(int row, int col);
+    bool getRunningStatus();
     cv::Mat getEyeBox(int index);
-    inline int getEyeDepth() {
-        return *depth;
-    }
+    int getEyeDepth();
 };

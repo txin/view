@@ -56,15 +56,8 @@ cv::Point Global::getEyePosition() {
     return *position;
 }
 
-void Global::setRawImg(cv::Mat& raw) {
-    *rawImg = raw.clone();
-}
-
-// TODO: test reference or copyTo ?
 void Global::setDepthImg(cv::Mat& img3D) {
-    // TODO: lock the thread??
     img3D.copyTo(*depthImg);
-    // TODO: print the coordinates        
 }
     
 void Global::getDepthData(int row, int col) {
@@ -81,4 +74,17 @@ void Global::setRunningStatus(bool val) {
     pthread_mutex_lock(&start);
     *running = val;
     pthread_mutex_unlock(&start);
+}
+
+// set up face depth determined by the size of the face
+// use camshift algorithm in eyeTracking
+void Global::setEyeDepth(int val) {
+    pthread_mutex_lock(&start);
+    *depth = val;
+    pthread_mutex_unlock(&start);
+}
+
+// called in Cube class to change the eye position
+int Global::getEyeDepth() {
+    return *depth;
 }

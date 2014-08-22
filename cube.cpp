@@ -320,12 +320,3 @@ int Cube::run() {
     glfwTerminate();
     return 0;
 }
-
-// for unit testing
-/*
-int main(void) {
-    Cube cube;
-    cube.run();
-    return 0;
-} 
-*/
