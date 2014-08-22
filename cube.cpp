@@ -36,15 +36,23 @@ static void key_callback(GLFWwindow* window, int key, int scancode,
 
 int Cube::setEyePosition(int deltaXpos, int deltaYpos, int deltaZpos) {
 
-    position += right * deltaTime * eyeMoveSpeed * float(deltaXpos);
-    glm::vec3 yAxis(0, 1, 0);
-    position += yAxis * deltaTime * eyeMoveSpeed * float(deltaYpos);
+    int thresh = 5;
+    // TODO: add threshold for the change of X, Y position
+    if (deltaXpos > thresh || deltaXpos < 0 - thresh) {
+        position += right * deltaTime * eyeMoveSpeed * float(deltaXpos);
+    }
+ 
+    if (deltaYpos > thresh || deltaYpos < 0 - thresh) {
+        glm::vec3 yAxis(0, 1, 0);
+        position += yAxis * deltaTime * eyeMoveSpeed * float(deltaYpos);
+    }
     
-
     // set eyeDepth
     // depth scaling factor
-    float depthChangeSpeed = 0.005;
-    position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
+    if (deltaZpos > thresh || deltaZpos < 0 - thresh) {
+        float depthChangeSpeed = 0.001;
+        position += direction * deltaTime * depthChangeSpeed * float(deltaZpos);
+    }
     return 0;
 }
 
@@ -198,10 +206,8 @@ int Cube::run() {
 
     Global global = Global::getInstance();
    
-
-    // std::cout << global.getPosition() << std::endl;
-    // TODO: test 
     // position of eye
+    // initialise eye position
     int xpos = CAMERA_WIDTH / 2;
     int ypos = CAMERA_HEIGHT / 2;
     int zpos = DEFAULT_DEPTH;

@@ -127,20 +127,30 @@ void StereoView::run() {
 
     cv::Mat frames[CAMERA_NUM];
     sbm_here = sbm;
-    for (int i = 0; i < CAMERA_NUM; i++) {
+
+    // initialise the windows
+/*    for (int i = 0; i < CAMERA_NUM; i++) {
         std::string windowName("Camera ");
         windowName += std::to_string(i);
         cv::namedWindow(windowName, CV_WINDOW_NORMAL);
-        cv::moveWindow(windowName, CAMERA_WIDTH * i, 0);
+        cv::moveWindow(windowName, CAMERA_WIDTH * i, CAMERA_HEIGHT);
     }
-    
+
+*/
+    int windowNo = 2;
+    std::string windowNames[] = {"Disparity", "EyeTracking"};
+    for (int i = 0; i < windowNo; i++) {
+        cv::namedWindow(windowNames[i], CV_WINDOW_AUTOSIZE);
+    }
+
+
+
     // rectified images
     cv::Mat rGrayFrames[2];
     cv::Mat grayFrames[2];
     while (cv::waitKey(15) != 'q') {
         for (int i = 0; i < 2; i++) {
             cameras[i] >> frames[i];
-            // TODO: break outer loop
             if (frames[i].empty()) {
                 break;
             }
@@ -152,8 +162,8 @@ void StereoView::run() {
 //        eyeTracking[0].detectEye(rFrames[0]);
         eyeTracking[0].detectEye(frames[0]);
         cv::imshow("EyeTracking", frames[0]);
-        cv::imshow("Camera 0", rGrayFrames[0]);
-        cv::imshow("Camera 1", rGrayFrames[1]);
+//        cv::imshow("Camera 0", rGrayFrames[0]);
+//        cv::imshow("Camera 1", rGrayFrames[1]);
 
         showDepthData(rGrayFrames[0], rGrayFrames[1]);
     }
