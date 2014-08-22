@@ -1,89 +1,99 @@
 view
 ====
-
-change view depending on the eye locations
+Eye location based view changing
 
 ### Be aware
-1. the index of the cameras. the program uses 1, 2 for 2 USB cameras.
+1. The index of the cameras. The program uses 1, 2 for 2 USB cameras.
 0 is for default integrated web cam.
+2. required library (library used)
+   openCV 2.4.9
+   glfw 3.0
+   glm 2.0
+   openGL 4.2
+3. May need configue the library path and Makefile
+4. tested under Ubuntu 14.04
 
-## Compiling
-Main: main program for eyetracking and disparity map 
+## Compiling & Running
+Main: main program runs eyetracking, steroview, and cube. 
 make main
-StereoCalibration: calibration program for stereo cameras
-make stereoCalibration
-Tuner: SBM tuner for disparity map
-make sbmTuner
-gpuStereo: SBM with GPU module
-make gpuStero
+./main.out
+
 calibration: calibration for single camera
 make calibration
+./calibration.out 1 // calibrate camera index 1, default camera 0
 
-### Running
-./main.out
+stereoCalibration: calibration program for one camera pair.
+make stereoCalibration 
+./stereoCalibration
+
+tuner: SBM tuner for disparity map with 2 default images
+make sbmTuner
 ./sbmTuner.out
-./calibration.out 1
-// calibrate camera index 1, default camera 0
 
-### StereoCalibration
-calibration for customized stereo cameras pair,
+gpuStereo: SBM algorithm implemented with GPU module
+make gpuStero
+./gpuStereo.out
+
+### stereoCalibration.cpp
+Calibration for customized stereo cameras pair,
 save the matrices cameraMatrices and distcoeffs as intrinsics.yml 
 and R, T, P1, P2, R1, R2 in the extrinsics.yml
 
-
-### StereoView
-using stereo block maching algorithm to compute the disparity map from 
+### stereoView.cpp
+Using stereo block maching algorithm to compute the disparity map from 
 the 2 calibrated stereo cameras pair, and use reprojectTo3D to get the 
-corresponding 3D coordinates
+corresponding 3D coordinates.
 
-### EyeTracking
-Using harcarscade classifying method for eye tracking
+### eyeTracking.cpp
+Using haarcascade classifying method for eye tracking and 
+CamShift algorithm is provided to track face size.
 
+### tuner.cpp
+SBM tuner, adjust the slider to find the optimum parameters of the SBM class.
 
-### Tuner
-SBM tuner, adjust the slider to find the optimum parameters of the SBM function
-
-
-### Global
-Global class provides the parameters and storage for global use
+### global.cpp
+Global class provides the parameters and storage for global use.
 
 ## Profiler
-Using gprofiler for profiling the memory usage of the program
-
+Using gprofiler for profiling the memory usage of the program.
 
 ## Implementation
-1. calibration
+1. Calibration
    2 calibration methods are provided.
    input: configuration file (default.xml)
    output: Cam0Config.xml (calibration.cpp) extrinsics.yml, intrinsics.yml(stereoCalibration.cpp)
         
-    calibration.cpp only calibrate one single camera.   
-        stereoCalibration.cpp calibrate a stereo camera pair.
-        Note: stereoCalibration return the found pattern once both camera find the same pattern.
+   calibration.cpp only calibrates one single camera.   
+   stereoCalibration.cpp calibrate a stereo camera pair.
+   Note: stereoCalibration return the found pattern once both camera find the same pattern.
         The condition is stricter than the single calibration, may needs more time.
 
-
-2. eye tracking
-Use openCV hararcsde classifier to detect face. (Only detect the largest face, with flag enabled) 
+2. Eye Tracking
+Implementing openCV haarcascade classifier to detect face. (Only detects the largest face, with flag enabled) 
 Once user face detected, eye template is extracted. Then use trackEye function to do template matching
 on the current frame.
-3. eye depth
+
+3. Eye Depth
 Two ways of measure eye depth have been implemented.
 (1) Using CamShift algorithm to track hue image of the face detected. Then set the height of the bounding
-box of the tracked area as the depth. 
-(2) Using stereo blocking matching algorithm to compute disparity map. With the camera matrices known from 
-the calibration stage 
+box of the tracked area to indicate the depth change. 
+(2) Using stereo blocking matching algorithm to compute disparity map with the camera matrices known from 
+the calibration stage. 
 4. cube
 Use openGL to display a 3D cube to present the eye position change.
 
+## Limitation & Improvement
+### Disparity
+1. Disparity map only works for a certain distance range between the user and the camera pair.
+   [30 cm, 2 meters]
+2. Disparity map accuracy mainly is determined by the locations of two cameras.
+   To get good quality disparity map, two cameras must be parallel, and be calibrated.
 
-## Limitation
-1. disparity map only works for a certain distance range.
-   currently 30 cm upwards.
-2. disparity map accuracy mainly determines on the locations of two cameras.
-   to improve quality, two cameras must be parallel, and need to get calibrated.
-3. eye tracking
-   camshift algorithm 
+### Eye Tracking   
+1. Camshift algorithm tracks the area with similar hues, so it may track the user's neck 
+   as well. Need to restrict the tracking algorithm further. 
+2. Haarcascade algorithm for eye template extraction may not be very accurate.
+3. Surf algorithm also implemented, can match certain features, but not work well with the bounding box.
 
 By Tianxin Tang
 University of Bristol
