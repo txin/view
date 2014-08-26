@@ -8,8 +8,8 @@ Eye location based view changing
 2. required library (library used)
    openCV 2.4.9
    glfw 3.0
-   glm 2.0
-   openGL 4.2
+   glm 0.9.5.4
+   openGL 4.0
 3. May need configue the library path and Makefile
 4. tested under Ubuntu 14.04
 
@@ -93,8 +93,8 @@ Use openGL to display a 3D cube to present the eye position change.
 1. Camshift algorithm tracks the area with similar hues, so it may track the user's neck 
    as well. Need to restrict the tracking algorithm further. 
 2. Haarcascade algorithm for eye template extraction may not be very accurate.
-3. Surf algorithm also implemented, can match certain features, but not work well with the bounding box.
+3. SURF algorithm was also implemented, can match certain features, but not work well with estimating the face bounding box.
 
 By Tianxin Tang
 University of Bristol
-Contact: titian.tang@gmail.com
+Contact: tt1589@my.bristol.ac.uk
