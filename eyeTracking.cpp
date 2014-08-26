@@ -65,6 +65,7 @@ int EyeTracking::setUp() {
    return 0;
 }
 
+bool SetUpEyeDepth = false;
 int EyeTracking::extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces, eyes;
@@ -75,6 +76,11 @@ int EyeTracking::extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     if (faces.size() > 0) {      
         cv::Mat face = im(faces[0]);
+        if (SetUpEyeDepth) {
+            Global global = Global::getInstance();
+            global.setEyeDepth(faces[0].height);
+        } 
+
         cv::rectangle(im, faces[0], cv::Scalar(0,0,255));
     //-- Find eye regions and draw them
         int eye_region_width = faces[0].width * (kEyePercentWidth/100.0);
