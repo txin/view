@@ -10,14 +10,6 @@
  *
  */
 
-/**
- * Function to detect human face and the eyes from an image.
- *
- * @param  im    The source image
- * @param  tpl   Will be filled with the eye template, if detection success.
- * @param  rect  Will be filled with the bounding box of the eye
- */
-
 #include "EyeTracking.h"
 #include "StereoView.h"
 #include "Cube.h"
@@ -34,6 +26,8 @@ const int kEyePercentWidth = 35;
 // detectEye, detecting the face first, and then use parameters to 
 
 
+bool UseCamShift = false;
+
 int EyeTracking::detectEye(cv::Mat& frame) {
     Global global = Global::getInstance();
     if (eyeRect.width == 0 && eyeRect.height == 0) {
@@ -43,7 +37,9 @@ int EyeTracking::detectEye(cv::Mat& frame) {
         trackEye(frame);
         // Use camShift algorithm to track the face, camShift can match
         // different size of face.
-        trackCamShift(frame);
+        if (UseCamShift) {
+            trackCamShift(frame);
+        }
         // set eye position to change the view of the cube
         global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
         cv::rectangle(frame, eyeRect, CV_RGB(0,255,0));
