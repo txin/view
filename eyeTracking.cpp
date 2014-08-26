@@ -24,26 +24,32 @@ const int kEyePercentWidth = 35;
 
 // detectEye used in stereoView
 // detectEye, detecting the face first, and then use parameters to 
-
-
 bool UseCamShift = false;
+bool UseTemplateMatching = false;
 
 int EyeTracking::detectEye(cv::Mat& frame) {
     Global global = Global::getInstance();
-    if (eyeRect.width == 0 && eyeRect.height == 0) {
+
+    if (UseTemplateMatching) {
+        if (eyeRect.width == 0 && eyeRect.height == 0) {
+            extractEyeTemplate(frame, eyeTpl, eyeRect);
+        } else {
+            // Tracking stage with template matching
+            trackEye(frame);
+            // Use camShift algorithm to track the face, camShift can match
+            // different size of face.
+            if (UseCamShift) {
+                trackCamShift(frame);
+            }
+            // set eye position to change the view of the cube
+            global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
+            cv::rectangle(frame, eyeRect, CV_RGB(0,255,0));
+        } 
+    } else { // detect eye each time
         extractEyeTemplate(frame, eyeTpl, eyeRect);
-    } else {
-        // Tracking stage with template matching
-        trackEye(frame);
-        // Use camShift algorithm to track the face, camShift can match
-        // different size of face.
-        if (UseCamShift) {
-            trackCamShift(frame);
-        }
-        // set eye position to change the view of the cube
         global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
-        cv::rectangle(frame, eyeRect, CV_RGB(0,255,0));
-    } 
+        cv::rectangle(frame, eyeRect, CV_RGB(0, 255, 0));
+    }
     return 0;
 }
 
