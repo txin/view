@@ -77,6 +77,37 @@ void StereoView::distortionRemoval(cv::Mat& view, cv::Mat& rview,
     cv::remap(view, rview, rmap[0], rmap[1], CV_INTER_LINEAR);
 }
 
+
+void StereoView::compute3DPoint() {
+    Global global = Global::getInstance();
+    
+    int offsets[2];
+    for (int i = 0; i < 2; i++) {
+        offsets[i] = global.getEyePosition(i).x - CAMERA_WIDTH / 2;
+    }
+    
+    std::cout << offsets[0] - offsets[1] << std::endl;
+
+    
+    // use eyebox
+    /*
+    int eyeBoxSide = 1;
+
+    cv::Size imgSize(eyeBoxSide, eyeBoxSide);
+    cv::Mat img3D(1, 1, CV_32FC3);
+
+    // convert the disparity map
+    cv::Mat disparity32F;
+    Mat disparity = (Mat_<double>(3,3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
+    
+    disparity.convertTo(disparity32F, CV_32F, 1./16);
+    cv::Mat_<float> vec(4,1);
+    cv::Mat Q_32F;
+    Q.convertTo(Q_32F, CV_32F);
+    // get the depthImg reference from the global class
+    cv::reprojectImageTo3D(disparity32F, img3D, Q, false, CV_32F); */
+}
+
 // use rectifyStereo first and reprojectImage to 3D
 void StereoView::computeDepth(cv::Mat& disparity) {
     
@@ -99,6 +130,8 @@ void StereoView::computeDepth(cv::Mat& disparity) {
 //    cv::imshow("img3D", img3D);
 //    cv::waitKey(5);
 }
+
+
 
 // capture images from 2 cameras, and convert to grayscale images and 
 // show disparity map, in order to calculate depth
@@ -143,8 +176,6 @@ void StereoView::run() {
         cv::namedWindow(windowNames[i], CV_WINDOW_AUTOSIZE);
     }
 
-
-
     // rectified images
     cv::Mat rGrayFrames[2];
     cv::Mat grayFrames[2];
@@ -159,11 +190,15 @@ void StereoView::run() {
             // apply the calibration parameters to remove distortions
             distortionRemoval(grayFrames[i], rGrayFrames[i], i);
         }
-//        eyeTracking[0].detectEye(rFrames[0]);
-        eyeTracking[0].detectEye(frames[0]);
-        cv::imshow("EyeTracking", frames[0]);
-//        cv::imshow("Camera 0", rGrayFrames[0]);
-//        cv::imshow("Camera 1", rGrayFrames[1]);
+        eyeTracking[1].detectEye(rGrayFrames[1]);
+        eyeTracking[0].detectEye(rGrayFrames[0]);
+        compute3DPoint();
+
+
+        cv::imshow("EyeTracking", rGrayFrames[0]);
+
+        cv::imshow("Camera 0", rGrayFrames[0]);
+        cv::imshow("Camera 1", rGrayFrames[1]);
 
         showDepthData(rGrayFrames[0], rGrayFrames[1]);
     }

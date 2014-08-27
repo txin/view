@@ -65,7 +65,7 @@ int EyeTracking::setUp() {
    return 0;
 }
 
-bool SetUpEyeDepth = false;
+bool SetUpEyeDepth = false ;
 int EyeTracking::extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
 
     std::vector<cv::Rect> faces, eyes;
@@ -91,6 +91,10 @@ int EyeTracking::extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
                                eye_region_top,eye_region_width,eye_region_height);
         rect = leftEyeRegion + cv::Point(faces[0].x, faces[0].y);
         tpl = face(leftEyeRegion).clone();
+
+        // set up rect point in global class.
+        Global global = Global::getInstance();
+        global.setEyePosition(cv::Point(rect.x, rect.y), index);
     }
     return 1;
 }

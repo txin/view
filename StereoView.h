@@ -32,6 +32,10 @@ private:
     int cameraCalibrationSetup();
     int cameraSetup();
     int loadConfiguration();
+ 
+    // compute 3D points with solvePnP
+    void compute3DPoint();
+
 
 public:
     // can track eye separately

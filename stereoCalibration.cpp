@@ -82,6 +82,7 @@ public:
                 // TODO: testing for 1, 2, two stereoCamera, maybe need to change!!
                 inputCapture[0].open(1);
                 inputCapture[1].open(2);
+
             }
         }
         if (inputType == INVALID) {

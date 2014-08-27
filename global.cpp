@@ -51,9 +51,22 @@ void Global::setEyePosition(cv::Point posIn) {
     *position = posIn;
     pthread_mutex_unlock(&start);
 }
-  
+ 
+void Global::setEyePosition(cv::Point posIn, int index) {
+    pthread_mutex_lock(&start);
+    *eyePosition[index] = posIn;
+
+
+    pthread_mutex_unlock(&start);
+}
+
+ 
 cv::Point Global::getEyePosition() {
     return *position;
+}
+
+cv::Point Global::getEyePosition(int index) {
+    return *eyePosition[index];
 }
 
 void Global::setDepthImg(cv::Mat& img3D) {
