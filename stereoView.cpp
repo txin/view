@@ -85,27 +85,26 @@ void StereoView::compute3DPoint() {
     for (int i = 0; i < 2; i++) {
         offsets[i] = global.getEyePosition(i).x - CAMERA_WIDTH / 2;
     }
-    
-    std::cout << offsets[0] - offsets[1] << std::endl;
+    int disparity = offsets[0] - offsets[1];
+//    std::cout << disparity << std::endl;
 
-    
-    // use eyebox
-    /*
-    int eyeBoxSide = 1;
+    cv::Mat_<float> result(4, 1);
 
-    cv::Size imgSize(eyeBoxSide, eyeBoxSide);
-    cv::Mat img3D(1, 1, CV_32FC3);
+    // eyePosition for cam 0
+    cv::Point pos = global.getEyePosition(0);
 
-    // convert the disparity map
-    cv::Mat disparity32F;
-    Mat disparity = (Mat_<double>(3,3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
-    
-    disparity.convertTo(disparity32F, CV_32F, 1./16);
-    cv::Mat_<float> vec(4,1);
+    cv::Mat factor = (cv::Mat_<float>(4,1) << pos.x, pos.y, disparity, 1);
+    cv::Mat factor_32F;
+    factor.convertTo(factor_32F, CV_32F, 1./16);
+
+    cv::Mat val = (cv::Mat_<float>(1, 1) << disparity);
     cv::Mat Q_32F;
     Q.convertTo(Q_32F, CV_32F);
+    cv::Mat img3D(1, 1, CV_32FC3);
+
     // get the depthImg reference from the global class
-    cv::reprojectImageTo3D(disparity32F, img3D, Q, false, CV_32F); */
+    cv::reprojectImageTo3D(val, img3D, Q_32F, false, CV_32F);
+    std::cout << img3D << std::endl;
 }
 
 // use rectifyStereo first and reprojectImage to 3D
@@ -120,9 +119,14 @@ void StereoView::computeDepth(cv::Mat& disparity) {
 
     // convert the disparity map
     cv::Mat disparity32F;
+
+
     disparity.convertTo(disparity32F, CV_32F, 1./16);
+    
+    
     cv::Mat_<float> vec(4,1);
     cv::Mat Q_32F;
+
     Q.convertTo(Q_32F, CV_32F);
     // get the depthImg reference from the global class
     cv::reprojectImageTo3D(disparity32F, img3D, Q, false, CV_32F);
