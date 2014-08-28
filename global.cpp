@@ -11,6 +11,8 @@ Global::Global() {
     *depth = DEFAULT_DEPTH;
     faceRect = new cv::Rect;
 
+    eye3DPosition = new cv::Point3f;
+
     // set up eyeBox, initialise the matrices of the eyeBox
     // use the fixed length of the square
     // allocate space for eyeBoxes
@@ -20,6 +22,22 @@ Global::Global() {
     }
     
 };
+
+
+void Global::setEye3DPosition(cv::Point3f point) {
+    pthread_mutex_lock(&start);
+    *eye3DPosition = point;
+    pthread_mutex_unlock(&start);
+}    
+
+cv::Point3f Global::getEye3DPosition() {
+    return *eye3DPosition;
+}
+
+
+
+
+
     
 // lock to update the bounding box matrix for the eyes
 // index refering to the index of the cameras

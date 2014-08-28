@@ -83,19 +83,34 @@ void StereoView::compute3DPoint() {
     
     int offsets[2];
     for (int i = 0; i < 2; i++) {
-        offsets[i] = global.getEyePosition(i).x - CAMERA_WIDTH / 2;
+        offsets[i] = global.getEyePosition(i).x;
     }
+    
     int disparity = offsets[0] - offsets[1];
+    if (disparity < 0) {
+        disparity = -disparity;
+    }
 
-    cv::Mat val = (cv::Mat_<cv::Vec3b>(1, 1) << cv::Vec3b(0, 0, disparity));
+
+    int x = global.getEyePosition(0).x;
+    int y = global.getEyePosition(0).y;
+
+
+    cv::Mat val = (cv::Mat_<cv::Vec3i>(1, 1) << cv::Vec3i(x, y, disparity));
+      
     cv::Mat Q_32F;
     cv::Mat val_32F;
     val.convertTo(val_32F, CV_32F);
 
     Q.convertTo(Q_32F, CV_32F);
-    cv::Mat img3D(1, 1, CV_32FC3);
-    cv::perspectiveTransform(val_32F, img3D, Q_32F);
-    std::cout << img3D << std::endl;
+    cv::Mat result(1, 1, CV_32FC3);
+    cv::perspectiveTransform(val_32F, result, Q_32F);
+
+    cv::Point3f pointVal = result.at<cv::Point3f>(0, 0);
+  
+    //std::cout << pointVal << std::endl;
+    global.setEye3DPosition(pointVal);
+   
 }
 
 // use rectifyStereo first and reprojectImage to 3D

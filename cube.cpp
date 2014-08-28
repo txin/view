@@ -56,6 +56,15 @@ int Cube::setEyePosition(int deltaXpos, int deltaYpos, int deltaZpos) {
     return 0;
 }
 
+
+void Cube::setEye3DPosition() {
+    Global global = Global::getInstance();
+    cv::Point3f point = global.getEye3DPosition();
+//    std::cout << point << std::endl;
+    position = glm::vec3(point.x / 100, -point.y / 100, -point.z / 100);
+//    std::cout << position << std::endl;
+}
+
 int Cube::run() {
  
     // Initialise GLFW
@@ -227,7 +236,9 @@ int Cube::run() {
         ypos = tempY;
         zpos = tempZ;
 
-        setEyePosition(deltaXpos, deltaYpos, deltaZpos);
+        //setEyePosition(deltaXpos, deltaYpos, deltaZpos);
+
+        setEye3DPosition();
 
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
@@ -256,6 +267,9 @@ int Cube::run() {
             position + direction, // and looks at the origin
             up  // Head is up (set to 0,-1,0 to look upside-down)
             );
+
+
+
         // Model matrix : an identity matrix (model will be at the origin)
         glm::mat4 Model      = glm::mat4(1.0f);
         // Our ModelViewProjection : multiplication of our 3 matrices

@@ -17,7 +17,9 @@ private:
     // bounding boxes of the eyes for different cameras
     cv::Mat *eyeBox[CAMERA_NUM];
 
-    // TODO: set eyePosition
+
+    // 3D point
+    cv::Point3f *eye3DPosition; 
 
     cv::Point *eyePosition[CAMERA_NUM];
     // face rectangle from eyeTracking class
@@ -50,4 +52,10 @@ public:
     cv::Mat getEyeBox(int index);
     int getEyeDepth();
     cv::Point getEyePosition(int index);
+
+
+
+
+    cv::Point3f getEye3DPosition();
+    void setEye3DPosition(cv::Point3f point);
 };

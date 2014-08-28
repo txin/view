@@ -31,6 +31,8 @@ private:
     // TODO: eyemovement speed testing
     float eyeMoveSpeed = 0.003f;
 
+    void setEye3DPosition();
+
 public:
     Cube() {};
     int run();
