@@ -180,8 +180,8 @@ void StereoView::run() {
     }
 
 */
-    int windowNo = 2;
-    std::string windowNames[] = {"Disparity", "EyeTracking"};
+    int windowNo = 1;
+    std::string windowNames[] = {"Disparity"};
     for (int i = 0; i < windowNo; i++) {
         cv::namedWindow(windowNames[i], CV_WINDOW_AUTOSIZE);
     }
@@ -205,7 +205,7 @@ void StereoView::run() {
         compute3DPoint();
 
 
-        cv::imshow("EyeTracking", rGrayFrames[0]);
+        //cv::imshow("EyeTracking", rGrayFrames[0]);
 
         cv::imshow("Camera 0", rGrayFrames[0]);
         cv::imshow("Camera 1", rGrayFrames[1]);

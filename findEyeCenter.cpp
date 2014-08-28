@@ -45,8 +45,6 @@ cv::Mat computeMatXGradient(const cv::Mat &mat) {
   return out;
 }
 
-#pragma mark Main Algorithm
-
 void testPossibleCentersFormula(int x, int y, unsigned char weight,double gx, double gy, cv::Mat &out) {
   // for all possible centers
   for (int cy = 0; cy < out.rows; ++cy) {
@@ -106,7 +104,7 @@ cv::Point findEyeCenter(cv::Mat face, cv::Rect eye, std::string debugWindow) {
       }
     }
   }
-  imshow(debugWindow,gradientX);
+  //imshow(debugWindow,gradientX);
   //-- Create a blurred and inverted image for weighting
   cv::Mat weight;
   GaussianBlur( eyeROI, weight, cv::Size( kWeightBlurSize, kWeightBlurSize ), 0, 0 );
@@ -120,7 +118,7 @@ cv::Point findEyeCenter(cv::Mat face, cv::Rect eye, std::string debugWindow) {
   //-- Run the algorithm!
   cv::Mat outSum = cv::Mat::zeros(eyeROI.rows,eyeROI.cols,CV_64F);
   // for each possible center
-  printf("Eye Size: %ix%i\n",outSum.cols,outSum.rows);
+//  printf("Eye Size: %ix%i\n",outSum.cols,outSum.rows);
   for (int y = 0; y < weight.rows; ++y) {
     const unsigned char *Wr = weight.ptr<unsigned char>(y);
     const double *Xr = gradientX.ptr<double>(y), *Yr = gradientY.ptr<double>(y);
@@ -159,8 +157,6 @@ cv::Point findEyeCenter(cv::Mat face, cv::Rect eye, std::string debugWindow) {
   }
   return unscalePoint(maxP,eye);
 }
-
-#pragma mark Postprocessing
 
 bool floodShouldPushPoint(const cv::Point &np, const cv::Mat &mat) {
   return inMat(np, mat.rows, mat.cols);

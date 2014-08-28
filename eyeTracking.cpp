@@ -33,7 +33,6 @@ bool UseTemplateMatching = false;
 
 cv::Point leftPupil;
 
-
 int EyeTracking::detectEye(cv::Mat& frame) {
     Global global = Global::getInstance();
 
@@ -58,7 +57,6 @@ int EyeTracking::detectEye(cv::Mat& frame) {
         global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
         cv::rectangle(frame, eyeRect, CV_RGB(0, 255, 0));
         cv::circle(frame, leftPupil, 3, CV_RGB(0, 255, 0)); 
-
     }
     return 0;
 }
