@@ -91,7 +91,7 @@ void StereoView::compute3DPoint() {
         disparity = -disparity;
     }
 
-
+    // use the eye position got from the global class
     int x = global.getEyePosition(0).x;
     int y = global.getEyePosition(0).y;
 

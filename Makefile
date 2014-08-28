@@ -29,9 +29,15 @@ eyeTracking.o : eyeTracking.cpp global.o
 cube.o : cube.cpp shader.cpp shader.hpp
 	g++ $(C_FLAG) -c cube.cpp shader.cpp shader.hpp
 
-main : cube.o eyeTracking.o shader.o stereoView.o global.o
+findEyeCenter.o: findEyeCenter.cpp
+	g++ $(CV_FLAGS) $(C_FLAG) -c findEyeCenter.cpp	
+
+helpers.o: helpers.cpp
+	g++ $(CV_FLAGS) $(C_FLAG) -c helpers.cpp	
+
+main : cube.o eyeTracking.o shader.o stereoView.o global.o findEyeCenter.o helpers.o
 	g++ $(C_FLAG) -c main.cpp
-	g++ $(C_FLAG) cube.o eyeTracking.o shader.o stereoView.o global.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
+	g++ $(C_FLAG) cube.o eyeTracking.o shader.o stereoView.o global.o findEyeCenter.o helpers.o main.o -o main.out $(CV_LIBS) $(GL_LIBS)
 
 clean :
 	rm *.o *.out *.gch

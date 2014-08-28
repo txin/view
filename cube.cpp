@@ -62,7 +62,6 @@ void Cube::setEye3DPosition() {
     cv::Point3f point = global.getEye3DPosition();
 //    std::cout << point << std::endl;
     position = glm::vec3(point.x / 100, -point.y / 100, -point.z / 100);
-//    std::cout << position << std::endl;
 }
 
 int Cube::run() {

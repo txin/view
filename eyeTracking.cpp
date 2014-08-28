@@ -15,6 +15,10 @@
 #include "Cube.h"
 #include "Global.h"
 
+#include "FindEyeCenter.h"
+
+
+
 // size constants for eye position in face
 
 const int kEyePercentTop = 25;
@@ -26,6 +30,9 @@ const int kEyePercentWidth = 35;
 // detectEye, detecting the face first, and then use parameters to 
 bool UseCamShift = false;
 bool UseTemplateMatching = false;
+
+cv::Point leftPupil;
+
 
 int EyeTracking::detectEye(cv::Mat& frame) {
     Global global = Global::getInstance();
@@ -44,11 +51,14 @@ int EyeTracking::detectEye(cv::Mat& frame) {
             // set eye position to change the view of the cube
             global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
             cv::rectangle(frame, eyeRect, CV_RGB(0,255,0));
+            cv::circle(frame, leftPupil, 3, CV_RGB(0, 255, 0)); 
         } 
     } else { // detect eye each time
         extractEyeTemplate(frame, eyeTpl, eyeRect);
         global.setEyePosition(cv::Point(eyeRect.x, eyeRect.y));
         cv::rectangle(frame, eyeRect, CV_RGB(0, 255, 0));
+        cv::circle(frame, leftPupil, 3, CV_RGB(0, 255, 0)); 
+
     }
     return 0;
 }
@@ -92,6 +102,11 @@ int EyeTracking::extractEyeTemplate(cv::Mat& im, cv::Mat& tpl, cv::Rect& rect) {
         rect = leftEyeRegion + cv::Point(faces[0].x, faces[0].y);
         tpl = face(leftEyeRegion).clone();
 
+
+        leftPupil = findEyeCenter(face, leftEyeRegion,"Left Eye");
+        leftPupil.x += rect.x;
+        leftPupil.y += rect.y;
+        
         // set up rect point in global class.
         Global global = Global::getInstance();
         global.setEyePosition(cv::Point(rect.x, rect.y), index);
