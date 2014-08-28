@@ -86,24 +86,15 @@ void StereoView::compute3DPoint() {
         offsets[i] = global.getEyePosition(i).x - CAMERA_WIDTH / 2;
     }
     int disparity = offsets[0] - offsets[1];
-//    std::cout << disparity << std::endl;
 
-    cv::Mat_<float> result(4, 1);
-
-    // eyePosition for cam 0
-    cv::Point pos = global.getEyePosition(0);
-
-    cv::Mat factor = (cv::Mat_<float>(4,1) << pos.x, pos.y, disparity, 1);
-    cv::Mat factor_32F;
-    factor.convertTo(factor_32F, CV_32F, 1./16);
-
-    cv::Mat val = (cv::Mat_<float>(1, 1) << disparity);
+    cv::Mat val = (cv::Mat_<cv::Vec3b>(1, 1) << cv::Vec3b(0, 0, disparity));
     cv::Mat Q_32F;
+    cv::Mat val_32F;
+    val.convertTo(val_32F, CV_32F);
+
     Q.convertTo(Q_32F, CV_32F);
     cv::Mat img3D(1, 1, CV_32FC3);
-
-    // get the depthImg reference from the global class
-    cv::reprojectImageTo3D(val, img3D, Q_32F, false, CV_32F);
+    cv::perspectiveTransform(val_32F, img3D, Q_32F);
     std::cout << img3D << std::endl;
 }
 
